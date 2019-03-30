@@ -1,0 +1,55 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><h3>MEDICINE MASTER</h3></p>
+      <div class="row">
+      <div class = "col-md-6 col-sm-12">
+
+        <div class="form-group">
+          <label><b>Code</b></label><br>
+          <input ng-model="master_data.code" type="text" placeholder="code" name="" class = "form-control" style="width: 50%">
+
+        </div>
+
+        <div class="form-group">
+          <label><b>Name</b></label><br>
+          <input type="text" placeholder="name" ng-model="master_data.name" class = "form-control" style="width: 50%">
+
+        </div>
+        <div class="form-group">
+          <label><b>Group</b></label><br>
+          <input type="text" placeholder="group" ng-model="master_data.group" class = "form-control" style="width: 50%">
+
+        </div>
+
+        <button ng-click = "AddMaster('medicine_master', 'master_name, skips', master_data, 'master', 'AddMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+ 
+
+        
+
+      </div>  
+      
+ <div class = "col-md-6 col-sm-12">
+  <table id = "medicine-master-dt" class = "table">
+    <thead><tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Group</th>
+      <th>...</th>
+    </tr>
+    </thead>
+    
+
+  </table>
+        
+        
+
+      </div>
+      </div>
+    
+
+</div>
+

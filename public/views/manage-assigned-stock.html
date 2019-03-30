@@ -1,0 +1,21 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><b>MANAGE ASSIGNED STOCK </b></p>
+      <div class = "form-group well">
+            <input type = "text" class = "form-control" placeholder="search tests" ng-model = "query" />
+        </div>
+      <table class = "table">
+          <tr><th>Test Code</th><th>Test Name</th><th>Inventory | Stock</th></tr>
+         <tr ng-repeat="test in display_all_test_scope | filter:query | orderBy: 'name' track by $index"><td>{{test.code}}</td><td>{{test.name}}</td><td><table class = "table">
+             <tr ng-if = "test.stock_list" ng-repeat = "stock in test.stock_list"><th>{{stock.code}}</th><td>assigned: <input ng-model = "stock.qty" type = "text" size = "3" /></td><td><button class = "bg-red text-white">X</button></td></tr>
+             <!-- <tr><th>xraycode2</th><td>assigned: 3</td><td><button class = "bg-red text-white">X</button></td></tr> -->
+            </table></td></tr>
+
+      </table>
+     <!-- <p ng-if = "perform_test_list.length < 1 && spinner < 1"><b>Please wait...</b></p>
+    <p ng-if = "perform_test_list.length < 1 && spinner > 0"><b>No record.</b></p> -->
+</div>

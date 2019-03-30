@@ -1,0 +1,30 @@
+<div ng-app="myApp"  ng-controller = "my_server">
+    <p><b>all tests ...</b></p>
+ 
+     <div class = "well">
+         <div class = "form-group">
+             <input type = "text" class = "form-control" placeholder="search tests" ng-model = "query" />
+         </div>
+      
+
+       <div class = "form-group">
+           <button ng-click = "delete_many_tests()" class = "my-btn btm-sm pull-right">- Delete Tests</button>
+           <br><br>
+       </div>
+       <div class="well"><b>Count: </b>{{list_m_tests.length}}</div>
+         <div class = "row">
+          
+             <div class = "col-sm-12 col-md-12" style="background: beige">
+               <table class = "table uppercase">
+                   <tr><th>Test</th><th>Code</th></tr>
+             <tr  ng-repeat = "test in list_m_tests | filter:query | orderBy: 'name'"><td>{{test.name}}</td><td>{{test.code}}</td><td></td><td><input 
+                  type = "checkbox" ng-model = "test.emma" /></td></tr>
+         
+              </table>  
+             </div>
+         </div>
+         
+     
+     </div>
+ </div>
+ 

@@ -1,0 +1,104 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+    <div ng-if = "! show_bar">
+      <div ng-include="'ng-includes/header.html'"></div>
+      
+      <div ng-include="'ng-includes/close.html'"></div>
+   </div>
+    
+          <p><h3>REFERRAL PERSON</h3></p>
+          <table class = "table table-responsive">
+            <tr>
+              
+              <td><label><b>code</b></label><input ng-model = "master_data.code"  class = "form-control" type = "text" /></td>
+              <td><label><b>title</b></label><select ng-model = "master_data.title"  class = "form-control">
+                <option>Mr</option>
+                <option>Miss</option>
+                <option>Mrs</option>
+                <option>Others</option>
+              </select></td>
+              <td><label><b>first name</b></label><input ng-model = "master_data.first_name"  class = "form-control" type = "text" /></td>
+              <td><label><b>last name</b></label><input ng-model = "master_data.last_name"  class = "form-control" type = "text" /></td>
+              <td><label><b>sex</b></label>
+                <select ng-model = "master_data.sex"  class = "form-control">
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </td>
+    
+            </tr>
+            <tr>
+              
+                <td><label><b>DOB</b></label><input ng-model = "master_data.dob"  class = "form-control" type = "date" /></td>
+                <td><label><b>phone no.</b></label><input ng-model = "master_data.phone_no"  class = "form-control" type = "text" /></td>
+                <td><label><b>email</b></label><input ng-model = "master_data.email"  class = "form-control" type = "text" /></td>
+                <td><label><b>marital status</b></label><input  class = "form-control" type = "text" /></td>
+                <td><label><b>religion</b></label><input ng-model = "master_data.religion"  class = "form-control" type = "text" /></td>
+      
+              </tr>
+              <tr>
+              
+                  <td><label><b>nationality</b></label><input ng-model = "master_data.nationality"  class = "form-control" type = "text" /></td>
+                  <td><label><b>state of orign</b></label><input ng-model = "master_data.state"  type = "text" class = "form-control" /></td>
+                  <td><label><b>designation</b></label><input ng-model = "master_data.designation"  type = "text" class = "form-control" /></td>
+                  <td><label><b>primary specialty</b></label><input ng-model = "master_data.primary_specialty"  class = "form-control" type = "text" /></td>
+                  <td><label><b>sub specialty</b></label><input ng-model = "master_data.sub_specialty"  class = "form-control" type = "text" /></td>
+        
+                </tr>
+              
+    
+          </table>
+    
+          <button ng-click = "AddMaster('person_master', 'master_name, skips', master_data, 'master', 'AddRefPersonMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+          
+          <br>
+            <h3>List</h3>
+            <br>
+          <div class = "row">
+              <div class = "col-md-12 col-sm-12">
+                  <style>
+                      #referral-person-master-dt td{
+                        
+                        max-width: 50px;
+                        overflow-x: hidden;
+                      }
+                    </style>
+                  <table id = "referral-person-master-dt" class = "table" width = "100%" style = "font-size: 0.8em; width: 100%">
+                   <thead>
+                     <tr>
+                       <th>Code</th>
+                       <th>Title</th>
+                       <th>First Name</th>
+                       <th>Last Name</th>
+                       <th>Sex</th>
+                       <th>DOB</th>
+                       <th>Phone No.</th>
+                       
+                       <th>Email.</th>
+                       <th>Marital Status</th>
+                       <th>Religion</th>
+                       <th>Nationality</th>
+                       <th>State of Origin</th>
+                       <th>Designation</th>
+                       <th>Primary Specialty</th>
+                       <th>Sub Specialty</th>
+                       <th>...</th>
+                    
+                    </tr>
+                   </thead>
+                
+                   
+                    
+                
+                  </table>
+                        
+                        
+                
+                      </div>
+    
+          </div>
+        
+    
+    </div>
+    
+    

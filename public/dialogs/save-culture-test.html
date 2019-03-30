@@ -1,0 +1,76 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "add-test" style = "padding: 4px">
+        <hr style = "border: 2px solid coral"> 
+       <h3>Edit Culture Test </h3>
+       
+   <div class = "row">
+<div class = "col-md-3">
+    <div>
+        <label><b>Code</b></label>
+    <input ng-model="edit_culture.code" class = "form-control uppercase" type = "text" placeholder="code" /><br> </div>   </div>
+<div class = "col-md-3"> <div>
+        <label><b>Name</b></label>
+    <input ng-model="edit_culture.name" class = "form-control" type = "text" placeholder="name" /> <br></div>   </div>
+
+<div class = "col-md-3"> <div>
+        <label><b>Rate</b></label>
+    <input ng-model="edit_culture.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div> </div>
+<div class = "col-md-3"> <div>
+        <label><b>Unit</b></label>
+    <input ng-model="edit_culture.unit" class = "form-control" type = "text" placeholder="unit" /><br> </div> </div>
+
+
+<div class = "col-md-3">
+    <div>
+            <label><b>Comment</b></label>
+        <textarea ui-tinymce = "tinymceOptions"  ng-model="edit_culture.comment" class = "form-control" type = "text" placeholder="comment"></textarea><br> 
+
+
+    </div> 
+ </div>
+<div class = "col-md-3">
+    <div>
+            <label><b>Select Medicines</b></label> 
+            <div class="form-group">
+              <select ng-options="item.name for item in medicine_master_list_items" ng-model = "sel_med_model" ng-change = "select_medicine()" class="form-control" ng-init = "medicine_master_list()">
+                <option value = "">--select--</option>
+                  
+              </select>  
+
+            </div>
+   
+        <table class = "table">
+            <tr><th>Code</th>
+            <th>Name</th>
+            <th>...</th>
+
+        </tr>
+            <tr ng-repeat = "i in selected_medicine_list_x">
+                <td>{{i.name}}</td>
+                <td>{{i.code}}</td>
+                <td><button ng-click="remove_medicine_item($index, selected_medicine_list)">X</button></td>
+            </tr>
+        </table> 
+    
+
+      <br>
+ 
+       </div>  </div>
+
+ 
+    
+    
+    
+    
+    
+    
+    
+   
+        <div class = "col-md-12">
+                <div ng-init = "edit_culture.report_type = 'Culture'">Report Type: <b>{{edit_culture.report_type}}</b></div>   
+               
+
+        </div>
+    
+    
+      
+    </div> <hr> <div><button ng-click = "add_new_test()" class = "app-btn bg-blue">add test</button> </div> 

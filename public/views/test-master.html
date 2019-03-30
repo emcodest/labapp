@@ -1,0 +1,84 @@
+<div class="lab-panel" style="border-radius: 12px; border: 1px solid #ddd">
+
+        <div ng-include="'ng-includes/header.html'"></div>
+
+        <div ng-include="'ng-includes/close.html'"></div>
+        <div ng-if="is_admin">
+                <div class="well row">
+                        <p class="pull-right"><button class="app-btn bg-coral"
+                                        ng-click="profile_master_nav()">Profile Master</button></p>
+                </div>
+                
+                <div class="row">
+                        <div class="col-md-4" style="background: #eee; border-right: 4px solid coral">
+                                       
+                                                        <p><b>Department List</b></p>
+                                                
+                                                        <table id="departmentdt_test" class="table" style="border: 1px solid #ddd; width: 100%">
+                                                          <thead>
+                                                            <tr>
+                                                              <th>Code </th>
+                                                              <th>Name</th>
+                                                
+                                                              <th>...</th>
+                                                              <th>...</th>
+                                                            </tr>
+                                                          </thead>
+                                                
+                                                
+                                                        </table>
+                                                
+                                                
+                                                      
+
+                        </div>
+                        <div class="col-md-4" style="background: #f9f9f9">
+                                <p><b>Test Category</b></p>
+                                <button ng-click =  "AddCategoryToDepartment()"  class = "btn btn-sm btn-danger"><i class = "fa fa-plus"></i> CATEGORY</button><br><br>
+                                <table id="categorydt_test" class="table" style="border: 1px solid #ddd; width: 100%">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Code </th>
+                                                    <th>Name</th>
+                                      
+                                                    <th>...</th>
+                                                    <th>...</th>
+                                                  </tr>
+                                                </thead>
+                                      
+                                      
+                                </table>
+                              
+                               
+
+                        </div>
+                        <div class="col-md-4"
+                                style="background: rgb(240, 228, 228); border-right: 4px solid coral">
+                                <p><b>Tests</b></p>
+                                <div class = "button-test-group">
+                                  <button params = '-1, tabular' func = 'TestMaster' class = "btn-sm click"><i class = "fa fa-plus"></i> TABULAR</button>&nbsp;  <button  params = '-1, paragraph' func = 'TestMaster' class = "btn-sm click"><i class = "fa fa-plus"></i> PARAGRAPH</button>&nbsp; <button  params = '-1, culture' func = 'TestMaster' class = "btn-sm click"><i class = "fa fa-plus"></i> CULTURE</button>&nbsp; <button  params = '-1, predefined' func = 'TestMaster' class = "btn-sm click"><i class = "fa fa-plus"></i> PRE-DEFINED</button>
+                                </div><br><br>
+                                <table id="testdt_test" class="table" style="border: 1px solid #ddd; width: 100%">
+                                                <thead>
+                                                  <tr>
+                                                    <!-- <th>Order </th> -->
+                                                    <th>Code </th>
+                                                    <th>Name</th>                                      
+                                                    <th>...</th>
+                                                    <th>...</th>
+                                                  </tr>
+                                                </thead>
+                                      
+                                      
+                                </table>
+                        </div>
+
+
+                </div>
+
+        </div>
+
+
+
+
+</div>

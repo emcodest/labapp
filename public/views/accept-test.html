@@ -1,0 +1,166 @@
+<div  class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+  <div ng-include="'ng-includes/header.html'"></div>
+
+   <div ng-include="'ng-includes/close.html'"></div>    
+         
+   <div class = "well bg-blue">
+   
+
+       <p class = "pull-right"> <button ng-click = "patient_form()" class = "app-btn bg-coral text-white">New Booking</button> <button class = "app-btn bg-coral text-white" ng-click="accept_test_list_ui()">Modify Record</button>    <button class = "app-btn bg-coral" ng-click = "preview_test_record()">Preview Record</button>  <button class = "app-btn bg-red" ng-click = "clear_form()">Clear Form</button>    </p> 
+<p>&nbsp</p>
+   </div>
+
+
+     
+             <div class = "panel-body text-left" style = "background: rgb(236, 234, 234)">
+               <!--  <p><h2>Patient Information: </h2> -->
+                  <div class = "row">
+                    <div class = "col-md-4">
+                      <div class = "row" >
+              <div class = "col-md-4">
+
+                <label>Patient Information: </label> 
+              </div>
+          <div class = "col-md-8" >
+                 <input ng-enter = "global_search()" ng-model = "custom_data_search_fieldx.search" type = "text" class = "form-control" placeholder="search patient"   /> 
+               </div>
+
+              </div>
+               
+                </div>
+                <div class="col-md-8">
+                  <input  type="checkbox" ng-model = "accept_test_data.is_clinical_box"  ng-selected="is_clinical_info"> Clinical Information
+                  <textarea id = "is_clinical_box_data" ng-if="accept_test_data.is_clinical_box" class="form-control" ng-model = "is_clinical_box_data_x"   placeholder="enter clinical details"></textarea>
+                </div>
+
+                </div>
+                </p>
+                <table class = "table table-responsive">
+                  <tr>
+                      <td><label><b>Lab No.</b></label><input ng-model = "accept_test_data.lab_no" type = "text" class = "form-control" /></td>
+                     
+                      <td><label><b>Ref Center Code.</b></label><input ng-enter = "ref_center_form()" type = "text" class = "form-control" /></td>
+                      <td><label><b>Ref Person Code.</b></label><input ng-enter = "ref_person_form()" type = "text" class = "form-control" /></td>
+                      <td><label><b>Guardian Code.</b></label><input ng-enter = "guardian_form()" type = "text" class = "form-control"  /></td>
+
+
+                  </tr>
+                </table>
+             <!-- <div class = "row">
+              <my-boot-form ng-init = "accept_test_data.birthday = patient_data_ui.birthday" accept_test_form = "accept_test_form" ng-repeat = "form in accept_test_form"></my-boot-form>
+              </div> -->
+              <div class = "well" ng-if = "patient_data_ui">
+                <p><b>Patient data</b><button class = "my-btn btn-sm pull-right" ng-click = "edit_form_data(patient_data_ui.id, true)">edit</button></p>
+                <div class = "row">
+                  <div class = "col-md-3" ng-repeat="patient in patient_data_ui.data track by $index">
+            <p><b>{{patient.name}}: </b> <span  ng-if  = "! patient.birth_age">{{patient.val}} </span> <input ng-model = "mdate" ng-init = "mdate = formatDate(patient.val)"  ng-if  = "patient.birth_age"
+               ng-mousemove = "mdate = formatDate(patient.val)" ng-blur = "mdate = formatDate(patient.val)" ng-readonly="true">  <b ng-if  = "patient.birth_age">{{patient.birth_age}} yrs</b></p>
+                  </div>
+                </div>
+               
+              </div>
+             <div class = "well" ng-if = "ref_data_ui">
+                <p><b>Referral: </b>
+                <span class = "pull-right">  <button class = "my-btn btn-sm" ng-click = "edit_form_data(ref_data_ui.id, false)">edit</button> <button class = "bg-red text-white" ng-click = "remove_pat_ref_data(ref_data_ui)">X</button></span>  </p>
+                <div class = "row">
+                  <div class = "col-md-3" ng-repeat="ref in ref_data_ui.data track by $index">
+            <p><b>{{ref.name}}: </b> {{ref.val}} </p>
+                  </div>
+                </div>
+               
+              </div>
+              <div class = "well" ng-if = "ref_data_ui.attached_ref">
+                   <p><b>...</b>
+                  <span class = "pull-right">  <button class = "my-btn btn-sm" ng-click = "edit_form_data(ref_data_ui.attached_ref.id, false)">edit</button> <button class = "bg-red text-white" ng-click = "remove_pat_ref_data(ref_data_ui.attached_ref)">X</button></span>  </p>
+                  <div class = "row">
+                    <div class = "col-md-3" ng-repeat="ref in ref_data_ui.attached_ref.data track by $index">
+              <p><b>{{ref.name}}: </b> {{ref.val}}</p>
+                    </div>
+                  </div>
+                 
+                </div>
+             <p>
+
+               <!-- <h2>Test Information: </h2> -->
+
+              <b><i>add test</i></b>
+            
+            </p>
+              <p class = "row"><span class = "col-md-3 col-sm-6"><input ng-enter = "add_tests_to_form()" ng-model = "add_tests_to_form_ui.code" type = "text" class = "form-control"  placeholder = "test or profile code" /></span> <span class = "col-md-3 col-sm-6"><button class = "my-btn" ng-click = "add_test_to_list()">+ Choose Test</button>&nbsp&nbsp<button class = "my-btn" ng-click = "add_profile_to_list()">+ Choose Profile</button></span> </p>
+              <br><br>
+              <div class = "row">
+
+              <div class = "col-md-9">
+                  <button ng-if = "table_test_list.length > 0" class = "my-btn btn-sm" ng-click = "remove_test()">remove test</button>
+                  
+                  <p>&nbsp</p>
+
+             <table class = "table">
+              <tr><th>...</th><th>Test ID</th><th>Test Name</th><th>Rate</th><th>Disc %</th><th>Disc Amount</th><th>Tax %</th><th>Tax Amount</th><th>Total</th></tr>
+              <tr ng-repeat="test in table_test_list track by $index"><td><input type = "checkbox" ng-model="test.selected_checkbox"  /></td><td>{{test.code.toUpperCase()}}</td><td>{{test.name}}</td><td><input data-ng-keyup = "calc_test_amount()" ng-model = "test.rate" placeholder = "Rate" type = "text" class = "form-control" ng-change = "reactive_update(test.rate, 'rate', $index)" readonly></td><td><input ng-model = "test.discount" placeholder = "Discount" type = "text" class = "form-control" ng-change = "reactive_update(test.discount, 'discount', $index)"></td><td><input ng-model = "test.discount_amount"  placeholder="Disc. amt" type = "number" class = "form-control" ng-change = "reactive_update(test.discount_amount, 'discount_amount', $index)"></td><td><input ng-model = "test.tax_per" placeholder="Tax %" type = "text" class = "form-control" ng-change = "reactive_update(test.tax_per, 'tax_per', $index)" readonly></td><td><input ng-model = "test.tax_amount" placeholder="Tax Amount" type = "text" class = "form-control" ng-change = "reactive_update(test.tax_amount, 'tax_amount', $index)" readonly></td><td>{{test.rate - test.discount_amount + test.tax_amount}}</td></tr>
+             </table>
+
+             <p ng-if = "table_test_list.length < 1"><b>No test selected. Please add test</b></p>
+             
+
+             <!-- <button class = "my-btn" ng-click = "test()">+ Row</button> -->
+            
+            </div>
+                  <div class = "col-md-3">
+                    <div class = "well">
+                      <p><b>Total Tests: </b> {{table_test_list.length}} </p>
+                      <p><b>Test Amount: </b> {{total_test_amountxx}} </p>
+                      <p><b>Concession: </b> {{total_discount_amountxx}} </p>
+                      <p><b>Home Collection: </b> {{accept_test_data.home_collection}} </p>
+                      <p><b>Tax Amount: </b> {{total_tax_amountxx}} </p>
+                      <p><b>Net Amount: </b> {{total_test_amountxx}}  </p>
+                      <p><b>Balance: </b>{{(total_test_amountxx.replace(',', '') - total_test_paid).toFixed(2)}}</p>
+                      <p><b>Paid: </b>{{make_pay}}</p>
+                      <p><b>Receipt No: </b>{{accept_test_data.receipt_number}}</p>
+    <button class = "app-btn bg-red text-white" ng-click = "calc_test_amount()">Calculate</button>
+                    </div>
+                  </div>
+                </div>
+   
+           <div class = "well bg-blue row">
+          <span class = "toolbar col-md-2 col-sm-4  col-xs-6">
+               <b>Home Collection</b> 
+               <select  ng-model = "accept_test_data.home_collection" ng-options="item for item in ['Yes', 'No']" ng-init = "accept_test_data.home_collection='No'">
+                  <option value = "">--select--</option>
+                
+                </select>
+          </span> 
+          <span class = "col-md-4 col-sm-4 col-xs-6">
+             <b class = " text-white">Pay Type</b> 
+
+            <select class = "form-control" style = "width: 200px" ng-change = "update_payment_type()" ng-model = "accept_test_data.pay_type" ng-options="item for item in ['POS', 'Cash',  'Bank Transfer', 'Cheque', 'Deposit', 'Mobile Money', 'Bill Client', 'Discount', 'Test Repeated']" ng-init = "accept_test_data.pay_type='Cash'">
+            <option value = "">--select--</option>                   
+            </select>
+
+                  <br>
+                  <table class = "table">
+                      <tr class = "text-white" ng-repeat = "pay in accept_pay track by $index"><td >{{pay.name}}</td><td><input  ng-enter="format_num(accept_pay, $index); update_bal()"  type = "text" style = "color: #333" ng-model = "pay.amount" size = "15" placeholder = "amount" /> <button class = "bg-red text-white" ng-click = "remove_pay($index)">X</button> </td></tr>
+                    </table>
+                </span>
+                  <span class = "toolbar col-md-2 col-sm-4 col-xs-6">
+                    <b>Paid</b> 
+                    <select ng-change="change_pay(make_pay)"  ng-model = "make_pay" ng-options="item for item in ['Yes', 'Part', 'No']" ng-init = "make_pay='No'">
+                     <option value = "">--select--</option>                      
+                    
+                    </select>
+                  
+                  </span>
+                  <span class = "toolbar col-md-3 col-sm-4 col-xs-6"><b>Receipt No</b> <input class = "form-control" ng-init = "accept_test_data.receipt_number = accept_test_data.lab_no"  ng-model = "accept_test_data.receipt_number" type = "text" placeholder="Receipt No." /></span>
+                </div>
+
+                <button class = "app-btn bg-coral" ng-click = "preview_test_record()">Preview Record</button> 
+               
+             </div>
+
+
+           </div>
+        
+           
+
+</div>

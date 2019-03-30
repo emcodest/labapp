@@ -1,0 +1,105 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><h3>APPROVE PERFORMED TESTS</h3></p>
+    
+      <div class = "row">
+          <div class = "col-md-4">
+  <div class = "form-group">
+            <label><b>Department</b></label><br>
+          
+            <select style = "width: 400px" ng-model = "select_department_x" class = "form-control" ng-options = "item.department_name for item in  department_list">
+                <option value = "">--select Department--</option>
+            </select>
+        </div>
+          </div>
+          <div class = "col-md-6">
+<label><b>Date Range</b></label><br>
+            <div class = "form-group">
+                <div class = "row">
+                <div class = "col-md-6">
+
+            From<br> <input class = "form-input" type  = "date" /> 
+
+                </div>
+                <div class = "col-md-6">
+                        
+                  To:<br>  <input type  = "date" />  <button>Search</button>                          
+                   </div>
+          
+            </div>
+
+            </div>
+
+          </div>
+          <div class = "col-md-2">
+                <label><b>Custom Queries</b></label><br>
+                <select>
+
+                    <option>Today</option>
+                    <option>Yesterday</option>
+                    <option>Last Week</option>
+                    <option>Approved</option>
+                    <option>UnApproved</option>
+                </select><br><br>
+                <table>
+                    <tr><td class = "approved" width = "15px"></td><td> <small>Approved</small></td> <td class = "printed" width = "15px"></td><td> <small>Printed</small></td>  </tr>
+                    <tr><td>&nbsp</td></tr>
+                    <tr><td class = "unapproved" width = "15px"></td><td> <small>Unapproved</small></td> <td class = "emailed" width = "15px"></td><td> <small>Emailed</small></td>  </tr>    
+                </table>
+                <br>
+
+                </div>
+      </div>
+    <!-- [{css: 'approved'}, {css: ''}, {css: 'printed'}, {css: 'approved'}] -->
+   
+    
+<p><b>Today's Accepted Test</b></p>
+      <table class = "table" ng-init = "list_perform_test_logs(); count_today_test = 0">
+          <tr><th>Date</th><th>Lab. No</th><th>Test Name</th><th>Sex</th><th>Age</th><th>Referral</th><th>Patient ID</th><th>...</th><th>...</th></tr>
+         <tr ng-class = "item.css" ng-dblclick="enter_perform_test(item)" ng-repeat="item in perform_test_list_logs  
+         | limitTo: 10">
+             <td>{{formatDate(item._id)}}</td><td>{{item.lab_no}}</td><td><span class = "badge" ng-repeat = "ii in item.tests">{{ii.name}}</span></td><td>
+              
+                 <p ng-repeat = "jj in item.my_doc[0].patient.data">
+                     
+                     <span ng-if = "jj.name.toUpperCase() == 'sex'.toUpperCase() ">{{jj.val}}</span>
+                 </p>
+                </td>
+                <td>
+                        <p ng-repeat = "jj in item.my_doc[0].patient.data">
+                                
+                                <span ng-if = "jj.name.toUpperCase() == 'age'.toUpperCase() ">{{jj.birth_age}} yrs</span>
+                            </p>
+                 </td>
+                 <td>
+                        <p ng-repeat = "jj in item.my_doc[1].ref_center.data">
+                                
+                                <span ng-if = "jj.name.toUpperCase() == 'centre name'.toUpperCase() ">{{jj.val}}</span>
+
+                  <span ng-if = "jj.name.toUpperCase() == 'first name'.toUpperCase() ">{{jj.val}}</span>
+
+
+                            </p> 
+                            <p ng-repeat = "jj in item.my_doc[2].ref_person.data">
+                                    
+                                 <b>  <span ng-if = "jj.name.toUpperCase() == 'first name'.toUpperCase() ">{{jj.val}}
+
+                                    </span></b> 
+    
+    
+                                </p> 
+                     
+                </td><td>{{item.patient_id}}</td>
+                <td><button ng-click="approve_test(item)" class = "btn btn-sm my-btn">Approve</button></td>
+                <td><button ng-click="email_sms(item)" class = "btn btn-sm my-btn">Email | SMS</button></td>
+              </tr>
+
+      </table>
+     <!-- <p ng-if = "perform_test_list.length < 1 && spinner < 1"><b>Please wait...</b></p>
+    <p ng-if = "perform_test_list.length < 1 && spinner > 0"><b>No record.</b></p> -->
+</div>
+

@@ -1,0 +1,24 @@
+.ngdialog.ngdialog-theme-default.custom-width .ngdialog-content {
+    width: 100%;
+    top: 0px !important;
+    border: 17px solid rgb(212, 235, 226);
+    position: fixed;   
+    overflow-y: scroll;
+    height: 100%;
+    background: #fff;
+}
+.ngdialog.ngdialog-theme-default.custom-width .ngdialog-content::before{
+    content: 'press esc to exit window';
+   
+    color: rgb(13, 13, 51);
+    font-weight: bold;
+    
+}
+button.ngdialog-close::before{
+    color: #eee !important;
+    border: 1px solid #333;
+    padding: 4px;
+    background: #333 !important;
+    margin-right: 10px;
+    outline: none;
+}

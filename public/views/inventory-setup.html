@@ -1,0 +1,143 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+  <div ng-include="'ng-includes/header.html'"></div>
+
+   <div ng-include="'ng-includes/close.html'"></div>    
+         
+   <div class = "well">
+       <p><b>Add new stock</b></p>
+       
+       <div class = "row">
+
+    <div class = "col-md-2">
+ Stock Code: <input size = "10" ng-model = "inventory_master.item_code" type = "text" placeholder = "Code" class = "form-control" />
+
+     </div>
+     <div class = "col-md-3">
+       Name:  <input ng-model = "inventory_master.item_name" type = "text" placeholder = "item name" class = "form-control"/>
+     </div>
+     <div class = "col-md-3">
+            Vendor:  <input ng-model = "inventory_master.vendor" type = "text" placeholder = "vendor" class = "form-control"/>
+          </div>
+
+          <div class = "col-md-3">
+                Catalog #:  <input ng-model = "inventory_master.vendor_catalog" type = "text" placeholder = "catalog" class = "form-control"/>
+              </div>
+         
+            </div>
+            <div class = "row">
+                    <div class = "col-md-2">
+                          Producer:  <input ng-model = "inventory_master.producer" type = "text" placeholder = "producer" class = "form-control"/>
+                        </div>
+      
+           <div class = "col-md-3">
+                U. Cost:  <input ng-model = "inventory_master.cost" type = "text" placeholder = "item cost per unit" class = "form-control" />   
+              </div>
+              <div class = "col-md-3">
+                   Unit Name:   <input ng-model = "inventory_master.unit" type = "text" placeholder = "unit"  class = "form-control" />       
+                  </div>
+
+                  <div class = "col-md-2">
+                        U. Qty:  <input ng-model = "inventory_master.qty" type = "number" placeholder = "Unit Qty Available" class = "form-control"/>      
+                                </div>
+
+
+              </div>
+            <p>&nbsp</p>
+            <div class = "row">
+            
+ 
+                  
+                    <div class = "col-md-2">
+                 Low stock:     <input class = "form-control" ng-model = "inventory_master.low_stock" type = "number" placeholder = "low stock notify value" />       
+                        </div> 
+                        <div class = "col-md-3">
+                                Purchase date:        <input class = "form-control" ng-model = "inventory_master.purchase_date" type = "date" placeholder = "purchase date" />       
+                                          </div> 
+                        <div class = "col-md-3">
+                        Expiration date:        <input class = "form-control" ng-model = "inventory_master.expiry_date" type = "date" placeholder = "expiry date" />       
+                                  </div> 
+                                  <div class = "col-md-3">
+                                        Location:  <input ng-model = "inventory_master.location" type = "text" placeholder = "location" class = "form-control" />   
+                                      </div>       
+
+
+                        
+                        
+            </div>
+<p>&nbsp</p>
+            <div class = "row">
+ <div class = "col-md-2">
+     G. Cost:  <input ng-keyup="convert_group_inventory('gcost', inventory_master.gcost)" ng-model = "inventory_master.gcost" type = "text" placeholder = "item cost per group" class = "form-control" />
+ </div>
+ <div class = "col-md-3">
+    Group Unit Name:    <input ng-model = "inventory_master.gunit_name" class = "form-control" placeholder="group unit name" type = "text" />
+ </div> 
+<div class = "col-md-3">
+      U.Conversion:  (how many units in the group)  <input ng-keyup="convert_group_inventory('uconversion', inventory_master.conv_value)" ng-model = "inventory_master.conv_value" placeholder="unit conversion value" type = "number" class = "form-control"/>
+      
+ </div>
+
+ <div class = "col-md-3">
+      G.Qty:  <input  ng-keyup="convert_group_inventory('gqty', inventory_master.gqty)" ng-model = "inventory_master.gqty" type = "number" placeholder = "Group Qty Available" class = "form-control" />
+ </div>
+            </div>
+            <div class = "row">
+                <div class = "col-md-5">
+                Details:    <textarea class = "form-control" placeholder="technical details, specs, e.t.c"></textarea>
+                </div>
+            </div>
+            <br>
+            <b>Track</b>
+            <select>
+              <option>Auto</option>
+              <option>Manual</option>
+            </select>
+            <br>
+    <div>
+
+      <input type = "checkbox" ng-model = "inventory_master.is_unit_divisor" /> <b> Unit Divisor to Integer </b> 
+      
+      <input type = "text" placeholder="value" size = "5" ng-model = "inventory_master.unit_divisor_value"  style = "outline:bisque" /> 
+      <b>this will divide any quantity unit removed from the <i style = "color: green">assigned stock</i> and rounds to integer </b>
+    
+    </div>
+            
+          <p>&nbsp</p>
+ <button  class = "app-btn bg-blue text-white" ng-click = "add_inventory_item()">Add Item</button>
+       </div> 
+       
+
+   
+  <p><b>Stock list - Branch Code: {{accept_test_data.doc_branch_code}}</b></p>
+  <div class = "form-group"> <input type = "search inventory" placeholder="search" ng-model = "search" class = "pull-left form-control text-center" style = "width: 300px" />
+
+</div>
+<p>&nbsp</p>
+  <p>&nbsp</p>
+
+  <p><button ng-click = "assign_stock_to_test()" class = "btn-sm app-btn bg-coral">Assign stocks to test</button> <button ng-click = "assign_stock_to_profile()" class = "btn-sm app-btn bg-green">Assign stocks to Profile</button> <span class = " pull-right"> <button class = "app-btn btn-sm bg-coral" ng-click = "manage_assigned_stock_ui()">Stock-Test List</button>&nbsp <button class = "app-btn btn-sm bg-blue" ng-click = "manage_assigned_stock_profile_ui()">Stock-Profile List</button></span></p>
+   <table class = "table table-striped table-hover" ng-init = "list_inventory()">
+  <tr><th>...</th><th>Code</th><th>Name</th><th>U. Cost</th><th>Unit Name</th><th>U.Qty</th><th>G.Qty</th> <th>G. Cost</th><th>Group Name</th><th>U. Conversion</th> <th>Low Stock</th><th>Expiry Date</th><th>...</th><th>...</th></tr>
+  <tr ng-repeat="inventory in inventory_master_list | filter: search track by $index">
+      <td><input type = "checkbox" ng-model = "inventory.emma" /></td><td>{{inventory.item_code.split('_').length > 1 ? inventory.item_code.split('_').slice(0, -1).join('_') : inventory.item_code}}</td>
+      <th>{{inventory.item_name}}</th>
+      <td>{{inventory.cost}}</td>
+      <td>{{inventory.unit}}</td>
+      <td>{{inventory.qty}}</td>
+      <td>{{inventory.gqty}}</td>
+      <td>{{inventory.gcost}}</td>
+      <td>{{inventory.gunit_name}}</td>
+      <td>{{inventory_master.conv_value}}</td>
+      <td>{{inventory_master.low_stock}}</td>
+      <td>{{inventory_master.expiry_date}}</td> 
+       <td><button class = "btn-sm my-btn">update</button></td>
+       <td><button class = "btn-sm my-btn">delete</button></td></tr>
+  
+   </table>
+
+
+
+</div>
+</div>
+

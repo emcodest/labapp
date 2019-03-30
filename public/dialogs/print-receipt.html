@@ -1,0 +1,144 @@
+<div ng-app="myApp"  ng-controller = "test_performed" class = "view-test" style = "margin-left: auto; margin-right: auto; width: 842px">
+  <hr style = "border: 2px solid blue">
+  
+<h3 class = "text-center">PRINT RECEIPT <p class = "pull-right"><button class = "my-btn btn-sm" ng-click="print_a4()">PRINT A4</button> <button class = "my-btn btn-sm" ng-click="print_pos()">PRINT POS</button></p></h3>
+<br>
+<hr style = "border: 2px solid blue">
+  
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      
+
+      <div id = "a4" style="margin-left: auto; margin-right: auto; width: 760px">
+      <div>
+    <span style = "float: right !important; width: 30%; margin-bottom: 14px" class = "pull-right"> <img src = "img/logo.png" width = "100%"  />
+      <div style="text-align: right; font-size: 0.6em !important; line-height: 10px !important"  ng-init="get_business_address('global_settings_business')">
+   <div ng-bind-html="address_per_branch"></div>
+    
+     </div>
+
+    </span>
+
+  </div>
+         <div style="margin-left: auto; margin-right: auto; width: 760px" class = "receipt-header">
+      
+                <div class = "bio-row-1">
+                  <span class = "bio-col-1">RECEIPT No. </span>
+                  <span class = "bio-col-2">{{a4_receipt.lab_no}}</span>
+                  <span class = "bio-col-3">Date</span>
+                  <span class = "bio-col-4">{{a4_receipt.date}}</span>
+                </div>
+                <div class = "bio-row-2">
+                <span class = "bio-col-1">Name</span>
+                  <span class = "bio-col-2"><b>
+                    {{a4_receipt.full_name}}
+
+                  </b></span>  
+
+                  <span class = "bio-col-3">Age / Sex</span>
+                  <span class = "bio-col-4">{{a4_receipt.age}} Years / {{a4_receipt.sex}}</span>
+                </div>
+                <div ng-if = "real_p_refcenter || real_p_refperson" class = "bio-row-3">
+                  <span class = "bio-col-1">Referred by</span>
+                  <span class = "bio-col-2">{{a4_receipt.ref_center}}  {{a4_receipt.ref_person}}</span>
+                </div>
+                <div class = "bio-row-4" ng-if = "a4_receipt.clinical_details">
+                  <span class = "bio-col-1">Clinical Details</span>
+                  <span class = "bio-col-2">  <p>{{a4_receipt.clinical_details}}</p></span>
+                </div>
+            
+              
+          
+
+
+      
+      </div>
+      
+         <div class = "test-body" style="font-size: 1em">
+   
+    <br>
+       <div class = "row">
+                <div class = "col-xs-9 col-sm-9 col-md-9">
+                        <table class = "table" style="font-size: 0.9em">
+                                <tr><th>...</th><th>Test ID</th><th>Test Name</th><th>Rate</th><th>Disc %</th><th>Disc Amount</th><th>Tax %</th><th>Tax Amount</th><th>Total</th></tr>
+                                <tr ng-repeat="test in a4_receipt.tests track by $index"><td></td><td>{{test.code.toUpperCase()}}</td><td style="white-space: nowrap;">{{test.name}}</td><td>{{test.rate}}</td><td>{{test.discount}}</td><td>{{test.discount_amount}}</td><td>{{test.tax_per}}</td><td>{{test.tax_amount}}</td><td>{{test.rate - test.discount_amount + test.tax_amount}}</td></tr>
+                               </table>
+                </div>
+                <div class = "col-sm-3 col-xs-3 col-md-3">
+                        <div class = "well">
+                          <p><b>Total Tests: </b> {{a4_receipt.tests.length}} </p>
+                          <p><b>Test Amount: </b> {{total_test_amountxx}} </p>
+                          <p><b>Discount: </b> {{total_discount_amountxx}} </p>                          
+                          <p><b>Tax Amount: </b> {{total_tax_amountxx}} </p>
+                          <p><b>Net Amount: </b> {{total_test_amountxx}}  </p>
+                          <p><b>Balance: </b>{{(total_test_amountxx.replace(',', '') - total_test_paid).toFixed(2)}}</p>
+                          <p><b>Payment Method: </b>  </p>
+                         
+                          
+       
+                        </div>
+                      </div> 
+
+            </div>
+  
+
+    </div>
+
+
+
+        
+
+      </div>
+      
+
+    </div>
+    <div class="col-sm-12 col-md-12">
+<hr style = "border: 2px solid blue">
+      <h3 class = "text-center">POS RECEIPT</h3>
+
+      <div id = "pos" style="margin-left: auto; margin-right: auto; width: 250px; border: 1px solid #eee; font-size: 0.8em">
+    
+      <div style = "width: 100%; margin-bottom: 14px; text-align: center;">
+    <span > <img src = "img/logo.png" width = "60%"  /></span>
+    <div style="text-align: center; font-size: 0.6em !important; line-height: 10px !important"  ng-init="get_business_address('global_settings_business')">
+   <div ng-bind-html="address_per_branch"></div>
+    
+     </div>
+    </div>
+     <table class="table" style="border: none !important; font-size: 0.7em">
+       <tr>
+         <td>RECEIPT NO.</td>
+         <td>{{a4_receipt.lab_no}}</td>
+         <td>DATE</td>
+         <td>{{a4_receipt.date}}</td>
+       </tr>
+
+       <tr><td>NAME</td><td colspan="3">{{a4_receipt.full_name}}</td></tr>
+       <tr><td>LAB NO.</td><td>{{a4_receipt.lab_no}}</td><td>AGE/SEX</td><td colspan="1">{{a4_receipt.age}} / {{a4_receipt.sex}}</td></tr>
+       <!-- <tr><td>REFF. BY</td><td colspan="3">{{a4_receipt.ref_center}} {{a4_receipt.ref_person}}</td></tr> -->
+       <tr><td><b>INVESTIGATION</b></td><td><b>RATE</b></td><td colspan="2"><b>DISC. RATE</b></td></tr>
+       <tr ng-repeat="i in a4_receipt.tests"><td>{{i.name}}</td><td>{{i.rate}}</td><td colspan="2">1800</td></tr>
+       <tr><td colspan="2"><b>TOTAL AMOUNT</b></td><td colspan="2">23,000</td></tr>
+       <tr><td colspan="2"><b>DISCOUNT</b></td><td colspan="2">23,000</td></tr>
+       <tr><td colspan="2"><b>NET AMOUNT</b></td><td colspan="2">23,000</td></tr>
+       <tr><td colspan="2"><b>PAID AMOUNT</b></td><td colspan="2">23,000</td></tr>
+       <tr><td colspan="2"><b>BALANCE</b></td><td colspan="2">23,000</td></tr>
+       
+       <tr><td colspan="2"><b>PAYMENT METHOD</b></td><td colspan="2">cash, visa</td></tr>
+
+     </table>
+     <p style="text-align: center;">
+       <b style="font-size: 0.6em;">THANK YOU FOR YOUR BUSINESS</b>
+     </p>
+        
+
+      
+      
+
+    </div>
+    
+
+  </div>
+ 
+
+</div>

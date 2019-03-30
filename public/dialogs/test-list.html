@@ -1,0 +1,39 @@
+<div ng-app="myApp"  ng-controller = "my_server">
+    <p><b>add test ...</b></p>
+ 
+     <div class = "well">
+         <div class = "form-group">
+             <input type = "text" class = "form-control" placeholder="search tests" ng-model = "query" />
+         </div>
+         <div class = "form-group">
+             <label><b>Department</b></label><br>
+           
+             <select ng-model = "select_department_x" class = "form-control" ng-options = "item.department_name for item in  department_list">
+                 <option value = "">--select Department--</option>
+             </select>
+         </div>
+       <div class = "form-group">
+           <button ng-click = "add_test_to_test_list()" class = "my-btn btm-sm pull-right">+ add</button>
+           <br>
+       </div>
+         <div class = "row">
+             <div class = "col-md-4 well" style="background: beige">
+                 <table class = "table" ng-init = "get_test_cats()">
+                     <tr><td>Categories</td></tr>
+                     <tr  ng-repeat="test_cat in all_dep_cats | filter: select_department_x.id track by $index" ng-class="{'selectedrow': test_cat.selectedrow}"><th>{{test_cat.data.name}}</th><td><button class = "my-btn  btn-sm" ng-click = "select_test_in_cats(test_cat.data, $index)">select</button></td></tr>
+                 </table>
+             </div>
+             <div class = "col-md-8" style="background: beige">
+               <table class = "table uppercase">
+                   <tr><th>Test</th><th>Code</th></tr>
+             <tr  ng-repeat = "test in display_all_test_scope | filter:query | orderBy: 'name'"><td>{{test.name}}</td><td>{{test.code}}</td><td></td><td><input 
+                  type = "checkbox" ng-model = "test.emma" /></td></tr>
+         
+         </table>  
+             </div>
+         </div>
+         
+     
+     </div>
+ </div>
+ 

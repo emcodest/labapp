@@ -1,0 +1,101 @@
+<script>
+        setTimeout(function() {
+         // GET SELECTED TEST CATEGORY
+         if(! window.test_category_list_dt){
+                alertError("Please select a category")
+                $("#modal-id").modal("hide")
+                return
+            }
+            var ddt = window.test_category_list_dt
+            $.map(ddt.rows('.selected').data(), function (item) {
+                
+    
+                var code = item[0] // code  test category
+                var name = item[1] // name  test category
+                var tab_id = item[4] // id of test category
+                $("#add-test-cat-select").append("<option value = '"+tab_id+"'>"+code+" - "+name+"</option>")
+                
+    
+               
+            });
+            //: load the vue and remove from dom
+            $("#funny-click").trigger("click").remove()
+    
+        }, 1000)
+    
+    </script>
+    <button style = "opacity: 0" id = "funny-click" @click = "LoadPredefined">Update</button>
+    <input  type = 'hidden' name = "idd" />
+    <input  type = 'hidden' name = "custom" />
+   
+    <div  class = "add-test" style = "padding: 4px">
+            <hr style = "border: 2px solid coral"> 
+           <h3>Edit Predefined Test </h3>
+           <b>Test Category</b>
+        <select id = "add-test-cat-select"  class = "form-control">
+            
+        </select>
+        <br>
+           
+       <div class = "row">
+    <div class = "col-md-4">
+        <div>
+            <label><b>Code</b></label>
+        <input name = "code" v-model="predefined_test.code" class = "form-control uppercase" type = "text" placeholder="code" /><br> </div>   </div>
+    <div class = "col-md-4"> <div>
+            <label><b>Name</b></label>
+        <input name = "name" v-model="predefined_test.name" class = "form-control" type = "text" placeholder="name" /> <br></div>   </div>
+    
+    <div class = "col-md-4"> <div>
+            <label><b>Rate</b></label>
+        <input name = "rate" v-model="predefined_test.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div> </div>
+       
+            
+            <div role="tabpanel">
+                    <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class = "button-test-group">
+                                            <table class = "table">
+                                                <tr>
+                    
+                                                    <td><select v-model = "predefined_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option>
+                                                        <option  value = "specimen">Specimen</option>
+                                                        <option  value = "medicine">Medicine</option>
+                                                    </select><input v-model = "predefined_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    <td><br><button @click = "AddCultureTest('predefined_test')" class = "btn-sm">Add Field</button></td>
+                                                </tr>
+                    
+                                            </table>
+                                           
+                                            
+                                        </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <h3 style ="font-weight: bold">FIELDS </h3>
+                                <table  class = "table">
+                                        <tr v-for = "(obj, i) in predefined_test_list[0].default">
+            
+                                            <td><b>{{obj.ftype}}</b></td>
+                                            <td><b>{{obj.field_name}}</b></td>
+                                            <td><button @click = "RemoveCulture('predefined_test', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
+                                        </tr>
+            
+                                </table>
+    
+    
+                            </div>
+                        </div>
+                        
+         
+            
+             
+                
+                <button type="button" @click = "UpdatePredefinedTest(predefined_test, predefined_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+                
+            </div>
+            
+        
+        
+        <!-- END VERTICAL NAV -->
+          
+        </div> 

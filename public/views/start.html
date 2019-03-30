@@ -1,0 +1,114 @@
+<div class = "container" class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+       
+     <div ng-include="'ng-includes/header.html'"></div>
+<br>
+            <div class = "row" style= "background: #000; border-radius: 6px; border: 1px solid #ddd; padding: 14px; text-align: center">
+               
+
+                <div class = "col-md-4 col-sm-6">
+                 
+                    <button class = "button text-white" ng-click="accept_test_ui()">
+                        <img src = "img/icons/perform-test.png" width = "30%" />
+                        <br>
+                        Accept Test
+                    
+                    </button>
+
+                </div>
+
+                <div class = "col-md-4 col-sm-6">
+                        
+                           <button class = "button text-white" ng-click="perform_test_ui()">
+                               <img src = "img/icons/perform-test.png" width = "30%" />
+                               <br>
+                               Perform Test
+                           
+                           </button>
+       
+                       </div>
+
+                       <div class = "col-md-4 col-sm-6">
+                            
+                               <button ng-click="approve_tests_ui()" class = "button text-white">
+                                   <img src = "img/icons/print.png" width = "30%" />
+                                   <br>
+                                 Approve Test
+                               
+                               </button>
+           
+                           </div>
+                        </div> 
+                        <div class = "row" style= "background: #000; border-radius: 6px; border: 1px solid #ddd; padding: 14px; text-align: center">
+
+                            <div class = "col-md-4 col-sm-6">
+                                           
+                                <button onclick = "window.location.href = 'users#!/masters'" class = "button text-white">
+                                    <img src = "img/icons/masters.png" width = "30%" />
+                                    <br>
+                                  Masters
+                                
+                                </button>
+            
+                            </div>
+                            
+                           <div class = "col-md-4 col-sm-6">
+                                
+                                   <button class = "button text-white" ng-click="report_ui()">
+                                       <img src = "img/icons/accounting.png" width = "30%" />
+                                       <br>
+                                      Accounting
+                                   
+                                   </button>
+               
+                               </div>
+               
+                               <div class = "col-md-4 col-sm-6">
+                                       
+                                          <button class = "button text-white">
+                                              <img src = "img/icons/print.png" width = "30%" />
+                                              <br>
+                                             Report Settings
+                                          
+                                          </button>
+                      
+                                      </div>
+               
+                                      
+                           </div>
+                           <div class = "row" style= "background: #000; border-radius: 6px; border: 1px solid #ddd; padding: 14px; text-align: center">
+                                          <div class = "col-md-4 col-sm-6">
+                                                
+                                                   <button class = "button text-white">
+                                                       <img src = "img/icons/print.png" width = "30%" />
+                                                       <br>
+                                                 Test Libraries
+                                                   
+                                                   </button>
+                               
+                                               </div>
+
+                                               <div class = "col-md-4 col-sm-6">
+                                                    
+                                                       <button ng-click="inventory_ui()" class = "button text-white">
+                                                           <img src = "img/icons/inventory.png" width = "30%" />
+                                                           <br>
+                                                        Inventory
+                                                       
+                                                       </button>
+                                   
+                                                   </div>
+             <div class = "col-md-4 col-sm-6">
+                                                                                                 <button class = "button text-white" ng-click = "exitApp()">
+                                                               <img src = "img/icons/exit2.png" width = "30%" />
+                                                               <br>
+                                                            Exit App
+                                                           
+                                                           </button>
+                                       
+                                                       </div>
+</div>
+
+
+            <div ng-include="'ng-includes/footer.html'"></div>
+        </div>
+

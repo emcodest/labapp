@@ -1,0 +1,584 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "view-test">
+<hr><p  style = "padding: 12px;">
+  <button class = "app-btn btn-sm bg-blue pull-left" ng-click = "property_reference()">PROPERTY REFERENCE</button>
+  <button class = "app-btn btn-sm bg-blue pull-right" ng-click = "save_settings()">SAVE SETTINGS</button>
+</p>
+<h3 class = "text-center">RESULT SETTINGS<p><small><b><i>Separate each property with a comma.</i></b></small></p> </h3>
+
+<div class="well">
+<p><b>Header Settings</b></p>
+<table class = "table">
+  <tr>
+    <td>ROWS: <textarea ng-model = "result_settings_config.grid_header0" class  = "form-control"></textarea></td>
+    <td>ROW 1: <textarea ng-model = "result_settings_config.grid_header1" class  = "form-control"></textarea></td>
+    <td>ROW 2: <textarea ng-model = "result_settings_config.grid_header2" class  = "form-control"></textarea></td>
+    <td>ROW 3: <textarea ng-model = "result_settings_config.grid_header3" class  = "form-control"></textarea></td>
+    <td>ROW 4: <textarea ng-model = "result_settings_config.grid_header4" class  = "form-control"></textarea></td>
+  </tr>
+  
+</table>
+<table class = "table">
+  <tr>
+
+    <td>Row 1, Col 1</td>
+    <td><textarea ng-model = "result_settings_config.grid_r1_c1" class  = "form-control"></textarea></td>
+    <td>Row 2, Col 1</td>
+    <td><textarea ng-model = "result_settings_config.grid_r2_c1" class  = "form-control"></textarea></td>
+
+  </tr>
+   <tr>
+
+    <td>Row 1, Col 2</td>
+    <td><textarea ng-model = "result_settings_config.grid_r1_c2" class  = "form-control"></textarea></td>
+ <td>Row 2, Col 2</td>
+    <td><textarea ng-model = "result_settings_config.grid_r2_c2"  class  = "form-control"></textarea></td>
+  </tr>
+
+   <tr>
+
+    <td>Row 1, Col 3</td>
+    <td><textarea ng-model = "result_settings_config.grid_r1_c3" class  = "form-control"></textarea></td>
+   <td>Row 2, Col 3</td>
+    <td><textarea ng-model = "result_settings_config.grid_r2_c3" class  = "form-control"></textarea></td>
+  </tr>
+
+   <tr>
+
+    <td>Row 1, Col 4</td>
+    <td><textarea ng-model = "result_settings_config.grid_r1_c4" class  = "form-control"></textarea></td>
+   <td>Row 2, Col 4</td>
+    <td><textarea ng-model = "result_settings_config.grid_r2_c4" class  = "form-control"></textarea></td>
+  </tr>
+
+</table>
+
+<table class = "table">
+  <tr>
+
+    <td>Row 3, Col 1</td>
+    <td><textarea ng-model = "result_settings_config.grid_r3_c1" class  = "form-control"></textarea></td>
+    <td>Row 4, Col 1</td>
+    <td><textarea ng-model = "result_settings_config.grid_r4_c1" class  = "form-control"></textarea></td>
+
+  </tr>
+   <tr>
+
+    <td>Row 3, Col 2</td>
+    <td><textarea ng-model = "result_settings_config.grid_r3_c2" class  = "form-control"></textarea></td>
+ <td>Row 4, Col 2</td>
+    <td><textarea ng-model = "result_settings_config.grid_r4_c2"  class  = "form-control"></textarea></td>
+  </tr>
+
+  
+
+</table>
+
+<p><b>Test Settings</b></p>
+<table class = "table">
+   <tr>
+    <td>ROWS: <textarea ng-model = "result_settings_config.grid_tr" class  = "form-control"></textarea></td>
+    <td>COL HEADER 1: <textarea ng-model = "result_settings_config.grid_th1" class  = "form-control"></textarea></td>
+    <td>COL HEADER 2: <textarea ng-model = "result_settings_config.grid_th2" class  = "form-control"></textarea></td>
+    <td>COL HEADER 3: <textarea ng-model = "result_settings_config.grid_th3" class  = "form-control"></textarea></td>
+    <td>COL HEADER 4: <textarea ng-model = "result_settings_config.grid_th4" class  = "form-control"></textarea></td>
+        <td>COL HEADER 5: <textarea ng-model = "result_settings_config.grid_th5" class  = "form-control"></textarea></td>
+  </tr>
+  
+   <tr>
+
+    <td>ROW</td>
+    <td>Col 1: <textarea ng-model = "result_settings_config.grid_tc1" class  = "form-control"></textarea></td>
+
+
+    <td>Col 2: <textarea ng-model = "result_settings_config.grid_tc2"class  = "form-control"></textarea></td>
+    <td>Col 3: <textarea ng-model = "result_settings_config.grid_tc3" class  = "form-control"></textarea></td>
+    <td>Col 4: <textarea ng-model = "result_settings_config.grid_tc4"  class  = "form-control"></textarea></td>
+    <td>Col 5: <textarea ng-model = "result_settings_config.grid_tc5" class  = "form-control"></textarea></td>
+    
+
+  </tr>
+
+ 
+  <tr>
+        <td><b>Table Title:</b> <textarea ng-model = "result_settings_config.grid_test_prof_title" class  = "form-control"></textarea></td>
+      <td><b>Table Header:</b> <textarea ng-model = "result_settings_config.grid_test_prof_header" class  = "form-control"></textarea></td> <td><b>Table Header Column:</b> <textarea ng-model = "result_settings_config.grid_th_col" class  = "form-control"></textarea></td>
+        <td><b>Result Footer:</b> <br><button class="app-btn btn-sm bg-coral">Settings</button></td>
+  </tr>
+
+</table>
+  <!-- 
+  <table class = "table">
+    <tr>
+      <td>Patient Header Font Size</td>
+      <td>
+        <select ng-model = "result_settings_config.test_header_font.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="1px">1px</option>
+    <option value="3px">3px</option>
+    <option value="6px">6px</option>
+    <option value="7px">7px</option>
+    <option value="8px">8px</option>
+    <option value="9px">9px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="28px">28px</option>
+    <option value="38px">38px</option>
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+    <tr>
+      <td>Patient Header Width</td>
+      <td>
+    <select ng-model = "result_settings_config.test_header_width.width">
+    
+    <option value="">--choose--</option>
+    <option value="0px">0px</option>
+    <option value="10px">10px</option>
+    <option value="20px">20px</option>
+    <option value="50px">50px</option>
+    <option value="100px">100px</option>
+    <option value="200px">200px</option>
+    <option value="300px">300px</option>
+    <option value="600px">600px</option>
+    <option value="800px">800px</option>
+    <option value="1000px">1000px</option>
+  
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+    <tr>
+      <td>Patient Header Padding</td>
+      <td>
+        <select ng-model = "result_settings_config.test_header_padding.padding">
+    
+    <option value="">--choose--</option>
+    <option value="0px">0px</option>
+    <option value="1px">1px</option>
+    <option value="2px">2px</option>
+    <option value="3px">3px</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+     <tr>
+          <td>Test/Profile Header Font</td>
+          <td>
+            <select ng-model = "result_settings_config.result_general_h.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+     <option value="18px">18px</option>
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    
+
+  </select>
+       </td>
+
+        </tr>
+
+    <tr>
+      <td>Body Font Size</td>
+      <td>
+        <select ng-model = "result_settings_config.result_general.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="6px">6px</option>
+     <option value="7px">7px</option>
+    <option value="8px">8px</option>
+    <option value="9px">9px</option>
+    <option value="10px">10px</option>
+    <option value="11px">11px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+    
+      <tr>
+      <td>Padding</td>
+      <td>
+        <select ng-model = "result_settings_config.result_general.padding">
+    
+    <option value="">--choose--</option>
+    <option value="0px">0px</option>
+    <option value="1px">1px</option>
+    <option value="2px">2px</option>
+    <option value="3px">3px</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+
+      <tr>
+      <td>Column Width</td>
+      <td>
+        <select ng-model = "result_settings_config.result_general.width">
+    
+    <option value="">--choose--</option>
+    <option value="1%">1%</option>
+    <option value="2%">2%</option>
+    <option value="5%">5%</option>
+    <option value="10%">10%</option>
+    <option value="15%">15%</option>
+    <option value="20%">20%</option>
+    <option value="25%">25%</option>
+    <option value="30%">30%</option>
+    <option value="40%">40%</option>
+    <option value="50%">50%</option>
+    <option value="100%">100%</option>
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+     <tr>
+      <td>Border</td>
+      <td>
+        <select ng-model = "result_settings_config.result_general.border">
+    
+    <option value="">--choose--</option>
+    <option value="none">No Border</option>
+    <option value="1px solid #333">1px thick</option>
+    <option value="2px solid #333">2px thick</option>
+    <option value="5px solid #333">5px thick</option>
+    <option value="10px solid #333">10px thick</option>
+   
+    
+
+  </select>
+
+      </td>
+      
+    </tr>
+    
+    
+
+  </table> -->
+
+</div>
+<!-- <table class = "result-settings table">
+  <tr>
+    <th>Section</th>
+    <th>Description</th>
+    <th>...</th>
+  </tr>
+  <tr>
+  <td>Patient Information</td>  
+
+  <td>
+      <table class = "table">
+        <tr>
+          <td>Font Family</td>
+          <td><select ng-model = "result_settings_config.test_header.fontFamily">
+    
+    <option value="">--choose--</option>
+     <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana </option>
+        <option value="Impact">Impact </option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+
+  </select></td>
+
+        </tr>
+          <tr>
+          <td>Font Size</td>
+          <td>
+            <select ng-model = "result_settings_config.test_header.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Font Style</td>
+          <td>
+            <select ng-model = "result_settings_config.test_header.fontStyle">
+    
+    <option value="">--choose--</option>
+    <option value="italic">Italic</option>
+    <option value="normal">Normal</option>
+    <option value="oblique">Oblique</option>    
+    <option value="initial">Initial</option>    
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Margin Bottom</td>
+          <td>
+            <select ng-model = "result_settings_config.test_header.marginBottom">
+    
+   <option value="">--choose--</option>
+    <option value="0px">0px</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>   
+    <option value="21px">21px</option>   
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    <option value="38px">48px</option> 
+    <option value="78px">Low</option>  
+    
+
+  </select>
+       </td>
+
+        </tr>
+
+      </table>
+
+  </td>  
+  
+
+  </tr>
+ <tr>
+  <td>Test</td>
+
+  <td>
+      <table class = "table">
+        <tr>
+          <td>Font Family</td>
+          <td><select ng-model = "result_settings_config.test_profile.fontFamily">
+    
+    <option value="">--choose--</option>
+     <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana </option>
+        <option value="Impact">Impact </option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+
+  </select>
+
+</td>
+
+        </tr>
+          <tr>
+          <td>Font Size</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profile.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Font Style</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profile.fontStyle">
+    
+    <option value="">--choose--</option>
+    <option value="italic">Italic</option>
+    <option value="normal">Normal</option>
+    <option value="oblique">Oblique</option>    
+    <option value="initial">Initial</option>    
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Margin Bottom</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profile.marginBottom">
+    
+   <option value="">--choose--</option>
+    
+    <option value="0px">0px</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    <option value="38px">48px</option> 
+    <option value="78px">Low</option>  
+    
+
+  </select>
+
+  </td>  
+  
+
+  </tr>
+
+</table>
+
+</td>
+
+</tr>
+
+<tr>
+  <td>Profile</td>
+
+  <td>
+      <table class = "table">
+        <tr>
+          <td>Font Family</td>
+          <td><select ng-model = "result_settings_config.test_profilep.fontFamily">
+    
+    <option value="">--choose--</option>
+     <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana </option>
+        <option value="Impact">Impact </option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+
+  </select>
+
+</td>
+
+        </tr>
+          <tr>
+          <td>Font Size</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profilep.fontSize">
+    
+    <option value="">--choose--</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    <option value="38px">48px</option>
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Font Style</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profilep.fontStyle">
+    
+    <option value="">--choose--</option>
+    <option value="italic">Italic</option>
+    <option value="normal">Normal</option>
+    <option value="oblique">Oblique</option>    
+    <option value="initial">Initial</option>    
+    
+
+  </select>
+       </td>
+
+        </tr>
+         <tr>
+          <td>Margin Top</td>
+          <td>
+            <select ng-model = "result_settings_config.test_profilep.marginTop">
+    
+   <option value="">--choose--</option>
+     <option value="-10px">Top Most</option>
+     <option value="0px">0px</option>
+    <option value="6px">6px</option>
+    <option value="8px">8px</option>
+    <option value="10px">10px</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="24px">24px</option>
+    <option value="28px">28px</option>
+    <option value="38px">48px</option> 
+    <option value="58px">Bottom</option> 
+    
+
+  </select>
+
+  </td>  
+  
+
+  </tr>
+
+</table> -->
+
+</td>
+
+</tr>
+
+
+
+  
+
+</table>
+
+</div>

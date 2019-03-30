@@ -1,0 +1,34 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><h3>MANAGE UNITS</h3></p>
+    <div class="row" ng-init="settings_sms_social_units_get('global_settings_units', 'units')">
+    	<div class="col-sm-12 col-md-6">
+      		<div class="form-group">
+        
+        <label>units: separate in a newline</label>
+        <textarea ng-model = "units_settings.units" rows = "10" class = "form-control" placeholder = "units separated by new line"></textarea> 
+
+      	</div>
+		</div>
+
+		<!-- <div class="col-sm-12 col-md-6">
+			<h3>DELETED DOC</h3>
+			<button ng-click="show_deleted()">Show Deleted</button>
+			<table>
+				<tr><th>Doc ID</th> <th>...</th></tr>
+				<tr><td>!2</td><td>Delete</td></tr>
+			</table>
+		</div> -->
+
+
+	</div>
+
+
+	 <button ng-click="settings_sms_social_units('units', units_settings, 'units_settings')" class = "btn my-btn">SAVE CHANGES</button>
+
+    </div>
+

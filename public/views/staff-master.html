@@ -1,0 +1,111 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+    <div ng-include="'ng-includes/header.html'"></div>
+    
+    <div ng-include="'ng-includes/close.html'"></div>
+    
+          <p><h3>STAFF INFORMATION</h3></p>
+          <table class = "table table-responsive">
+            <tr>
+              
+              <td><label><b>login username|code</b></label><input ng-model = "master_data.code" class = "form-control" type = "text" /></td>
+              <td><label><b>login password</b></label><input ng-model = "master_data.password"  class = "form-control" type = "text" /></td>
+              <td><label><b>title</b></label><select ng-model = "master_data.title" class = "form-control">
+                <option>Mr</option>
+                <option>Miss</option>
+                <option>Mrs</option>
+                <option>Others</option>
+              </select></td>
+              <td><label><b>first name</b></label><input ng-model = "master_data.first_name"  class = "form-control" type = "text" /></td>
+              <td><label><b>last name</b></label><input ng-model = "master_data.last_name"  class = "form-control" type = "text" /></td>
+              <td><label><b>sex</b></label>
+                <select ng-model = "master_data.sex"  class = "form-control">
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </td>
+    
+            </tr>
+            <tr>
+              
+                <td><label><b>date of birth</b></label><input ng-model = "master_data.dob"  class = "form-control" type = "date" /></td>
+                <td><label><b>age</b></label><input ng-model = "master_data.age"  class = "form-control" type = "text" /></td>
+                <!-- <td><label><b>department</b></label><select  class = "form-control"><option>
+                  clinical lab
+                </option>
+              </select>
+                </td> -->
+
+                <td><label><b>phone no.</b></label><input ng-model = "master_data.phone"  class = "form-control" type = "text" /></td>
+                <td><label><b>email</b></label><input ng-model = "master_data.email"  class = "form-control" type = "text" /></td>
+                <td><label><b>marital status</b></label><input ng-model = "master_data.marital_status"  class = "form-control" type = "text" /></td>
+                <td><label><b>religion</b></label><input ng-model = "master_data.religion"  class = "form-control" type = "text" /></td>
+      
+              </tr>
+              <tr>
+              
+                  <td><label><b>nationality</b></label><input ng-model = "master_data.nationality"  class = "form-control" type = "text" /></td>
+                  <!-- <td><label><b>state of orign</b></label><select  class = "form-control">
+                      <option>Delta</option>
+                      <option>Rivers</option>
+                    </select></td> -->
+                    <td><label><b>office location</b></label><input ng-model = "master_data.office_location"  class = "form-control" type = "text" /></td>
+                   
+                 
+        
+                </tr>
+              
+    
+          </table>
+    
+          <button ng-click = "AddMaster('staff_master', 'master_name, skips', master_data, 'master', 'AddStaffMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+          
+          <br>
+            <h3>List</h3>
+            <br>
+          <div class = "row">
+              <div class = "col-md-12 col-sm-12">
+                <style>
+                  #staff-master-dt td{
+                  
+                    max-width: 50px;
+                    overflow-x: hidden;
+                  }
+                </style>
+                  <table id = "staff-master-dt" class = "table" width = "100%" style = "font-size: 0.8em; width: 100%">
+                    <thead>
+                    <tr>
+                      
+                      <th>Title</th>
+                      <th>Username/Code</th>
+                      <th>Password</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Sex</th>
+                      <th>DOB</th>
+                      <th>Age</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Marital Status</th>
+                      <th>Religion</th>
+                      <th>Nationality</th>
+                      <th>Office Location</th>
+                      <th>...</th>
+                    </tr>
+                  </thead>
+                
+                 
+                    
+                
+                  </table>
+                        
+                        
+                
+                      </div>
+    
+          </div>
+        
+    
+    </div>
+    
+    

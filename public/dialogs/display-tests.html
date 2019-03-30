@@ -1,0 +1,53 @@
+<script>
+    setTimeout(function() {
+        //GET SELECTED DEPARTMENT
+         
+         if(! window.profile_dt){
+            alertError("Please select a profile")
+            $("#modal-id").modal("hide")
+            return
+        }
+        //: GET THE PROFILE ID
+        $.map(window.profile_dt.rows('.selected').data(), function (item) {
+            
+            var tab_id = item[4] // id of profile     
+            $(".profile-name").html(item[1])   
+            $("[name=idd]").val(tab_id) // store the profile id
+         
+
+           
+        });
+
+        $("#click-testlist").trigger('click').remove()
+
+    }, 500);
+</script>
+<div class="clearfix"></div>
+<h3 style = "font-weight: 700">ADD TEST TO PROFILE - <span class = "profile-name"></span></h3>
+<button id = "click-testlist" style = "opacity: 0" class = "click" func = "LoadProfileTestList" ></button>
+<input type = "hidden" name = "idd" />
+<div style = "text-align: center">Order of arrangement in Profile: </div>
+<input class = "form-control" name = "test_order" type = "number" value = "0"  />
+<div class="add-test" style="padding: 4px">
+
+    <table id="testlist_dt" class="table" style="border: 1px solid #ddd; width: 100%">
+        <thead>
+            <tr>
+                <th>Code </th>
+                <th>Name</th>
+
+                <th>...</th>
+                <!-- <th>...</th> -->
+            </tr>
+        </thead>
+
+
+    </table>
+  
+                  
+    </div>
+
+
+    
+
+    

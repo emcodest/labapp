@@ -1,0 +1,227 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "view-test">
+<hr style = "border: 2px solid coral">
+   <!-- <h3 class = "text-center">View Test <button ng-click = "reference_range_ui()" class = "my-btn btn-md pull-right">Reference Range</button></h3> -->
+   <h3 class = "text-center">View Test </h3>
+   
+   <hr>
+    <div class = "row">
+
+<div class = "col-md-3">
+    <div>
+        <label><b>Test Code</b></label>
+    <input ng-model="view_test_fd.code" class = "form-control uppercase" type = "text" placeholder="code"  /><br> </div>  
+
+</div>
+
+<div class = "col-md-3"> <div>
+        <label><b>Test Name</b></label>
+    <input ng-model="view_test_fd.name" class = "form-control" type = "text" placeholder="name" /> <br></div>   
+
+</div>
+
+<div class = "col-md-3"> <div>
+        <label><b>Rate</b></label>
+    <input ng-model="view_test_fd.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div> 
+
+</div>
+<div class = "col-md-3"> <div>
+        <label><b>Tax %</b></label>
+    <input ng-model="view_test_fd.tax_per" class = "form-control" type = "text" placeholder="tax %" /><br> </div> 
+
+</div>
+
+
+<div class = "col-md-3">
+    <div>
+            <label><b>Lower bound 1</b></label>
+        <input ng-model="view_test_fd.lower_bound_1" class = "form-control" type = "text" placeholder="lower bound 1" /><br> </div> 
+ </div>
+<div class = "col-md-3">
+    <div>
+            <label><b>Upper band 1</b></label>  
+        <input ng-model="view_test_fd.upper_band_1" class = "form-control" type = "text" placeholder="upper band 1" /><br> </div> 
+    
+    </div>
+
+
+        <div class = "col-md-3">    <div>
+                <label><b>Unit _1</b></label>
+                <input  type="text" placeholder="enter unit" ng-model="view_test_fd.unit_1" uib-typeahead="unit for unit in global_units | filter:$viewValue | limitTo:10" class="form-control">
+               
+            
+            <br> </div>  
+        
+        </div>
+
+<div class = "col-md-3"> <div>
+        <label><b>Result Output Formula _1</b></label>
+    <input ng-model="view_test_fd.formula_1" class = "form-control" type = "text" placeholder="formula 1" /><br> </div> 
+
+</div> 
+    
+<div class = "col-md-3">
+        <div>
+                <label><b>Lower band 2</b></label>     
+            <input ng-model="view_test_fd.lower_bound_2" class = "form-control" type = "text" placeholder="lower bound 2" /><br> </div> 
+    </div>
+    <div class = "col-md-3">
+        <div>
+                <label><b>Upper band 2</b></label>
+            <input ng-model="view_test_fd.upper_band_2" class = "form-control" type = "text" placeholder="upper band 2" /><br> </div>  
+        
+        </div>
+    
+    
+            <div class = "col-md-3">    <div>
+                    <label><b>Unit _2</b></label>
+                    <input  type="text" placeholder="enter unit" ng-model="view_test_fd.unit_2" uib-typeahead="unit for unit in global_units | filter:$viewValue | limitTo:10" class="form-control">
+                   
+                
+                <br> </div>  
+            
+            </div>    
+    
+    
+    
+    
+    
+    <div class = "col-md-3"> <div>
+            <label><b>Result Output Formula _2</b></label>
+        <input ng-model="view_test_fd.formula_2" class = "form-control" type = "text" placeholder="formula 2" /><br> </div> 
+    
+    </div> 
+        <div class = "col-md-12">
+
+                <button ng-click = "test_references_fxn()" class = "my-btn btn-md">Reference Range</button>
+          
+         <div class = "well" ng-repeat = "ref in test_references track by $index">
+                   <b>Referene Range: {{$index + 1}}</b>     <button class = "my-btn btn-sm pull-right">X</button>
+                       <div class = "row">
+                       
+                           <div class = "col-md-3">
+                           Months | Years: 
+                           <input  type="text" placeholder="Months or Years" ng-model="test_references[$index].month_years" uib-typeahead="unit for unit in ['Months', 'Years'] | filter:$viewValue | limitTo:10" class="form-control">
+                           </div>
+                       <div class = "col-md-3">
+                          
+                           <div class = "row">
+                               <div class = "col-md-6">
+                                    Age Range: From <input class = "form-control" type = "text" placeholder="1" ng-model = "test_references[$index].age_range_1" /> 
+
+                               </div>
+
+                               <div class = "col-md-6">
+
+ To <input class = "form-control" type = "text" placeholder="2" ng-model = "test_references[$index].age_range_2" /> 
+                               </div>
+                           </div>
+                               
+                               <br> 
+                               <br>
+                               
+                       </div>
+                       <div class = "col-md-3"><div>
+                            Sex:
+                            <input class = "form-control" type = "text" placeholder="Male or Female" ng-model = "test_references[$index].sex" uib-typeahead="unit for unit in ['Male', 'Female'] | filter:$viewValue | limitTo:10" /> 
+                       
+                        
+                            <br> </div>   </div>
+                       </div>
+                           
+                       
+ <div class = "row">
+                              
+<div class = "col-md-12">
+        <div class = "col-md-3">
+                <div>
+                        <label><b>Lower bound 1</b></label>
+                    <input ng-model = "test_references[$index].lower_bound_1"  class = "form-control" type = "text" placeholder="lower bound 1" /><br> </div> 
+             </div>
+            <div class = "col-md-3">
+                <div>
+                        <label><b>Upper band 1</b></label>  
+                    <input ng-model = "test_references[$index].upper_band_1"  class = "form-control" type = "text" placeholder="upper band 1" /><br> </div>  </div>
+            
+            
+                    <div class = "col-md-3">    <div>
+                            <label><b>Unit _1</b></label>
+                            <input  type="text" placeholder="enter unit"  ng-model="test_references[$index].unit_1" uib-typeahead="unit for unit in global_units | filter:$viewValue | limitTo:10" class="form-control">
+                           
+                        
+                        <br> </div>  </div>
+            <div class = "col-md-3"> <div>
+                    <label><b>Result Output Formula _1</b></label>
+                <input ng-model="test_references[$index].formula_1" class = "form-control" type = "text" placeholder="formula 1" /><br> </div> </div> 
+   
+
+
+</div>
+
+<div class = "col-md-12">
+
+        <div class = "col-md-3">
+                <div>
+                        <label><b>Lower band 2</b></label>     
+                    <input ng-model="test_references[$index].lower_bound_2" class = "form-control" type = "text" placeholder="lower bound 2" /><br> </div> 
+             </div>
+            <div class = "col-md-3">
+                <div>
+                        <label><b>Upper band 2</b></label>
+                    <input ng-model="test_references[$index].upper_band_2" class = "form-control" type = "text" placeholder="upper band 2" /><br> </div>  </div>
+            
+            
+                    <div class = "col-md-3">    <div>
+                            <label><b>Unit _2</b></label>
+                            <input  type="text" placeholder="enter unit" ng-model="test_references[$index].unit_2" uib-typeahead="unit for unit in global_units | filter:$viewValue | limitTo:10" class="form-control">
+                           
+                        
+                        <br> </div>  </div>    
+            
+            
+            
+            
+            
+            <div class = "col-md-3"> <div>
+                    <label><b>Result Output Formula _2</b></label>
+                <input ng-model="test_references[$index].formula_2" class = "form-control" type = "text" placeholder="formula 2" /><br> </div> </div> 
+    
+
+     
+     </div>
+           
+    <br> </div>  
+                            
+                            
+ </div> 
+            </div> 
+
+
+        <!-- </div> -->
+
+       
+
+
+        <div class = "col-md-12">
+                <div>Report Type: <select  ng-change="m_report_type()" class = "form-control" ng-init = "view_test_fd.report_type = 'Tabular'" ng-model = "view_test_fd.report_type" ng-options = "item for item in ['Tabular', 'Paragraph']"><option value = "">--select--</option></select><br> </div>   
+
+        </div>
+     <div class = "col-md-12">
+         <label><b>Test information summary - You can paste doc from ms word</b></label>
+         <textarea rows = "10" ui-tinymce = "tinymceOptions" ng-model="view_test_fd.summary"  class = "form-control" placeholder="Test information summary"></textarea>
+        
+     
+     </div> 
+   
+      
+    </div>
+
+
+
+
+
+<hr> 
+<div><button ng-click = "launch_view_test_ui_save_changes()" class = "btn-sm app-btn bg-blue">save changes</button> <button ng-click = "launch_view_test_ui_delete(view_test_fd.id)" class = "my-btn pull-right btn-sm"> X delete test</button> 
+
+</div>
+ 
+</div> 

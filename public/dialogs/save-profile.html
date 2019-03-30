@@ -1,0 +1,17 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "add-new-category" style = "padding: 4px">
+        <hr>
+       <h4>Edit Profile</h4>
+    <!-- <div><input ng-model="add_new_category_fd.sno" class = "form-control" type = "text" placeholder="serial no." readonly /><br> </div>   -->
+    <div>Code: <input ng-model="save_profile_edit.code" class = "form-control uppercase" type = "text" placeholder="code" /><br> </div>
+    <div>Name: <input ng-model="save_profile_edit.name" class = "form-control" type = "text" placeholder="name" /> <br></div> 
+    <div>Rate: <input ng-model="save_profile_edit.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div>  
+    <div>Report Type: <select ng-init = "save_profile_edit.report_type = 'Tabular'" ng-model = "save_profile_edit.report_type" ng-options = "item for item in ['Tabular', 'Paragraph']"><option value = "">--select--</option></select><br> </div> 
+    <div class = "form-group">
+            <label><b>Profile information summary - You can paste doc from ms word</b></label>
+            <textarea rows = "15" ui-tinymce = "tinymceOptions" ng-model="save_profile_edit.profile_summary"  class = "form-control" placeholder="Test information summary"></textarea>
+           
+        
+        </div>
+    <div><button ng-click = "save_changes_to_profile(save_profile_edit.id)" class = "my-btn">save changes</button> </div>  
+    <hr>         
+    </div>

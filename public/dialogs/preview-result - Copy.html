@@ -1,0 +1,424 @@
+<div ng-app="myApp"  ng-controller = "test_performed" class = "" style = "margin-left: auto; margin-right: auto; width: 842px">
+    <hr style = "border: 2px solid blue">
+
+
+    <p  style = "padding: 12px; text-align: right;">
+        <!-- <button ng-click="result_settings()"  class = "app-btn btn-sm bg-coral">RESULT SETTING</button> -->
+    </p>
+    <div class = "text-center">
+        RESULT PREVIEW 
+        <span class = "pull-right">
+            <!-- <p style = "font-size: 0.7em"><b>Page Offset: Negative(-) value will decrease the page height, Positive(+) value will increase the height. Default is 0.</b></p>
+           <input size = "3" type = "text" placeholder="offset" ng-model ="page_offset" style = "font-size: 0.7em"  />  -->
+           
+           <button class = "my-btn btn-sm" ng-click="print_to_printer()">PRINT</button> 
+            
+            <button class = "my-btn btn-sm" ng-click="generate3()">SAVE PDF</button>  
+        </span>  
+    </div>
+    <br>
+    <p>&nbsp</p>
+    <hr style = "border: 2px solid blue">
+
+    <div class = "test-body" ng-init = "load_settings()" style="margin-left: auto; margin-right: auto; width: 85%">
+        <div>
+            <span style = "float: right !important; width: 30%; margin-bottom: 14px" class = "pull-right"> <img src = "img/logo.png" width = "100%"  /></span>
+        </div>
+
+        <div class="clearfix"></div>
+        <!-- TEST HEADER -->    
+        <div class="static-test-header patient-header-info">
+            <div class = "header" style="border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%) !important;">
+                Patient Information:
+            </div>
+            <div class="body">
+                <div class = "bio-row-1">
+                    <span class = "bio-col-1">LAB No. </span>
+                    <span class = "bio-col-2">{{real_lab_no}}</span>
+                    <span class = "bio-col-3">Date</span>
+                    <span class = "bio-col-4">{{real_p_test_modified_date}}</span>
+                </div>
+
+                <div class = "bio-row-2">
+                    <span class = "bio-col-1">Name</span>
+                    <span  class = "bio-col-2"><b>{{real_p_title}}. {{real_p_last_name}} {{real_p_first_name}}</b></span>
+                    <span  class = "bio-col-3">
+                        <span ng-if="real_p_age">Age</span>
+                        <span ng-if="real_p_age && real_p_sex">/</span> 
+                        <span ng-if="real_p_sex">Sex</span>
+                    </span>
+                    <span  ng-if="real_p_age" class = "bio-col-4">
+                        <span ng-if="real_p_age">{{real_p_age}} years</span> <span  ng-if="real_p_age && real_p_sex">/</span> 
+                        <span  ng-if="real_p_sex">{{real_p_sex}}</span>
+                    </span>
+                </div>
+
+                <div class = "bio-row-2">
+                    <span class = "bio-col-1">Patient ID</span>
+                    <span class = "bio-col-2"><b>{{real_patient_id}}</b></span>
+                    <span  class = "bio-col-3">
+                        <span ng-if="real_p_age">Phone</span> 
+                    </span>
+                    <span ng-if="real_p_age" class = "bio-col-4">{{phone}} </span>
+                </div>
+                <div ng-if = "real_p_refcenter || real_p_refperson" class = "bio-row-3">
+                    <span class = "bio-col-1"><b>Referred By: </b>{{real_p_refcenter}}
+                    </span>
+                    <span class = "bio-col-2">
+                        {{real_p_refcenter}} <span ng-if = "real_p_refcenter && real_p_refperson">, from</span> {{real_p_refperson}}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <!-- clinical info -->
+        <div class="static-test-header clinical">
+            <div class = "header">
+                Clinical Information:
+            </div>
+            <div class="body">
+                <div class = "bio-row-4" ng-if = "real_p_is_clinical">
+                    <span class = "bio-col-1">Clinical Details</span>
+                    <span class = "bio-col-2">	<p>{{real_p_is_clinical}}</p></span>
+                </div>
+
+                <div class = "bio-row-4" ng-if = "!real_p_is_clinical">
+                    <span class = "bio-col-1"></span>
+                    <span class = "bio-col-2">	<p>No clinical information</p></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- start rendering tests  -->
+        <div class = "enter-testxx tabular all-tests-profile-wrapper">
+
+            <div class="all-tests only-tests" ng-if = "grouped_tests.tests">
+                <!-- loop through tests -->
+                <div class = "group-test-category track-page" ng-repeat = "test_group in grouped_tests.tests">
+                  
+					
+                    <div class = "text-center cat_name">
+                        <!-- category name of test -->
+                        <span ng-init = "get_test_cat_name_1(test_group.name)">
+                            {{getres[$index].name}}
+                        </span>
+                    </div>
+
+                    <table class = "preview-test-new">
+                        <!-- header for tests -->
+                        <tr class = "header" ng-if = "test_group.data[0].type != 'Culture'">
+                            <td><span class = "bio-col-1" style="white-space: nowrap;">Test Name</span>
+                            </td>
+                            <td><span class = "bio-col-2">Result</span></td>
+                            <td><span class = "bio-col-3">Units</span></td>
+                            <td><span class = "bio-col-4">Normal Range</span></td>
+                            <td><span class = "bio-col-5">Previous Result</span></td>
+
+                        </tr>
+                        <tbody ng-repeat="main_test in test_group.data">
+                            <!-- first row of result -->
+                            <tr class = "test_ track_row" ng-if = "main_test.type == 'Tabular' && main_test.result_1.trim()">
+                                <td>
+                                    <span class = "bio-col-1"  ng-init ="get_patient_previous_result(main_test.test_code, mee)">
+                                        <b>{{main_test.test_name}}</b> 
+                                    </span>
+                                </td>
+                                <td>
+                                    
+                            
+                                    <span ng-class="{true: 'bio-col-2', false: 'abnormal-main-result bio-col-2'}[compare_abnormal_result(main_test.result_1, main_test.range_1, main_test.h_range_1) == true]">{{main_test.result_1}}</span>
+                                    <!-- <span class = "bio-col-2" class = "" ng-if="main_test.result_1 > main_test.h_range_1">{{main_test.result_1}}					
+                                    </span> -->
+                                </td>
+                                <td>
+                                    <span class = "bio-col-3">{{main_test.unit_1}}</span>
+                                </td>
+                                <td>
+                                    <span class = "bio-col-4">	({{main_test.range_1}} - {{main_test.h_range_1}})</span>
+                                </td>
+
+                                <td>
+                                    <span class = "bio-col-5">	
+                                        <small class = "prev-result" ng-if = "mee[main_test.test_code][0]">
+                                            <!-- {{main_test.prev_result.date}} -->
+                                            {{mee[main_test.test_code][0]}} ({{mee[main_test.test_code][2]}})
+                                        </small>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class = "test_ track_row" ng-show="true" ng-if = "main_test.type == 'Tabular' && main_test.result_2.trim()">
+                                <td>
+                                    <span class = "bio-col-1"> </span>				
+                                </td>
+                                <td>
+                                    <span ng-class="{true: 'bio-col-2', false: 'abnormal-main-result bio-col-2'}[compare_abnormal_result(main_test.result_2, main_test.range_2, main_test.h_range_2) == true]" >{{main_test.result_2}}</span>
+                                    <!-- <span class = "abnormal-main-result bio-col-2" ng-if="main_test.result_2 > main_test.h_range_2">{{main_test.result_2}}				
+                                    </span> -->
+                                </td>
+                                <td>			
+                                    <span class = "bio-col-3">{{main_test.unit_2}}</span>		
+                                </td>
+                                <td>			
+                                    <span class = "bio-col-4">({{main_test.range_2}} - {{main_test.h_range_2}})
+                                    </span>			
+                                </td>
+                                <td>	
+                                    <span class = "bio-col-5">		
+                                        <small class = "prev-result" ng-if = "mee[main_test.test_code][1]">
+                                            <!-- {{main_test.prev_result.date}} -->
+                                            {{mee[main_test.test_code][1]}} ({{mee[main_test.test_code][2]}})
+                                        </small>
+                                    </span>
+
+                                </td>
+                            </tr>
+                            <tr class = "test_x track_row" ng-if = "main_test.type == 'Culture' && main_test.spicemen">
+                                <td  colspan="6">
+                                    
+                                    <!-- 	<b>{{main_test.test_name}}</b> -->
+                                    <section class="header">
+                                        <table>
+                                            <tr>
+                                                <td class = "item">Spicemen</td>
+                                                <td class = "val">{{main_test.spicemen}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class = "item">Sample Date</td>
+                                                <td class = "val">{{main_test.date_collection}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class = "item">Reporting Date</td>
+                                                <td class = "val">{{main_test.reporting_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class = "item">GRAM'S STAIN</td>
+                                                <td class = "val"> {{main_test.grams_stain}}</td>
+                                            </tr>
+
+                                        </table>
+                                        <div class="text-center">
+                                            <h4>DRUG SENSITIVITY REPORT</h4>
+                                            <div class="row">
+                                                <div class = "col-xs-6 col-sm-6 col-md-6" ng-repeat="i in [1, 2]">
+                                                    <table style="margin: 0px; padding: 0px">
+
+                                                        <tr>
+                                                            <td width="100px"><b>Medicine</b></td>
+                                                            <td width="100px">Sensitivity Level</td>
+
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                                <div class = "col-xs-6 col-sm-6 col-md-6" ng-repeat="io in main_test.med_lists">
+                                                    <table>
+
+                                                        <tr>
+                                                            <td width="100px"><b>{{io.name}}</b></td>
+                                                            <td width="100px">{{main_test[io.code]}}</td>
+
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <br>
+                                    <div class = 'test-info' ng-bind-html="main_test.culture_comment"></div>	
+                                </td>
+                            </tr>
+                            <tr class = "test_ track_row" ng-if = "main_test.type == 'Paragraph' && main_test.result">
+                                <td  colspan="4">
+                                    <b>{{main_test.test_name}}</b>
+                                    <div class = 'test-info' ng-bind-html="main_test.result"></div>	
+                                </td>		
+                            </tr>
+                            <tr class = "track_row" style="border-left: none !important; border-right: none !important; border-bottom: none !important"    ng-init="get_test_summary_load(main_test.id, main_test.test_code)">
+                                <td colspan="5">
+                                    <!-- {{test_summary_load[main_test.code]}}			 -->
+                                    <div   ng-if = "test_summary_load[main_test.test_code]" class = "test-info" ng-bind-html="test_summary_load[main_test.test_code]">
+                                    </div>
+                                </td>
+                            </tr>
+                   
+                        </tbody>
+
+                    </table>
+
+                   
+
+                </div>
+                <!-- end track page - grouped single test -->
+
+            </div>
+
+            <!-- start profiled tests -->
+            <div class="all-tests only-profile" ng-if = "grouped_tests.profiles">
+                <div class = "group-test-profile track-page" ng-repeat = "profile_group in grouped_tests.profiles">
+					
+					
+                    <div class="text-center cat_name">
+                        <span>{{profile_group.name}}</span>
+                    </div>
+                    <div class = "a-profile" ng-repeat="main_profile in profile_group.data">
+                        <small><!-- {{main_profile.name}} -->	</small>
+                        <table class = "preview-test-new">
+                            <tr class = "header">
+                                <td><span class = "bio-col-1" style="white-space: nowrap;">Test Name</span>
+                                </td>
+                                <td><span class = "bio-col-2">Result</span></td>
+                                <td><span class = "bio-col-3">Units</span></td>
+                                <td><span class = "bio-col-4">Normal Range</span></td>
+                                <td><span class = "bio-col-5">Previous Result</span></td>
+                            </tr>
+                            <tbody ng-repeat="test_in_prof in main_profile.data">
+                                <tr class = "test_ " ng-if = "test_in_prof.type == 'Tabular' && test_in_prof.result_1.trim()" style="padding: 6px">
+                                    <td style="padding: 6px">			
+                                        <span class = "bio-col-1" ng-init ="get_patient_previous_result(test_in_prof.test_code, mee)">
+                                            {{test_in_prof.test_name}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span ng-class="{true: 'bio-col-2', false: 'abnormal-main-result bio-col-2'}[compare_abnormal_result(test_in_prof.result_1, test_in_prof.range_1, test_in_prof.h_range_1) == true]">
+                                            {{test_in_prof.result_1}}
+                                        </span>
+                                        <!-- <span class = "abnormal-main-result bio-col-2" ng-if = "test_in_prof.result_1 > test_in_prof.h_range_1">{{test_in_prof.result_1}}
+                                        </span> -->
+                                    </td>
+                                    <td>			
+                                        <span class="bio-col-3">	{{test_in_prof.unit_1}}</span>	
+                                    </td>
+                                    <td>		
+                                        <span class = "bio-col-4" ng-if = "test_in_prof.range_1">({{test_in_prof.range_1}} - {{test_in_prof.h_range_1}})</span>
+                                    </td>
+                                    <td>
+                                        <span class = "bio-col-5">		
+                                            <small class = "prev-result" ng-if = "mee[test_in_prof.test_code][0]"><!-- {{test_in_prof.prev_result.date}} -->
+                                                {{mee[test_in_prof.test_code][0]}} ({{mee[test_in_prof.test_code][2]}})
+                                            </small>
+                                        </span>
+                                    </td>		
+                                </tr>
+                                <tr class = "test_ track_row" ng-if = "test_in_prof.type == 'Tabular' && test_in_prof.result_2.trim()">
+                                    <td>
+                                        <span class = "bio-col-1"> </span>		
+                                    </td>
+                                    <td>
+                                        <span ng-class="{true: 'bio-col-2', false: 'abnormal-main-result bio-col-2'}[compare_abnormal_result(test_in_prof.result_2, test_in_prof.range_2, test_in_prof.h_range_2) == true]">{{test_in_prof.result_2}}</span>
+                                        <!-- <span class = "abnormal-main-result bio-col-2" ng-if="test_in_prof.result_2 > test_in_prof.h_range_2">{{test_in_prof.result_2}}
+                                        </span> -->
+                                    </td>
+                                    <td>
+                                        <span class="bio-col-3">{{test_in_prof.unit_2}}	</span>			
+                                    </td>
+                                    <td>
+                                        <span class = "bio-col-4" ng-if = "test_in_prof.range_2">	({{test_in_prof.range_2}} - {{test_in_prof.h_range_2}})
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="bio-col-5">	
+                                            <small class = "prev-result" ng-if = "mee[test_in_prof.test_code][0]"><!-- {{test_in_prof.prev_result.date}} -->
+                                                {{mee[test_in_prof.test_code][1]}} ({{mee[test_in_prof.test_code][2]}})
+                                            </small> 
+                                        </span> 
+                                    </td>	
+                                </tr>
+                                <!-- CUTLURE TEST PROFILE -->
+                                <tr class = "test_ track_row" ng-if = "test_in_prof.type == 'Culture' && test_in_prof.spicemen">
+                                    <td  colspan="5">
+                                        <!-- 	<b>{{test_in_prof.test_name}}</b> -->
+                                        <section class="header">
+                                            <table>
+                                                <tr>
+                                                    <td class = "item">Spicemen</td>
+                                                    <td class = "val">{{test_in_prof.spicemen}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class = "item">Sample Date</td>
+                                                    <td class = "val">{{test_in_prof.date_collection}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class = "item">Reporting Date</td>
+                                                    <td class = "val">{{test_in_prof.reporting_date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class = "item">GRAM'S STAIN</td>
+                                                    <td class = "val"> {{test_in_prof.grams_stain}}</td>
+                                                </tr>
+                                            </table>
+                                            <div class="text-center">
+                                                <h4>DRUG SENSITIVITY REPORT</h4>
+                                                <div class="row">
+                                                    <div class = "col-xs-6 col-sm-6 col-md-6" ng-repeat="i in [1, 2]">
+                                                        <table style="margin: 0px; padding: 0px">
+                                                            <tr>
+                                                                <td width="100px"><b>Medicine</b></td>
+                                                                <td width="100px">Sensitivity Level</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class = "col-xs-6 col-sm-6 col-md-6" ng-repeat="io in test_in_prof.med_lists">
+                                                        <table>
+                                                            <tr>
+                                                                <td width="100px"><b>{{io.name}}</b></td>
+                                                                <td width="100px">{{test_in_prof[io.code]}}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <br>
+                                        <div ng-bind-html="test_in_prof.culture_comment"></div>	
+                                    </td>
+                                </tr>
+                                <!-- END CULTURE TEST PROFILE -->
+                                <tr class = "track_row" ng-if = "test_in_prof.type == 'Paragraph' && test_in_prof.result">
+                                    <td  colspan="4">
+                                        <b>{{test_in_prof.test_name}}</b>
+                                        <div  class = 'test-info' ng-bind-html="test_in_prof.result"></div>	
+                                    </td>
+                                </tr>
+                            </tbody>	
+                            <tr class = "track_row">
+                                <td  colspan="4">
+                                    <div class = "pf-summary test-info" style = "font-weight: normal; font-size: 0.7em; margin-top: 10px; padding: 10px" ng-if = "profile_group.summary != 'undefined'"  ng-bind-html="profile_group.summary">		
+                                    </div>
+
+                                </td> 
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- <div class = "pf-summary test-info" style = "font-weight: normal; font-size: 0.7em; margin-top: 10px; padding: 10px" ng-if = "profile_group.summary != 'undefined'"  ng-bind-html="profile_group.summary">		
+                    </div> -->
+                    <!-- <div class="page-breaker"></div> -->
+                </div>
+            </div>
+            <!-- end profiled tests -->
+
+        </div>	
+
+        <div class="clearfix"></div>
+        <br>
+        <!-- DISPLAY ADDRESS -->
+        <!-- <div class = "result-footer text-center" ng-init="get_business_address('global_settings_business')">
+        </div> -->
+    </div>
+    <!-- <br>
+    <br>
+    <br>
+    <div class = "new-page-footer" style="margin-left: auto; margin-right: auto; width: 98%">
+        <img src = "img/address.png" width="100%" />	
+    </div> -->
+<!-- 
+    <button ng-click = "test_print()">Print</button> -->
+    
+
+
+</div>

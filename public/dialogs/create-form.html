@@ -1,0 +1,48 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "create-form-fields" style = "padding: 4px">
+        <hr>
+        <p><b>Form: </b> {{form_name}}</p>
+       <h4>Create New Fields</h4>
+   <div class = "row">
+
+<div class = "col-md-6">
+
+    <div class = "form-group">
+   <label><b>Field name</b></label>
+        <input ng-model="custom_form_field.name" type = "text" class = "form-control" placeholder = "field name" />
+
+    </div>
+    <div class = "form-group">
+            <label><b>Field Type</b></label>
+          <select ng-model="custom_form_field.type" class = "form-control">
+              <option value = "">--select--</option>
+                <option value = "text" >text</option>
+                <option value = "textarea" >long text</option>
+                <option value = "number" >number</option>
+                <option value = "select" >select box</option>
+                <option value = "date" >date field</option>
+                <option value = "age" >age field</option>
+          </select>
+ 
+     </div>
+    <div class = "form-group">
+            <label><b>Not Null</b></label>
+        <input ng-model="custom_form_field.not_null" type = "checkbox" />
+            </div>
+<div class = "form-group">
+            <label><b>Search Index</b></label>
+        <input ng-model="custom_form_field.is_search" type = "checkbox" />
+</div>
+
+
+<div class = "form-group">
+            <label><b>Discount %</b></label>
+        <input ng-model="custom_form_field.is_discount" type = "checkbox" />
+</div>
+ <div class = "form-group">
+            <label><b>Referral Cut %</b></label>
+        <input ng-model="custom_form_field.is_cut" type = "checkbox" />
+</div>           
+  <button ng-click = "add_custom_form_field(form_name)">Add field</button>
+</div>
+
+</div>

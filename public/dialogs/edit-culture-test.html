@@ -1,0 +1,244 @@
+<script>
+    setTimeout(function() {
+     // GET SELECTED TEST CATEGORY
+     if(! window.test_category_list_dt){
+            alertError("Please select a category")
+            $("#modal-id").modal("hide")
+            return
+        }
+        var ddt = window.test_category_list_dt
+        $.map(ddt.rows('.selected').data(), function (item) {
+            
+
+            var code = item[0] // code  test category
+            var name = item[1] // name  test category
+            var tab_id = item[4] // id of test category
+            $("#add-test-cat-select").append("<option value = '"+tab_id+"'>"+code+" - "+name+"</option>")
+            
+
+           
+        });
+          //: load the vue and remove from dom
+          $("#funny-click").trigger("click").remove()
+
+    }, 1000)
+
+</script>
+<button style = "opacity: 0" id = "funny-click" @click = "LoadCulture">Update</button>
+<input  type = 'hidden' name = "idd" />
+<input  type = 'hidden' name = "custom" />
+<div  class = "add-test" style = "padding: 4px">
+        <hr style = "border: 2px solid coral"> 
+       <h3>Update Culture Test </h3>
+       <b>Test Category</b>
+    <select id = "add-test-cat-select"  class = "form-control">
+        
+    </select>
+    <br>
+       
+   <div class = "row">
+<div class = "col-md-4">
+    <div>
+        <label><b>Code</b></label>
+    <input name = "code" v-model="culture_test.code" class = "form-control uppercase" type = "text" placeholder="code" /><br> </div>   </div>
+<div class = "col-md-4"> <div>
+        <label><b>Name</b></label>
+    <input name = "name" v-model="culture_test.name" class = "form-control" type = "text" placeholder="name" /> <br></div>   </div>
+
+<div class = "col-md-4"> <div>
+        <label><b>Rate</b></label>
+    <input name = "rate" v-model="culture_test.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div> </div>
+
+    <!-- START VERTICAL NAV -->
+        
+        <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#micro" aria-controls="home" role="tab" data-toggle="tab">Microscopy</a>
+                </li>
+                <li role="presentation">
+                    <a href="#culture" aria-controls="tab" role="tab" data-toggle="tab">Culture</a>
+                </li>
+                <li role="presentation">
+                        <a href="#antibacterial" aria-controls="tab" role="tab" data-toggle="tab">Antibacterial Sensitivity</a>
+                </li>
+
+                <li role="presentation">
+                        <a href="#antifungal" aria-controls="tab" role="tab" data-toggle="tab">Antifungal Sensitivity</a>
+                </li>
+
+            </ul>
+        
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="micro">
+                    <br>
+                    <b>Microscopy</b>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class = "button-test-group">
+                                        <table class = "table">
+                                            <tr>
+                
+                                                <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option>
+                                                    <option  value = "specimen">Specimen</option>
+                                                    <option  value = "medicine">Medicine</option>
+                                                </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                <td><br><button @click = "AddCultureTest('micro')" class = "btn-sm">Add Field</button></td>
+                                            </tr>
+                
+                                        </table>
+                                       
+                                        
+                                    </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <h3 style ="font-weight: bold">FIELDS </h3>
+                            <table class = "table">
+                                    <tr v-for = "(obj, i) in culture_test_list[0].microscopy">
+        
+                                        <td><b>{{obj.ftype}}</b></td>
+                                        <td><b>{{obj.field_name}}</b></td>
+                                        <td><button @click = "RemoveCulture('micro', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
+                                    </tr>
+        
+                            </table>
+
+
+                        </div>
+                    </div>
+                    
+                    
+
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="culture"> 
+                        <br>
+                        <b>Culture</b>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class = "button-test-group">
+                                            <table class = "table">
+                                                <tr>
+                    
+                                                    <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option><option selected value = "specimen">Specimen</option>
+                                                        <option  value = "medicine">Medicine</option>
+                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    <td><br><button @click = "AddCultureTest('culture')" class = "btn-sm">Add Field</button></td>
+                                                </tr>
+                    
+                                            </table>
+                                           
+                                            
+                                        </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <h3 style ="font-weight: bold">FIELDS </h3>
+                                <table class = "table">
+                                        <tr v-for = "(obj, i) in culture_test_list[1].culture">
+            
+                                            <td><b>{{obj.ftype}}</b></td>
+                                            <td><b>{{obj.field_name}}</b></td>
+                                            <td><button @click = "RemoveCulture('culture', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
+                                        </tr>
+            
+                                </table>
+    
+    
+                            </div>
+                        </div>
+
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="antibacterial"> 
+                        <br>
+                        <b>Antibacterial</b>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class = "button-test-group">
+                                            <table class = "table">
+                                                <tr>
+                    
+                                                    <td><select v-model = "culture_test.ftype"><option value = "date">Date</option>
+                                                        <option selected value = "text">Text</option><option selected value = "specimen">Specimen</option><option  value = "medicine">Medicine</option>
+                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    <td><br><button @click = "AddCultureTest('antibacterial')" class = "btn-sm">Add Field</button></td>
+                                                </tr>
+                    
+                                            </table>
+                                           
+                                            
+                                        </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <h3 style ="font-weight: bold">FIELDS </h3>
+                                <table class = "table">
+                                        <tr v-for = "(obj, i) in culture_test_list[2].antibacterial">
+            
+                                            <td><b>{{obj.ftype}}</b></td>
+                                            <td><b>{{obj.field_name}}</b></td>
+                                            <td><button @click = "RemoveCulture('antibacterial', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
+                                        </tr>
+            
+                                </table>
+    
+    
+                            </div>
+                        </div>
+
+
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="antifungal"> 
+
+                        <br>
+                    <b>Antifungal</b>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class = "button-test-group">
+                                            <table class = "table">
+                                                <tr>
+                    
+                                                    <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option><option selected value = "specimen">Specimen</option><option  value = "medicine">Medicine</option></select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    <td><br><button @click = "AddCultureTest('antifungal')" class = "btn-sm">Add Field</button></td>
+                                                </tr>
+                    
+                                            </table>
+                                           
+                                            
+                                        </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <h3 style ="font-weight: bold">FIELDS </h3>
+                                <table class = "table">
+                                        <tr v-for = "(obj, i) in culture_test_list[3].antifungal">
+            
+                                            <td><b>{{obj.ftype}}</b></td>
+                                            <td><b>{{obj.field_name}}</b></td>
+                                            <td><button @click = "RemoveCulture('antifungal', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
+                                        </tr>
+            
+                                </table>
+    
+    
+                            </div>
+                        </div>
+
+
+
+                </div>
+
+
+            </div>
+            
+            <button type="button" @click = "UpdateCultureTest(culture_test, culture_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+            
+        </div>
+        
+    
+    
+    <!-- END VERTICAL NAV -->
+      
+    </div> 

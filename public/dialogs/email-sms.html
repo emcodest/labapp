@@ -1,0 +1,55 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "view-test container">
+<hr><p  style = "padding: 12px;">
+  <button class = "app-btn btn-sm bg-blue pull-left" ng-click = "show_email()">SHOW EMAIL</button>
+  <button class = "app-btn btn-sm bg-blue pull-right" ng-click = "show_sms()">SHOW SMS</button>
+</p>
+<h3 class = "text-center"><p><small><b>Patient Name: {{email_sender.patient_full_name}}</b></small></p> </h3>
+
+<div class="well email" ng-if = "! toggle_email_sms">
+  <div class="form-group">
+    <p><b>Patient Email Address</b></p>
+    <input ng-model = "email_sender.recipient_email" type="text" class = "form-control" placeholder="recipient email">
+  </div>
+  <div class="form-group">
+    <p><b>Subject</b></p>
+    <input ng-model = "email_sender.subject" type="text" class = "form-control" placeholder="subject">
+  </div>
+<div class="form-group">
+    <p><b>Message Body</b></p>
+    <textarea ng-model = "email_sender.message" ui-tinymce = "tinymceOptions" rows= "7" class = "form-control"></textarea>
+</div>
+<div class="form-group">
+    <p><b>Attachment File</b></p>
+    <input ng-model = "email_sender.attachment" readonly="true" type="text" class = "form-control" placeholder="Attachment"><button ng-click = "openResult()">open file</button>
+</div>
+<div class="form-group">
+  <button ng-show ="processing" ng-click="send_email_now()" class = "my-btn">SEND NOW</button>
+</div>
+
+
+
+ 
+</div>
+
+<div class="well sms" ng-if = "toggle_email_sms">
+<div class="form-group">
+    <p><b>Patient Phone</b></p>
+    <input ng-model = "sms_sender.phone_number"  type="text" class = "form-control" placeholder="phone number">
+  </div>
+<div class="form-group">
+    <p><b>Message </b></p>
+    <textarea ng-model = "sms_sender.message" placeholder="short message" rows= "7" class = "form-control"></textarea>
+</div>
+<div class="form-group">
+    <p><b>Sender Name</b></p>
+    <input ng-model = "sms_sender.sender_name"  type="text" class = "form-control" placeholder="sender name">
+  </div>
+<div class="form-group">
+  <button ng-show ="processing" ng-click="send_sms_now()" class = "my-btn">SEND NOW</button>
+</div>
+
+ 
+</div>
+
+
+</div>

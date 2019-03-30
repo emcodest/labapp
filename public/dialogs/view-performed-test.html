@@ -1,0 +1,134 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "view-test">
+<hr>
+<h3 class = "text-center">Enter Test Result</h3>
+<hr>
+
+
+<div class = "well">
+      <button class = "app-btn bg-coral" ng-click = "preview_test_record()">Preview Record</button>  <button class = "app-btn bg-green pull-right" ng-click = "preview_test_record()">Save All Changes</button> <br> <br>      
+    <div class = "row">
+
+<div class = "col-md-12" >
+
+  <div class = "wellx" ng-repeat="ptests in we_perform_tests track by $index"  ng-init = "get_name_testcat_profname(ptests.id, $index); we_perform_tests[$index].custom_name = 'loading...' " >
+    <!-- <b>{{ptests}}</b>  -->
+   
+
+     <div class = "wellx" ng-if = "ptests.id.split('_').slice(0, -1).join('_') == 'department_master_test_list'">
+          
+  <div class = "wellx" ng-if = "ptests.report_type == 'Tabular'">
+      
+          <h3><b>{{we_perform_tests[$index].custom_name_x.toUpperCase()}}</b></h3>
+      
+      <table class = "table">
+      <tr>
+          <th> Test Name</th><th>Result</th><th>Units</th><th>Normal Range</th><th>Previous Result</th>
+      </tr>
+        <tr ng-init = "ptestx = get_d_particular_ref(rref_range_x, ptests.id); g_model[$index].id = ptests.id"><td>{{we_perform_tests[$index].custom_name.toUpperCase()}}</td><td><input class = "form-control {{ptests.id}}_1" placeholder="enter result" ng-enter = "calc_formulas(ptests.id, ptests.formula_1, we_perform_tests, ptests.code+'_'+1, g_model[$index].val_1)"  ng-model = "g_model[$index].val_1" type = "text" /></td>
+
+          <td ng-if = "ptestx">{{ptestx.unit_1}}</td>
+          <td ng-if = "! ptestx">{{ptests.unit_1}}</td>
+
+          <td ng-if = "ptestx">{{ptestx.lower_bound_1}} - {{ptestx.upper_band_1}}</td> <td ng-if = "! ptestx"> {{ptests.lower_bound_1}} - {{ptests.upper_band_1}} </td>   <td style = "font-size: 0.8em">2.06 (14-Feb-2018)</td></tr>
+
+        <tr><td>...</td><td><input class = "form-control {{ptests.id}}_2" placeholder="enter result" type = "text" ng-enter = "calc_formulas(ptests.id, ptests.formula_2, we_perform_tests, ptests.code+'_'+2, g_model[$index].val_2)" ng-model = "g_model[$index].val_2"  /></td>
+
+          <td ng-if = "! ptestx">{{ptests.unit_2}}</td>
+          <td ng-if = "ptestx">{{ptestx.unit_2}}</td>
+
+          <td ng-if = "! ptestx">{{ptests.lower_bound_2}} - {{ptests.upper_band_2}}</td>
+          <td ng-if = "ptestx">{{ptestx.lower_bound_2}} - {{ptestx.upper_band_2}}</td>
+
+          <td style = "font-size: 0.8em">2.06 (14-Feb-2018)</td></tr>
+      
+      </table>
+      
+      </div>
+      <div class = "wellx" ng-if = "ptests.report_type == 'Paragraph'" >
+          <h3><b>{{we_perform_tests[$index].custom_name_x.toUpperCase()}}</b></h3>
+          <label><b>Result - You can paste from ms word or saved results</b></label>
+            <p><b>{{we_perform_tests[$index].custom_name.toUpperCase()}}</b></p>
+          <textarea class = "form-control" rows = "15" ui-tinymce ng-model = "para"></textarea> <br>
+      
+      
+      </div>
+     
+      
+     </div>
+
+     <div class = "well" ng-if = "ptests.id.split('_').slice(0, -1).join('_') == 'profile_master'" ng-init = "mcur = $index">
+       <!-- {{ptests.id}} - {{$index}} - {{mcnt}} - {{sub_profiled_tests[$index]}} - {{count_profile_test}} -->
+       
+        <!-- <h5><b>PROFILE</b></h5>  -->
+        <h3 style = "border-bottom: 3px solid #333">{{we_perform_tests[$index].custom_name.toUpperCase()}} (PROFILE) </h3>
+        <div class = "prof-test"    ng-repeat = "sub_test in sub_profiled_tests[naive_key(mcur, count_profile_test)]">
+          
+          <!-- <i>{{sub_test.id}} kkdk</i> -->
+          <!-- <b>{{sub_test}}</b> -->
+        <div class = "wellx" ng-if = "sub_test.id.split('_').slice(0, -1).join('_') == 'department_master_test_list'">
+            <p ng-init = "sub_test.unit_1 = rref_range_x.length"><b>{{sub_test.name}} </b></p> 
+    <div class = "well" ng-if = "sub_test.report_type == 'Tabular'">
+        
+            <!-- <h3><b>{{we_profiled_tests[$index].custom_name_x.toUpperCase()}}</b></h3> -->
+        
+        <table class = "table">
+        <tr >
+            <th> Test Name</th><th>Result</th><th>Units</th><th>Normal Range</th><th>Previous Result</th>
+        </tr>
+          <tr ng-init = "ptestxp = get_d_particular_ref(rref_range_x, sub_test.id)"><td>{{sub_test.name.toUpperCase()}}</td><td><input class = "form-control" placeholder="enter result" type = "text" /></td>
+          <td ng-if = "! ptestxp">
+        
+            {{sub_test.unit_1}} 
+
+
+          </td>
+          <td ng-if = "ptestxp">
+
+            {{ptestxp.unit_1}} 
+            
+          </td>
+
+          <td ng-if = "! ptestxp">{{sub_test.lower_bound_1}} - {{sub_test.upper_band_1}}</td>
+
+          <td ng-if = "ptestxp">{{ptestxp.lower_bound_1}} - {{ptestxp.upper_band_1}}</td>
+
+          <td style = "font-size: 0.8em">2.06 (14-Feb-2018)</td></tr>
+          <tr><td>...</td><td><input class = "form-control" placeholder="enter result" type = "text" /></td><td>{{sub_test.unit_2}}</td><td>{{sub_test.lower_bound_2}} - {{sub_test.upper_band_2}}</td><td style = "font-size: 0.8em">2.06 (14-Feb-2018)</td></tr>
+        
+        </table>
+        
+        </div>
+        <div class = "wellx" ng-if = "sub_test.report_type == 'Paragraph'">
+            <!-- <h3><b>{{we_perform_tests[$index].custom_name_x.toUpperCase()}}</b></h3> -->
+            <label><b>Result - You can paste from ms word or saved results</b></label>
+              <p><b>{{we_profiled_tests[$index].custom_name.toUpperCase()}}</b></p>
+            <textarea class = "form-control" rows = "15" ui-tinymce ng-model = "para"></textarea> <br>
+            <button  class = "my-btn btn-sm">Test Footer</button>
+        
+        </div>
+        <!-- <div class = "well" ng-if = "sub_test.report_type == 'Tabular and Paragraph'">
+        
+        </div> -->
+        
+       </div>
+       </div>
+
+     </div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+    </div>
+     
+    <button class = "app-btn bg-coral" ng-click = "preview_test_record()">Preview Result</button>   <button class = "app-btn bg-green pull-right" ng-click = "preview_test_record()">Save All Changes</button>  
+</div>
+    
+
+</div>
+      

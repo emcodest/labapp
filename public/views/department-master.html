@@ -1,0 +1,55 @@
+<div class="lab-panel" style="border-radius: 12px; border: 1px solid #ddd">
+
+  <div ng-include="'ng-includes/header.html'"></div>
+
+  <div ng-include="'ng-includes/close.html'"></div>
+  <div ng-if="is_admin">
+    <div class="well  row">
+      <p class="pull-right"><button class="app-btn bg-coral" ng-click="test_master_nav()">Test Master</button>
+      </p>
+    </div>
+   
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class = "col-md-6">
+            <b>Code</b>
+            <input style = "text-transform: uppercase" placeholder = "code" type = "text" ng-model = "department_master_data.code" class = "form-control" />
+          </div>
+          <div class = "col-md-6">
+              <b>Department Name</b>
+              <input placeholder = "department name" type = "text" ng-model = "department_master_data.department_name" class = "form-control" />
+            </div>
+        </div>
+        <br>
+        <button class="app-btn bg-blue" ng-click="add_department()">Add Department</button>
+
+      </div>
+
+      <div class="col-md-6" style="background: #f9f9f9">
+        <p><b>Department List</b></p>
+
+        <table id="departmentdt" class="table" style="border: 1px solid #ddd; width: 100%">
+          <thead>
+            <tr>
+              <th>Code </th>
+              <th>Name</th>
+
+              <th>...</th>
+              <th>...</th>
+            </tr>
+          </thead>
+
+
+        </table>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</div>

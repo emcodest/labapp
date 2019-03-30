@@ -1,0 +1,13 @@
+<div ng-app="myApp"  ng-controller = "my_server" class = "form-fields" style = "padding: 2px; background: #eee">
+<div class = "form-group">
+    <input type = "text" placeholder="search filter" ng-model = "query" />
+</div>
+<table class = "table table-striped table-hover">
+     
+    <tr ng-repeat = "ii in data_form_list | filter:query track by $index">
+<td>{{ii.id.split('_').pop()}}</td>     <td><button class = "my-btn btn-sm" ng-click = "select_patient_from_list(data_form_list[$index].data, ii.id, is_self_id, form_code)">select</button></td>   <td ng-repeat = "jj in data_form_list[$index].data">{{jj.val}}</td>
+       
+    </tr>
+
+
+</table></div>

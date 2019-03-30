@@ -1,0 +1,54 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+        
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+<div ng-if = "is_admin">
+                <div class = "well row">
+                                <p class = "pull-right"><button class = "app-btn bg-coral" ng-click = "department_master_nav()">Department Master</button> &nbsp<button class = "app-btn bg-coral" ng-click = "test_master_nav()">Test Master</button> </p>
+                                </div>
+        <div class = "row">
+                <div class = "col-md-5" style = "background:#f9f9f9; border-right: 4px solid coral">
+                        <p><b>Profile List</b></p>
+                       
+                        <p><button ng-click = "OpenProfile()" class = "my-btn btn-sm"><i class = "fa fa-plus"></i></button></p>
+                       
+                        <table id = "profiledt" class = "table" width = "100%">
+                           <thead>
+                                 <tr><th>Name</th><th>Code</th><th>...</th><th>...</th></tr>
+                           </thead>
+                           
+                         
+                       </table>  
+                    
+                       
+                             
+                     </div>
+           
+            <div class = "col-md-7" style = "background: rgb(240, 228, 228); border-right: 4px solid coral">
+               <p><b>Tests</b></p>
+               <button params = '-1, add-test-to-profile' func = 'TestMaster' class = "btn my-btn click"><i class = "fa fa-plus"></i></button>
+               <div>
+                
+  
+               
+               <table id = "test-profiledt" class = "table">
+                    <thead><tr><th>Order</th><th>Code</th><th>Name</th><th>...</th></tr></thead>
+                  
+              </table>      
+              
+            
+               </div> 
+                    
+            </div>
+
+
+        </div>
+
+</div>
+
+
+</div>
+
+
+        

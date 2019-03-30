@@ -1,0 +1,97 @@
+<div class="lab-panel" style="border-radius: 12px; border: 1px solid #ddd">
+
+    <div ng-include="'ng-includes/header.html'"></div>
+
+    <div ng-include="'ng-includes/close.html'"></div>
+
+
+
+    <div class="container">
+
+        <div class='sub-nav'>
+            <p>
+                <h3>MASTERS</h3>
+            </p>
+            <hr>
+            <div class="row">
+                <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                                <button ng-click = "custom_form_data(accept_test_data.patient_id, custom_static_form_patient, custom_static_form_patient_desc, custom_static_form_patient_list, true, mLab.patient_custom_data, mLab.patient_custom_field )" onclicks = "window.location.href = 'users#!/patient_master/patient-master'"  class = "btn btn-primary"><i class = "fa fa-users"></i> Patient</button>
+                            </div> -->
+                
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/department_master/department-master'"
+                        class="btn btn-primary"><i class="fa fa-home"></i> Department</button>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/test_master/test-master'"
+                        class="btn btn-primary"><i class="fa fa-bathtub"></i> Tests</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/profile_master/profile-master'"
+                        class="btn btn-primary"><i class="fa fa-archive"></i> Profile</button>
+                </div>
+
+            </div>
+            <hr>
+            <!-- <h3>CUSTOM MASTERS</h3> -->
+            <div class="row">
+                
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                        <button onclick="window.location.href = 'users#!/patient_master/patient-master'"
+                            class="btn btn-primary"><i class="fa fa-users"></i> Patient</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/medicine_master/medicine-master'"
+                        class="btn btn-primary"><i class="fa fa-ambulance"></i> Medicine</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/staff_master/staff-master'"
+                        class="btn btn-primary"><i class="fa fa-user"></i> Staff</button>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+              
+                <div onclick="window.location.href = 'users#!/center/center-master'"
+                    class="col-xs-12 col-sm-6 col-md-4">
+                    <button class="btn btn-primary"><i class="fa fa-building"></i> Ref. Centers</button>
+                </div>
+                <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                        <button onclick = "window.location.href = 'users#!/doctor_master/doctor-master'" class = "btn btn-primary"><i class = "fa fa-briefcase"></i> Doctors</button>
+                    </div> -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/ref/ref-master'"
+                        class="btn btn-primary"><i class="fa fa-user"></i> Ref. Person</button>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/guardian/guardian-master'"
+                        class="btn btn-primary"><i class="fa fa-user"></i> Guardian</button>
+                </div>
+                <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button onclick="window.location.href = 'users#!/upload/upload-master'"
+                        class="btn btn-primary"><i class="fa fa-file"></i> Upload Master</button>
+
+
+                </div> -->
+
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <p ng-if="spinnerx == 0">
+        <b>please wait...</b>
+    </p>
+
+
+</div>

@@ -1,0 +1,59 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><h3>DOCTOR MASTER</h3></p>
+      <div class="row">
+      <div class = "col-md-7 col-sm-7">
+
+        <div class="form-group">
+          <label><b>Code</b></label><br>
+          <input ng-model="medicine_master.med_code" type="text" placeholder="code" name="" class = "form-control" style="width: 50%">
+
+        </div>
+
+        <div class="form-group">
+          <label><b>Name</b></label><br>
+          <input type="text" placeholder="name" ng-model="medicine_master.med_name" class = "form-control" style="width: 50%">
+
+        </div>
+        <div class="form-group">
+          <label><b>Group</b></label><br>
+          <input type="text" placeholder="group" ng-model="medicine_master.med_group" class = "form-control" style="width: 50%">
+
+        </div>
+
+        <button ng-click = "add_medicine()" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+ 
+
+        
+
+      </div>  
+      
+ <div class = "col-md-5 col-sm-5">
+  <table class = "table" ng-init="medicine_master_list()">
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Group</th>
+    </tr>
+
+    <tr ng-repeat="i in medicine_master_list_items">
+      <td>{{i.code}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.group}}</td>
+    </tr>
+    
+
+  </table>
+        
+        
+
+      </div>
+      </div>
+    
+
+</div>
+

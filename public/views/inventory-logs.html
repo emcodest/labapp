@@ -1,0 +1,46 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+  <div ng-include="'ng-includes/header.html'"></div>
+
+   <div ng-include="'ng-includes/close.html'"></div>    
+         
+   <div class = "well">
+       <p><b>Inventory Logs</b></p>
+      
+<div class = "row">
+
+    <div class = "col-md-6">
+        <label><b>Date Range</b></label><br>
+                    <div class = "form-group">
+                        <div class = "row">
+                        <div class = "col-md-6">
+        
+                    From<br> <input class = "form-input" type  = "date" /> 
+        
+                        </div>
+                        <div class = "col-md-6">
+                                
+                          To:<br>  <input type  = "date" />  <button>Search</button>                          
+                           </div>
+                  
+                    </div>
+        
+                    </div>
+        
+                  </div>
+</div>
+  
+   <table class = "table table-striped table-hover" ng-init = "list_inventory_logs()">
+  <tr><th>Date</th><th>Branch Code</th><th>Inventory Code</th><th>Qty Deducted</th><th>Unit</th><th>Test Code</th><th>Test Performed</th><th>Perform Test Code</th></tr>
+  <tr ng-repeat="inventory in inventory_master_list_logs | filter: search track by $index">
+   <th>{{mdate = formatDate(inventory.date)}}</th> <th>{{inventory.branch_code}}</th><td>{{inventory.inventory_code}}</td><td>{{inventory.qty}}</td><td>..</td><td>{{inventory.test_code}}</td><td>{{inventory.test_performed}}</td><td>{{inventory.perform_test_code}}</td>
+      
+       </tr>
+  
+   </table>
+
+
+
+</div>
+</div>
+

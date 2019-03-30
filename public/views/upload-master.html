@@ -1,0 +1,30 @@
+<div class="lab-panel" style="border-radius: 12px; border: 1px solid #ddd">
+
+    <div ng-if="! show_bar">
+        <div ng-include="'ng-includes/header.html'"></div>
+
+        <div ng-include="'ng-includes/close.html'"></div>
+    </div>
+
+    <p>
+        <h3>UPLOAD DATA</h3>
+    </p>
+
+    <p><b>Select file</b></p>
+    <p><b>Data Type</b>
+       
+        <select ng-model = "data_type">
+            <option  value = "">--select--</option>
+            <option  value = "test">Test</option>
+            <option value = "profile">Profile</option>
+        </select><br><br> <input type = "file" /><br>
+    
+    </p>
+
+
+    <button ng-click = "UploadData(data_type)" class="my-btn">UPLOAD</button>
+
+
+
+
+</div>

@@ -1,0 +1,92 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+    <div ng-if = "! show_bar">
+  <div ng-include="'ng-includes/header.html'"></div>
+  
+  <div ng-include="'ng-includes/close.html'"></div>
+</div>
+
+      <div class = "sub-nav">
+        <p><h3>REFERRAL CENTER</h3></p>
+        <table class = "table table-responsive">
+          <tr>
+            
+            <td><label><b>code</b></label><input ng-model = "master_data.code" class = "form-control" type = "text" /></td>
+            <td><label><b>center name</b></label><input ng-model = "master_data.name" class = "form-control" type = "text" /></td>
+            <td><label><b>contact person</b></label><input ng-model = "master_data.contact_person" class = "form-control" type = "text" /></td>
+            <td><label><b>primary specialty</b></label><input ng-model = "master_data.primary_specialty"  class = "form-control" type = "text" /></td>
+            <td><label><b>other specialties</b></label><input ng-model = "master_data.other_specialty"  class = "form-control" type = "text" /></td>
+        
+          </tr>
+          <tr>
+            
+              <td><label><b>mobile no.</b></label><input ng-model = "master_data.mobile_no"  class = "form-control" type = "text" /></td>
+              <td><label><b>office no.</b></label><input ng-model = "master_data.office_no"  class = "form-control" type = "text" /></td>
+              <td><label><b>email</b></label><input ng-model = "master_data.email"  class = "form-control" type = "text" /></td>
+              <td><label><b>director name</b></label><input ng-model = "master_data.director_name"  class = "form-control" type = "text" /></td>
+              <td><label><b>address</b></label><input ng-model = "master_data.address"  class = "form-control" type = "text" /></td>
+        
+            </tr>
+            <tr>
+            
+                <td><label><b>region</b></label><input ng-model = "master_data.region"  class = "form-control" type = "text" /></td>
+                <td><label><b>LGA</b></label><input class = "form-control" type = "text" ng-model = "master_data.lga"  /></td>
+                <td><label><b>discount %</b></label><input ng-model = "master_data.discount"  class = "form-control" type = "text" /></td>
+                <td><label><b>cut %</b></label><input ng-model = "master_data.cut"  class = "form-control" type = "text" /></td>
+        
+              </tr>
+        
+        </table>
+        
+        <button ng-click = "AddMaster('center_master', 'master_name, skips', master_data, 'master', 'AddCenterMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+      </div>
+      
+      <br>
+        <h3>List</h3>
+        <br>
+      <div class = "row">
+          <div class = "col-md-12 col-sm-12">
+              <style>
+                  #referral-center-master-dt td{
+                    
+                    max-width: 50px;
+                    overflow-x: hidden;
+                  }
+                </style>
+              <table id = "referral-center-master-dt" class = "table" width = "100%" style = "font-size: 0.8em; width: 100%">
+               <thead>
+                 <tr>
+                   <th>Code</th>
+                   <th>Center name</th>
+                   <th>Contact Person</th>
+                   <th>Primary Specialties</th>
+                   <th>Other Specialty</th>
+                   <th>Mobile No.</th>
+                   <th>Office No.</th>
+                   
+                   <th>Email.</th>
+                   <th>Director Name</th>
+                   <th>Address</th>
+                   <th>Region</th>
+                   <th>LGA</th>
+                   <th>Discount %</th>
+                   <th>Cut %</th>
+                   <th>...</th>
+                
+                </tr>
+               </thead>
+            
+               
+                
+            
+              </table>
+                    
+                    
+            
+                  </div>
+
+      </div>
+    
+
+</div>
+

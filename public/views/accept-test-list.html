@@ -1,0 +1,60 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+<div ng-include="'ng-includes/header.html'"></div>
+
+<div ng-include="'ng-includes/close.html'"></div>
+
+      <p><h3>LIST OF ACCEPTED TESTS</h3></p>
+      <div class="form-group">
+        <input ng-model = "search"  type = "text" placeholder="Lab No." class = "form-control" style = "width: 40%"> 
+
+      </div>
+    
+  <table style="background: #eee" class = "table" ng-init = "accept_test_list_fxn()">
+     <tr><th>Date</th><th>Lab. No</th><th>Test Name</th><th>Sex</th><th>Age</th><th>Referral</th><th>Patient ID</th><th>...</th></tr>
+     
+    <tr ng-class = "item.css = ''" ng-dblclick = "accept_test_ui(item)" ng-repeat="item in accept_test_list | filter:search">
+             <td>{{formatDate(item._id)}}</td><td>{{item.lab_no}}</td><td><span class = "badge" ng-repeat = "ii in item.tests">{{ii.name}}</span></td><td>
+              
+                 <p ng-repeat = "jj in item.my_doc[0].patient.data">
+                     
+                     <span ng-if = "jj.name.toUpperCase() == 'sex'.toUpperCase() ">{{jj.val}}</span>
+                 </p>
+                </td>
+                <td>
+                        <p ng-repeat = "jj in item.my_doc[0].patient.data">
+                                
+                                <span ng-if = "jj.name.toUpperCase() == 'age'.toUpperCase() ">{{jj.birth_age}} yrs</span>
+                            </p>
+                 </td>
+                 <td>
+                        <p ng-repeat = "jj in item.my_doc[1].ref_center.data">
+                                
+                                <span ng-if = "jj.name.toUpperCase() == 'centre name'.toUpperCase() ">{{jj.val}}</span>
+
+                  <span ng-if = "jj.name.toUpperCase() == 'first name'.toUpperCase() ">{{jj.val}}</span>
+
+
+                            </p> 
+                            <p ng-repeat = "jj in item.my_doc[2].ref_person.data">
+                                    
+                                 <b>  <span ng-if = "jj.name.toUpperCase() == 'first name'.toUpperCase() ">{{jj.val}}
+
+                                    </span></b> 
+    
+    
+                                </p> 
+                     
+                </td><td>{{item.patient_id}}</td>
+                 <td><button ng-click = "print_receipt_dialog(item)" class = "btn my-btn">Receipt</button></td> 
+              </tr>
+
+  </table>
+
+ <p ng-if = "spinnerx == 0">
+        <b>please wait...</b>
+      </p>
+
+
+    </div>
+

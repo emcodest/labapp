@@ -1,0 +1,93 @@
+<div class = "container" class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+  <div ng-include="'ng-includes/header.html'"></div>
+  <div ng-include="'ng-includes/close.html'"></div>   
+<br>
+         <div class = "row" style= "background: #000; border-radius: 6px; border: 1px solid #ddd; padding: 14px; text-align: center">
+            
+
+             <div class = "col-md-4 col-sm-6">
+              
+                 <button class = "button text-white" ng-click="inventory_setup_fxn()">
+                     <img src = "img/icons/perform-test.png" width = "30%" />
+                     <br>
+                    Setup
+                 
+                 </button>
+
+             </div>
+
+             <div class = "col-md-4 col-sm-6" style = "border: 1px solid #ddd; padding: 12px">
+                     
+                        <button class = "button text-white" ng-click="purchase_order_ui()">
+                            <img src = "img/icons/perform-test.png" width = "30%" />
+                            <br>
+                          Purchase Order
+                        
+                        </button>
+
+                       &nbsp;&nbsp;
+                        <button ng-click = "receive_order_ui()" class = "button text-white">
+                            <img src = "img/icons/print.png" width = "30%" />
+                            <br>
+                            Receive Order
+                        
+                        </button>
+            
+                          
+    
+                    </div>
+                       
+                    <div class = "col-md-4 col-sm-6">
+                         
+                            <button class = "button text-white">
+                                <img src = "img/icons/print.png" width = "30%" />
+                                <br>
+                                Stock Report
+                            
+                            </button>
+        
+                        </div>
+                   
+                     
+                     </div>
+                     <div class = "row" style= "background: #000; border-radius: 6px; border: 1px solid #ddd; padding: 14px; text-align: center">
+                            <div class = "col-md-4 col-sm-6">
+                                    
+                                       <button class = "button text-white">
+                                           <img src = "img/icons/print.png" width = "30%" />
+                                           <br>
+                                           Manage Vendors
+                                       
+                                       </button>
+                   
+                                   </div>  
+                                   <div class = "col-md-4 col-sm-6">
+                                    
+                                       <button ng-click="inventory_logs_ui()" class = "button text-white">
+                                           <img src = "img/icons/print.png" width = "30%" />
+                                           <br>
+                                        Inventory Logs
+                                       
+                                       </button>
+                   
+                                   </div>    <div class = "col-md-4 col-sm-6">
+                                    
+                                       <button ng-click="track_inventory_ui()" class = "button text-white">
+                                           <img src = "img/icons/print.png" width = "30%" />
+                                           <br>
+                                       Track Inventory
+                                       
+                                       </button>
+                   
+                                   </div>  
+                    </div> 
+                    
+
+
+
+     
+         <div ng-include="'ng-includes/footer.html'"></div>
+     </div>
+
+</div>

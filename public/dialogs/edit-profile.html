@@ -1,0 +1,23 @@
+<script>
+    setTimeout(function() {
+        
+        CKEDITOR.replace( 'editor1', { uiColor: '#9AB8F3', height: '30vh', allowedContent: true} )
+      
+        
+    }, 500);
+</script>
+       <h3>Edit Profile</h3>
+       <input type = "hidden" name = "idd" />
+    <!-- <div><input model="add_new_category_fd.sno" class = "form-control" type = "text" placeholder="serial no." readonly /><br> </div>   -->
+    <div>Code: <input name = "code" model="add_new_profile_fd.code" class = "form-control uppercase" type = "text" placeholder="code" /><br> </div>
+    <div>Name: <input name = "name" model="add_new_profile_fd.name" class = "form-control" type = "text" placeholder="name" /> <br></div> 
+    <div>Rate: <input name = "rate" model="add_new_profile_fd.rate" class = "form-control" type = "text" placeholder="rate" /><br> </div>  
+   
+    <div class = "form-group">
+            <label><b>Profile information summary </b></label>
+            <textarea name = "summary" id = "editor1" rows = "15" model="add_new_profile_fd.profile_summary"  class = "form-control" placeholder="Test information summary"></textarea>
+           
+        
+    </div>
+    <div><button @click = "EditNewProfile('idd, code, name, rate, summary')" class = "my-btn">edit profile</button> </div>  
+   

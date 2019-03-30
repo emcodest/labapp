@@ -1,0 +1,218 @@
+<script>
+    setTimeout(function() {
+
+        CKEDITOR.replace( 'editor1', { uiColor: '#9AB8F3', height: '30vh', allowedContent: true} );
+        CKEDITOR.replace( 'editor2', { uiColor: '#9AB8F3', height: '30vh', allowedContent: true} );
+        CKEDITOR.replace( 'editor3', { uiColor: '#9AB8F3', height: '30vh', allowedContent: true} );
+        CKEDITOR.replace( 'editor4', { uiColor: '#9AB8F3', height: '30vh', allowedContent: true} );   // GET SELECTED TEST CATEGORY
+        if(! window.test_category_list_dt){
+            alertError("Please select a category")
+            $("#modal-id").modal("hide")
+            return
+        }
+        var ddt = window.test_category_list_dt
+        $.map(ddt.rows('.selected').data(), function (item) {
+            
+
+            var code = item[0] // code  test category
+            var name = item[1] // name  test category
+            var tab_id = item[4] // id of test category
+            $("[name=test_cat_id]").val(tab_id)
+            
+            
+
+           
+        });    
+       
+        
+    }, 500);
+    
+    
+</script>
+<div><button v-on:click="EditTest('idd, code,formula_1,formula_2,lower_bound_1,lower_bound_2,name,rate,report_type,summary, summary_2, summary_3, summary_4,tax_per,unit_1,unit_2,upper_band_1,upper_band_2, test_order, test_cat_id')" params="" class="app-btn bg-blue pull-right">EDIT TEST</button> </div>
+
+<div class="clearfix"></div>
+<input type = "hidden" name = "test_cat_id" />
+<div class="add-test" style="padding: 4px">
+    
+  
+    
+    
+  
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Test Code</b></label>
+                                <input model = "edit_new_test_fd.idd" type = "hidden" name = "idd" />
+                                <input name = "code" model="edit_new_test_fd.code" class="form-control uppercase" type="text"
+                                    placeholder="code" /><br> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Test Name</b></label>
+                                <input name = "name" model="edit_new_test_fd.name" class="form-control" type="text" placeholder="name" />
+                                <br></div>
+                        </div>
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Rate</b></label>
+                                <input name = "rate" v-model="edit_new_test_fd.rate = ''" class="form-control" type="text"
+                                    placeholder="rate" /><br> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Tax %</b></label>
+                                <input name = "tax_per" model="edit_new_test_fd.tax_per" class="form-control" type="text"
+                                    placeholder="tax %" /><br> </div>
+                        </div>
+                
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Lower bound 1</b></label>
+                                <input  name = "lower_bound_1" model="edit_new_test_fd.lower_bound_1" class="form-control" type="text"
+                                    placeholder="lower bound 1" /><br> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Upper band 1</b></label>
+                                <input name = "upper_band_1" model="edit_new_test_fd.upper_band_1" class="form-control" type="text"
+                                    placeholder="upper band 1" /><br> </div>
+                        </div>
+                
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Unit _1</b></label>
+                                <input name = "unit_1" type="text" placeholder="enter unit" model="edit_new_test_fd.unit_1"
+                                   
+                                    class="form-control">
+                                <!-- <select class = "form-control"  model = "edit_new_test_fd.unit_1" ng-options = "item for item in ['mg/L', 'Litre']"><option value = "">--choose unit--</option></select> -->
+                
+                                <br> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Result Output Formula _1</b></label>
+                                <input name = "formula_1" model="edit_new_test_fd.formula_1" class="form-control" type="text"
+                                    placeholder="formula 1" /><br> </div>
+                        </div>
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Lower band 2</b></label>
+                                <input name = "lower_bound_2" model="edit_new_test_fd.lower_bound_2" class="form-control" type="text"
+                                    placeholder="lower bound 2" /><br> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Upper band 2</b></label>
+                                <input name = "upper_band_2" model="edit_new_test_fd.upper_band_2" class="form-control" type="text"
+                                    placeholder="upper band 2" /><br> </div>
+                        </div>
+                
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Unit _2</b></label>
+                                <input name = "unit_2" type="text" placeholder="enter unit" model="edit_new_test_fd.unit_2"
+                                    class="form-control">
+                                <!-- <select class = "form-control"  model = "edit_new_test_fd.unit_2" ng-options = "item for item in ['mg/L', 'Litre']"><option value = "">--choose unit--</option></select> -->
+                
+                
+                
+                
+                                <br> </div>
+                        </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                        <div class="col-md-3">
+                            <div>
+                                <label><b>Result Output Formula _2</b></label>
+                                <input name = "formula_2" model="edit_new_test_fd.formula_2" class="form-control" type="text"
+                                    placeholder="formula 2" /><br> </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div>Result Type: <select name = "report_type" class="form-control"
+                                    model="edit_new_test_fd.report_type">
+                                    <option  value="">--select--</option>
+                                    <option v-for = "r in report_type">{{r}}</option>
+                                </select><br> </div>
+                
+                        </div><div class="col-md-3">
+                            Test Order: <input name = "test_order" type = "number" class = "form-control" />
+                        </div>
+                        <div class="col-md-12">
+                            <label><b>Test information </b></label>
+                            <textarea name = "summary" id = "editor1" rows="5"  model="edit_new_test_fd.summary"
+                                class="form-control" placeholder="Test information summary"></textarea>
+
+                                <!-- START TEST NOTE -->
+                                
+                                <div role="tabpanel">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#test-note1" aria-controls="home" role="tab" data-toggle="tab">Test Note 1</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#test-note2" aria-controls="tab" role="tab" data-toggle="tab">Test Note 2</a>
+                                        </li>
+                                        <li role="presentation">
+                                                <a href="#test-note3" aria-controls="tab" role="tab" data-toggle="tab">Test Note 3</a>
+                                        </li>
+
+                                    </ul>
+                                
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="test-note1">
+                                                <!-- <label><b>Test information </b></label> -->
+                                                <textarea name = "summary_2" id = "editor2" rows="5"  model="edit_new_test_fd.summary_2"
+                                                    class="form-control" placeholder="note 1"></textarea>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="test-note2">
+                                                <!-- <label><b>Test information </b></label> -->
+                                                <textarea name = "summary_3" id = "editor3" rows="5"  model="edit_new_test_fd.summary_3"
+                                                    class="form-control" placeholder="note 2"></textarea>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="test-note3">
+                                                <!-- <label><b>Test information </b></label> -->
+                                                <textarea name = "summary_4" id = "editor4" rows="5"  model="edit_new_test_fd.summary_4"
+                                                    class="form-control" placeholder="note 3"></textarea>
+
+                                         </div>
+
+                                    </div>
+                                </div>
+                                
+
+                                <!-- END TEST NOTE -->
+                                
+                        </div>
+                        <div class="col-md-12"><br>
+                
+                
+                        </div>
+                
+                
+                
+                    </div>
+                    <hr>
+                    <div><button v-on:click="EditTest('idd, code,formula_1,formula_2,lower_bound_1,lower_bound_2,name,rate,report_type,summary, summary_2, summary_3, summary_4,tax_per,unit_1,unit_2,upper_band_1,upper_band_2,test_order, test_cat_id')" params="" class="app-btn bg-blue">EDIT TEST</button> </div>
+    </div>
+
+
+    
+
+    

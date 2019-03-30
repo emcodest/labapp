@@ -1,0 +1,129 @@
+<div ng-app="myApp" ng-controller = "PatientMaster">
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+       <div ng-if = "! show_bar">
+          <div ng-include="'ng-includes/header.html'"></div>
+          
+          <div ng-include="'ng-includes/close.html'"></div>
+       </div>
+          <button ng-if = "! getToggle()" ng ng-click = "toggle()" class = "my-btn"><i class = "fa fa-plus"></i> New Record</button>
+              <div ng-if = "getToggle()" class = "patient-info" style = "background: beige">
+                <p><h3>PATIENT INFORMATION</h3></p>
+                <table class = "table table-responsive">
+                  <tr>
+                    
+                    <!-- <td><label><b>code</b></label><input ng-model = "patient.code" class = "form-control" type = "text" /></td> -->
+                    <td><label><b>title</b></label><select ng-model = "patient.title" class = "form-control">
+                      <option value = "">--please select--</option>
+                      <option value = "mr">Mr</option>
+                      <option value = "miss">Miss</option>
+                      <option value = "mrs">Mrs</option>
+                      <option value = "others">Others</option>
+                    </select></td>
+                    <td><label><b>first name</b></label><input ng-model = "patient.first_name" class = "form-control" type = "text" /></td>
+                    <td><label><b>last name</b></label><input ng-model = "patient.last_name" class = "form-control" type = "text" /></td>
+                    <td><label><b>sex</b></label>
+                      <select class = "form-control" ng-model = "patient.sex">
+                          <option value = "">--please select--</option>
+                        <option value = "male">Male</option>
+                        <option value = "female">Female</option>
+                      </select>
+                    </td>
+                    <td><label><b>date of birth</b></label><input  ng-model = "patient.dob" class = "form-control" type = "date" /></td>
+                
+                  </tr>
+                  <tr>
+                    
+                     
+                      <td><label><b>age</b></label><input ng-model = "patient.age" class = "form-control" type = "text" /></td>
+                      <td><label><b>phone no.</b></label><input ng-model = "patient.phone_number" class = "form-control" type = "text" /></td>
+                      <td><label><b>email</b></label><input ng-model = "patient.email" class = "form-control" type = "text" /></td>
+                      <td><label><b>marital status</b></label><select ng-model = "patient.marital_status" class = "form-control">
+                        <option value = "">--please select--</option>
+                        <option value = "single">Single</option>
+                        <option value = "married">Married</option>
+
+                      </select></td>
+                      <td><label><b>religion</b></label>
+                        <select ng-model = "patient.religion" class = "form-control">
+                            <option value = "">--please select--</option>
+                          <option value = "christainity">Christainity</option>
+                          <option value = "muslim">Muslim</option>
+                          <option value = "others">Others</option>
+                        </select>
+                       
+                      </td>
+                
+                    </tr>
+                    <tr>
+                    
+                        <td><label><b>nationality</b></label>
+                          <select ng-model = "patient.nationality" class = "form-control">
+                              <option value = "">--please select--</option>
+                            <option value = "nigeria">Nigeria</option>
+                            <option value = "other">Others</option>
+                          </select>
+                        
+                        </td>
+                        <td><label><b>state of orign</b></label><select ng-model = "patient.state" class = "form-control">
+                            <option value = "">--please select--</option>
+                            <option value = "delta">Delta</option>
+                            
+                            <option value = "rivers">Rivers</option>
+                          </select></td>
+                          <td><label><b>discount %</b></label><input ng-model = "patient.discount" class = "form-control" type = "text" /></td>
+                       
+                
+                      </tr>
+                    
+                
+                </table>
+
+                <button ng-click = "add_new_patient_info()" class = "my-btn">Add Record</button>
+                <button ng-click = "toggle()" class = "btn btn-danger btn-sm pull-right"><i class = "fa fa-times"></i> Hide Form</button>
+
+              </div>
+        
+              
+              
+              <br>
+                <h3>Patient Records</h3>
+               
+                <br>
+              <div class = "row">
+                  <div class = "col-md-12 col-sm-12">
+                      <table id = "patientdt" class = "table" style = "border: 1px solid #ddd; width: 100%">
+                        <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Name</th>
+                          <th>Sex</th>
+                          <th>Mobile No.</th>
+                          <th>...</th>
+                          <th>...</th>
+                        </tr>
+                       </thead>
+                      
+                    
+                        <!-- <tr ng-repeat="i in patient.list">
+                          <td>{{i.code}}</td>
+                          <td>{{i.name}}</td>
+                          <td>{{i.sex}}</td>
+                          <td>{{i.contact}}</td>
+                          <td><button class = "my-btn"><i class = "fa fa-plus"></i></button></td>
+                          <td><button class = "my-btn"><i class = "fa fa-list"></i></button></td>
+                        </tr> -->
+                        
+                    
+                      </table>
+                            
+                            
+                    
+                          </div>
+        
+              </div>
+            
+        
+        </div>
+      </div>
+        

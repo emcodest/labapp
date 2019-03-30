@@ -1,0 +1,92 @@
+<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+    
+        <div ng-include="'ng-includes/header.html'"></div>
+        
+        <div ng-include="'ng-includes/close.html'"></div>
+        
+              <p><h3>RECEIVE ORDER</h3></p>
+
+            
+            <div class="container">
+
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                    <label>PO #</label>
+                            <input name=""  class="form-control" placeholder="po no." />
+
+
+                            </div> 
+                        <div class="form-group">
+                                <label>Date</label>
+                                
+                                <input type="date" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" value="" required="required" title="">
+                                
+                        </div>
+                        
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                    <label>Status</label> 
+                                    
+                                    <input type="text" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" value="" required="required" pattern="" title="">
+                                    
+                                    
+                                </div>
+                                <div class="form-group">
+                                        <label>Person</label> 
+                                    
+                                        <input type="text" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" value="" required="required" pattern="" title="">
+                                        
+                                    </div>
+                                 
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            
+
+                            <div class="form-group">
+                                    <label>Notes </label>
+                            <textarea name=""  class="form-control" placeholder="note"></textarea>
+
+
+                            </div> 
+                    </div>
+
+                </div>
+                <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <table class = "table">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Desc</th>
+                                    <th>Qty</th>
+                                    <th>Price</th>
+                                    <th>Tax</th>
+                                    <th>Amount</th>
+                                    <th>...</th>
+                                    
+                                </tr>
+                               
+
+                            </table>
+
+
+                            
+                        </div>
+
+
+                </div>
+                
+                
+                <button  style = "width: 200px; text-algn: center" type="button" class="btn btn-large btn-block btn-info">SAVE</button>
+                
+                
+            </div>
+            
+
+
+
+</div>

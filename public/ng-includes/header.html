@@ -1,0 +1,39 @@
+<div id= "header">
+       <p class = "pull-right">Today's Date: <b>
+    		<span style = "font-size: 0.7em" class = "text-info" my-current-time="format"></span></b>
+    		
+    	</p>
+    	<div class="clearfix"></div>
+   <!-- <div class = "pull-right">	<button class = "my-btn pull-left" style = "color: #ffffff; margin-right: 8px"  ng-click = "home()">Go Back</button>
+<button class = "my-btn" style = "color: #ffffff;" ng-click = "homex()">Dashboard</button></div> -->
+    <p>&nbsp</p>
+    <div style = "text-align: left"> <img src = "img/logo.png" width = "20%"/> Lab Master</div>
+    <h6>
+    	<b>Welcome {{get_user_info.fname}}</b> <b class = "pull-right">Dept: {{get_user_info.user_type}}</b> 
+
+    </h6>
+
+<div id = "id-generator"></div>   
+<div class =  "">
+   
+    <div class = "pull-right">	<button class = "btn-primary pull-left" style = "color: #ffffff; margin-right: 8px"  ng-click = "home()"><i class = "fa fa-backward"></i></button>
+        <button class = "btn-primary" style = "color: #ffffff;" ng-click = "homex()"><i class = "fa fa-home"></i></button>
+        <button ng-click = "logout()" class = "btn-danger" style = " border-radius: 3px; color: #ffffff"><i class = "fa fa-sign-out"></i></button>
+    
+    </div>
+    
+    <div class="clearfix"></div>
+  
+
+</div>
+
+
+<!--  <button ng-click = "logout()" class = "bg-green btn" style = " border-radius: 3px; color: #ffffff" ng-if = "is_admin" >Add Lab Users</button> <button ng-click = "logout()" class = "bg-blue btn" style = " border-radius: 3px; color: #ffffff" ng-if = "is_admin" >Manage</button>
+ -->
+
+<div>
+
+<p class = "text-center text-white pull-right"><b style = "color: #312f2f; font-size: 1.7em; font-weight: 800; text-transform: uppercase">{{panel_title}}</b></p>
+<br><br> 
+</div>
+</div>

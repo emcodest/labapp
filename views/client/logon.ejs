@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title></title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/toastr.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body style = "overflow-y: hidden">
+
+        
+   <div class = "container">
+<div class = "row" style = "margin: 90px auto">
+  
+      <div class = "col-sm-6">
+        <img src = "img/logo.png" width = "40%" />
+          <h2>Please Sign In</h2>
+            <label><b>Username</b></label>
+             <input  name = "username" type = "text" class = "form-control username text-left"  placeholder = "username" />  <br>
+             <label><b>Password</b></label>
+             <input name = "password" type = "password" class = "form-control password text-left"   placeholder = "password" /> <br><br>  
+             <button type = "button" class = "app-btn bg-blue login">Sign In</button> &nbsp &nbsp
+             <!-- <button class = "app-btn bg-red exit">Exit</button> -->
+      </div>
+</div>
+        
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/toastr.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  function reset(inputs){
+    for(var i in inputs){
+      $("[name='"+inputs[i]+"']").val("")
+    }
+  }
+  setTimeout(function() {
+    reset(["username", "password"])
+  }, 1000);
+  
+ window.addEventListener("keypress", function(e){
+   
+   var key = e.which || e.keyCode
+    if (key === 13) { // 13 is enter
+      // code for enter
+      $(".login").trigger("click")
+    }
+ })
+//  if(){
+//     alert("emma")
+//     $(".login").trigger("click")
+//   }
+
+  $(".login").click(function(){
+
+    var uname = $("[name=username]").val()
+    var psw = $("[name=password]").val()
+    var _btn = $(this)
+    var _txt = _btn.text()
+   
+    var data = {username: uname, password: psw}
+    $.ajax({
+      type: "POST",
+      url: "/users",
+      data: data,
+      dataType: "json",
+      beforeSend: function(){
+        _btn.text("please wait...")
+        
+      }, 
+      success: function (res) {
+       // alert(JSON.stringify(res.data))
+       _btn.text(_txt)
+        if(res.error){
+          toastr.error(res.message)
+        }
+        if(res.success){
+          toastr.success(res.message)
+          setTimeout(function() {
+            window.localStorage.setItem("user", JSON.stringify(res.data))
+            window.location.href = "/users"
+          }, 2000);
+          
+        }
+        
+      }, 
+      error: function(e){
+        //alert(e)
+      }
+    });
+
+
+    
+  })
+
+  
+
+   
+})
+</script>
+
+</body>
+</html>
