@@ -58,19 +58,24 @@
                     <tr>
                     
                         <td><label><b>nationality</b></label>
-                          <select ng-model = "patient.nationality" class = "form-control">
+                          <input type = "text" class = "form-control" ng-model = "patient.nationality" />
+                          <!-- <select ng-model = "patient.nationality" class = "form-control">
                               <option value = "">--please select--</option>
                             <option value = "nigeria">Nigeria</option>
                             <option value = "other">Others</option>
-                          </select>
+                          </select> -->
                         
                         </td>
-                        <td><label><b>state of orign</b></label><select ng-model = "patient.state" class = "form-control">
+                        <td><label><b>state of orign</b></label>
+                          <input type = "text" class = "form-control" ng-model = "patient.state" />
+                          <!-- <select ng-model = "patient.state" class = "form-control">
                             <option value = "">--please select--</option>
                             <option value = "delta">Delta</option>
                             
                             <option value = "rivers">Rivers</option>
-                          </select></td>
+                          </select> -->
+                        
+                        </td>
                           <td><label><b>discount %</b></label><input ng-model = "patient.discount" class = "form-control" type = "text" /></td>
                        
                 
@@ -99,20 +104,20 @@
                           <th>Name</th>
                           <th>Sex</th>
                           <th>Mobile No.</th>
+                          <th>DOB</th>
+                          <th>Email</th>
+                          <th>Religion</th>
+                          <th>Nationality</th>
+                          <th>State</th>
+                          
+                          <th>...</th>
                           <th>...</th>
                           <th>...</th>
                         </tr>
                        </thead>
                       
                     
-                        <!-- <tr ng-repeat="i in patient.list">
-                          <td>{{i.code}}</td>
-                          <td>{{i.name}}</td>
-                          <td>{{i.sex}}</td>
-                          <td>{{i.contact}}</td>
-                          <td><button class = "my-btn"><i class = "fa fa-plus"></i></button></td>
-                          <td><button class = "my-btn"><i class = "fa fa-list"></i></button></td>
-                        </tr> -->
+                       
                         
                     
                       </table>

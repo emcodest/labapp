@@ -1,0 +1,90 @@
+<script>
+    setTimeout(function() {
+
+        $("#update-patient-info").trigger("click").remove()
+        var idd = $("[name=id]").val()
+
+       
+      
+
+    }, 500);
+</script>
+
+<input v-model = "patient.id" type = "hidden" name = "id" />
+<p><h3>UPDATE PATIENT INFORMATION</h3></p>
+<table class = "table table-responsive">
+  <tr>
+    
+    <!-- <td><label><b>code</b></label><input v-model = "patient.code" class = "form-control" type = "text" /></td> -->
+    <td><label><b>title</b></label><select name = "title" v-model = "patient.title" class = "form-control">
+      <option value = "">--please select--</option>
+      <option value = "mr">Mr</option>
+      <option value = "miss">Miss</option>
+      <option value = "mrs">Mrs</option>
+      <option value = "others">Others</option>
+    </select></td>
+    <td><label><b>first name</b></label><input name = "first_name" v-model = "patient.first_name" class = "form-control" type = "text" /></td>
+    <td><label><b>last name</b></label><input name = "last_name" v-model = "patient.last_name" class = "form-control" type = "text" /></td>
+    <td><label><b>sex</b></label>
+      <select name = "sex" class = "form-control" v-model = "patient.sex">
+          <option value = "">--please select--</option>
+        <option value = "male">Male</option>
+        <option value = "female">Female</option>
+      </select>
+    </td>
+    <td><label><b>date of birth</b></label><input name = "dob"  v-model = "patient.dob" class = "form-control" type = "date" /></td>
+
+  </tr>
+  <tr>
+    
+     
+      <td><label><b>age</b></label><input name = "age" v-model = "patient.age" class = "form-control" type = "text" /></td>
+      <td><label><b>phone no.</b></label><input name = "phone_number" v-model = "patient.phone_number" class = "form-control" type = "text" /></td>
+      <td><label><b>email</b></label><input name = "email" v-model = "patient.email" class = "form-control" type = "text" /></td>
+      <td><label><b>marital status</b></label><select  name = "marital_status" v-model = "patient.marital_status" class = "form-control">
+        <option value = "">--please select--</option>
+        <option value = "single">Single</option>
+        <option value = "married">Married</option>
+
+      </select></td>
+      <td><label><b>religion</b></label>
+        <select name = "religion" v-model = "patient.religion" class = "form-control">
+            <option value = "">--please select--</option>
+          <option value = "christainity">Christainity</option>
+          <option value = "muslim">Muslim</option>
+          <option value = "others">Others</option>
+        </select>
+       
+      </td>
+
+    </tr>
+    <tr>
+    
+        <td><label><b>nationality</b></label>
+          <input name = "nationality" type = "text" class = "form-control" v-model = "patient.nationality" />
+          <!-- <select v-model = "patient.nationality" class = "form-control">
+              <option value = "">--please select--</option>
+            <option value = "nigeria">Nigeria</option>
+            <option value = "other">Others</option>
+          </select> -->
+        
+        </td>
+        <td><label><b>state of orign</b></label>
+          <input name = "state" type = "text" class = "form-control" v-model = "patient.state" />
+          <!-- <select v-model = "patient.state" class = "form-control">
+            <option value = "">--please select--</option>
+            <option value = "delta">Delta</option>
+            
+            <option value = "rivers">Rivers</option>
+          </select> -->
+        
+        </td>
+          <td><label><b>discount %</b></label><input name = "discount" v-model = "patient.discount" class = "form-control" type = "text" /></td>
+       
+
+      </tr>
+    
+
+</table>
+
+<button params = "id, title, first_name, last_name, sex, dob, age, phone_number, email, marital_status, religion, nationality, state, discount" func = "EditPatientMaster" class = "my-btn click">SAVE CHANGES</button>

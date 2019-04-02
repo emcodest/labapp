@@ -290,7 +290,8 @@ function dialog(view, data){
         predefined_test: {ftype: 'text'},
         predefined_test_list: [{default: []}],
         add_new_profile_fd: {},
-        edit_new_profile_fd: {}
+        edit_new_profile_fd: {},
+        patient: {}
       },
       methods: 
            {
@@ -1481,6 +1482,15 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
     }
 
   break;
+  case "patient_master":
+  $("#patientdt").DataTable().ajax.reload()
+  break
+
+  case "accepted_tests":
+
+    console.log(server_res)
+
+  break;
 
 
     }
@@ -1506,6 +1516,7 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
     //console.log(idd)
 
   }
+
   function AddMaster(master_name, skips, master_data, api_route, server_method, cb, $scope){
  
     //alert(api_route)
@@ -1526,7 +1537,32 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
    
     
   }
+  // EDIT PATIENT MASTER
+  function EditMaster(params, _this){
+ 
+    if(params){
+     
+      var func = params.split(",")
+          switch(func[1].trim()){
+          case "edit_patient_master":
+          var url = getAPI("master", "ListPatientMaster")
+          var type = "json"
+           var data = {id: func[0]}         
+          server(url, data, type, function (res) {
+         //   console.log(res)
+           // console.log(res[0])
+            dialog("dialogs/edit-patient-master.html", res)
+          })
+          
+          break
+       
 
+
+        }
+
+    }
+  
+  }
   // PROCESS TEST - ACCEPT, PREVIEW, PERFORM, APPROVE, PRINT, EMAIL TEST, SMS TEST 
   function AcceptTest(params){
 

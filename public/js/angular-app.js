@@ -50,7 +50,8 @@ app.config(function($routeProvider) {
         controller: "ReferralPersonMaster"
     })
     .when("/accept_test/:title", {
-        templateUrl : "views/accept-test.html"
+        templateUrl : "views/accept-test.html",
+        controller: "AcceptTest"
     }).when("/accept_test_preview/:title", {
         templateUrl : "views/accept-test-preview.html"
     }).when("/perform_test/:title", {
