@@ -7,7 +7,7 @@
    </div>
     
           <p><h3>REFERRAL PERSON</h3></p>
-          <table class = "table table-responsive">
+          <table class = "table table-responsive" ng-init = "ActivateMode2()">
             <tr>
               
               <td><label><b>code</b></label><input ng-model = "master_data.code"  class = "form-control" type = "text" /></td>
@@ -32,7 +32,7 @@
                 <td><label><b>DOB</b></label><input ng-model = "master_data.dob"  class = "form-control" type = "date" /></td>
                 <td><label><b>phone no.</b></label><input ng-model = "master_data.phone_no"  class = "form-control" type = "text" /></td>
                 <td><label><b>email</b></label><input ng-model = "master_data.email"  class = "form-control" type = "text" /></td>
-                <td><label><b>marital status</b></label><input  class = "form-control" type = "text" /></td>
+                <td><label><b>marital status</b></label><input ng-model = "master_data.marital_status"  class = "form-control" type = "text" /></td>
                 <td><label><b>religion</b></label><input ng-model = "master_data.religion"  class = "form-control" type = "text" /></td>
       
               </tr>
@@ -63,7 +63,7 @@
                         overflow-x: hidden;
                       }
                     </style>
-                  <table id = "referral-person-master-dt" class = "table" width = "100%" style = "font-size: 0.8em; width: 100%">
+                  <table id = "referral-person-master-dt" width = "100%" class = "table">
                    <thead>
                      <tr>
                        <th>Code</th>
@@ -82,6 +82,8 @@
                        <th>Designation</th>
                        <th>Primary Specialty</th>
                        <th>Sub Specialty</th>
+                       <th>...</th>
+                       <th>...</th>
                        <th>...</th>
                     
                     </tr>

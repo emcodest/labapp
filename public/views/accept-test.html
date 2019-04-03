@@ -28,16 +28,7 @@
           <div class="col-md-8">
             <input ng-enter="Search('patient_code', master_data.patient_code)"
               ng-model="master_data.patient_code" type="text" class="form-control"
-              placeholder="search patient" />
-
-              <div class = "well patient-info">
-                <table class = "table">
-                  <tr><th>Code</th> <td>ADE</td></tr>
-                  <tr><th>Name</th> <td>ADE</td></tr>
-                  <tr><th>Sex</th> <td>M</td></tr>
-                  <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('patient-info', 'patient_code')" class = "btn btn-danger">X</button></td></tr>
-                </table>
-              </div>
+              placeholder="search patient" />             
 
           </div>
 
@@ -61,45 +52,78 @@
         <td><label><b>Ref Center Code.</b></label><input ng-model="master_data.ref_code_center"
             ng-enter="Search('ref_code_center', master_data.ref_code_center)" type="text"
             class="form-control" />
-            <div class = "well ref-code-center-info">
-                <table class = "table">
-                  <tr><th>Code</th> <td>ADE</td></tr>
-                  <tr><th>Center Name</th> <td>ADE</td></tr>
-                  <!-- <tr><th>Address</th> <td>M</td></tr> -->
-                  <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('ref-code-center-info', 'ref_code_center')" class = "btn btn-danger">X</button></td></tr>
-                </table>
-              </div>
+           
           
           
           </td>
         <td><label><b>Ref Person Code.</b></label><input
             ng-enter="Search('ref_code_person', master_data.ref_code_person)"
             ng-model="master_data.ref_code_person" type="text" class="form-control" />
-            <div class = "well ref-person-code-info">
-                <table class = "table">
-                  <tr><th>Code</th> <td>ADE</td></tr>
-                  <tr><th>First Name</th> <td>ADE</td></tr>
-                  <tr><th>Last Name</th> <td>M</td></tr>
-                  <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('ref-person-code-info', 'ref_code_person')" class = "btn btn-danger">X</button></td></tr>
-                </table>
-              </div>
+            
           
           </td>
         <td><label><b>Guardian Code.</b></label><input ng-model="master_data.ref_code_guardian"
             ng-enter="Search('ref_code_guardian', master_data.ref_code_guardian)" type="text"
             class="form-control" />
-            <div class = "well ref-guardian-code-info">
-                <table class = "table">
-                  <tr><th>Code</th> <td>ADE</td></tr>
-                  <tr><th>First Name</th> <td>ADE</td></tr>
-                  <tr><th>Last Name</th> <td>M</td></tr>
-                  <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('ref-guardian-code-info', 'ref_code_guardian')" class = "btn btn-danger">X</button></td></tr>
-                </table>
-              </div>
+            
           </td>
 
 
       </tr>
+      <tr>
+        
+        <td colspan = "4"> 
+        <!-- <div class = "well patient-info">
+          <table class = "table">
+            <tr><th>Code</th> <td>ADE</td></tr>
+            <tr><th>Name</th> <td>ADE</td></tr>
+            <tr><th>Sex</th> <td>M</td></tr>
+            <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('patient-info', 'patient_code')" class = "btn btn-danger">X</button></td></tr>
+          </table>
+        </div>
+        <hr> -->
+        <!-- <div class = "well ref-code-center-info">
+        <table class = "table">
+          <tr><th>Code</th> <td>ADE</td></tr>
+          <tr><th>Center Name</th> <td>ADE</td></tr>
+       
+          <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('ref-code-center-info', 'ref_code_center')" class = "btn btn-danger">X</button></td></tr>
+        </table>
+       </div>
+       <hr> -->
+       <!-- <div class = "well ref-person-code-info">
+          <table class = "table">
+            <tr><th>Code</th> <td>ADE</td></tr>
+            <tr><th>First Name</th> <td>ADE</td></tr>
+            <tr><th>Last Name</th> <td>M</td></tr>
+            <tr><th>Remove</th> <td><button ng-click = "RemoveInfo('ref-person-code-info', 'ref_code_person')" class = "btn btn-danger">X</button></td></tr>
+          </table>
+        </div>
+        <hr> -->
+        <div id = "accept-test-info-record">
+          <!-- <div class = "well ref-guardian-code-info">
+         
+            <b>Name of master</b>
+              <table class = "table" width="100%">
+                <tr><th>Code</th> <td>ADE</td><th>First Name</th> <td>ADE</td><th>Last Name</th> <td>M</td><th>kk</th><td>M</td><th>Badd</th><td>jdjdj</td> 
+                </tr>
+          
+                <tr><td><button ng-click = "RemoveInfo('ref-guardian-code-info', 'ref_code_guardian')" class = "btn btn-danger my-btn">X</button></td></tr>
+              </table>
+            </div> -->
+
+
+            <div id = "patient_master"></div>
+            <div id = "center_master"></div>
+            <div id = "person_master"></div>
+            <div id = "guardian_master"></div>
+        </div>
+      
+    
+    </td>
+   
+    
+    </tr>
     </table>
 
     <p>

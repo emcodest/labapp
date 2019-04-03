@@ -1,4 +1,4 @@
-app.controller("PatientMaster", function($scope, $route, $compile){
+app.controller("PatientMaster", function($scope, $route, $compile, $rootScope){
     
 
         //! - - - - - - - - - -- - - - - - -LIST PATIENT RECORD
@@ -16,6 +16,24 @@ app.controller("PatientMaster", function($scope, $route, $compile){
         if ( ! $.fn.DataTable.isDataTable( '#patientdt' ) ) {
             $("#patientdt").DataTable(options)
           }
+
+          //$rootScope.show_bar = true
+            
+            $rootScope.ActivateMode2 = function(){
+              if($rootScope.show_bar)
+              {
+                
+                setTimeout(function() {
+                  
+                  $("#patientdt tr td:nth-child(12)").remove()
+                  $("#patientdt thead tr th:nth-child(12)").remove()
+                  $("#patientdt tr td:nth-child(11)").remove()
+                  $("#patientdt thead tr th:nth-child(11)").remove()
+                }, 200);
+                
+              }
+            }
+         
          
 
 
@@ -72,7 +90,7 @@ app.controller("DepartmentMaster", function($scope, $rootScope, $route, $compile
    
    //DepartmentMaster($scope, null)
 
-//    $scope.preview_department = () => {
+//    $scope.preview_department = function() {
     
 //     //$rootScope.show_bar = true
 //     $(".modal-body").load("views/patient-master.html",  function(text) {
@@ -290,7 +308,7 @@ app.controller("ProfileMaster", function($scope, $rootScope, $route, $compile, n
               ajax: {
                 url: url,
                 type: "post",
-                data: {master_name: "medicine_master"}
+                data: {master_name: "medicine_master", master_dialog: "edit-medicine-master"}
               }
             }
             // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
@@ -313,7 +331,7 @@ app.controller("StaffMaster", function($scope){
       ajax: {
         url: url,
         type: "post",
-        data: {master_name: "staff_master"}
+        data: {master_name: "staff_master", master_dialog: "edit-staff-master"}
       }
     }
   
@@ -327,7 +345,7 @@ app.controller("StaffMaster", function($scope){
 
 })
 
-app.controller("ReferralCenterMaster", function($scope){
+app.controller("ReferralCenterMaster", function($scope, $rootScope){
 
     
     $(document).ready(function(){
@@ -337,12 +355,27 @@ app.controller("ReferralCenterMaster", function($scope){
       ajax: {
         url: url,
         type: "post",
-        data: {master_name: "center_master"}
+        data: {master_name: "center_master", master_dialog: "edit-center-master"}
       }
     }
     // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
     if (!$.fn.DataTable.isDataTable('#referral-center-master-dt')) {
       $("#referral-center-master-dt").DataTable(options)
+    }
+    $rootScope.ActivateMode2 = function(){
+      if($rootScope.show_bar)
+      {
+        
+        setTimeout(function() {
+          
+          $("#referral-center-master-dt tr td:nth-child(17)").remove()
+          $("#referral-center-master-dt thead tr th:nth-child(17)").remove()
+          $("#referral-center-master-dt tr td:nth-child(16)").remove()
+          $("#referral-center-master-dt thead tr th:nth-child(16)").remove()
+        }, 200);
+        
+      }
+
     }
     $scope.master_data = {}
     $scope.AddMaster = function(master_name, skips, master_data, api_route, server_method, callback ){
@@ -353,7 +386,7 @@ app.controller("ReferralCenterMaster", function($scope){
 
 })
 
-app.controller("ReferralPersonMaster", function($scope){
+app.controller("ReferralPersonMaster", function($scope, $rootScope){
 
     //alert("test ref person")
     $(document).ready(function(){
@@ -363,12 +396,28 @@ app.controller("ReferralPersonMaster", function($scope){
       ajax: {
         url: url,
         type: "post",
-        data: {master_name: "person_master"}
+        data: {master_name: "person_master",  master_dialog: "edit-referral-person-master"}
       }
     }
     // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
     if (!$.fn.DataTable.isDataTable('#referral-person-master-dt')) {
       $("#referral-person-master-dt").DataTable(options)
+    }
+    
+    $rootScope.ActivateMode2 = function(){
+      if($rootScope.show_bar)
+      {
+        
+        setTimeout(function() {
+          $("#referral-person-master-dt tr td:nth-child(18)").remove()
+          $("#referral-person-master-dt thead tr th:nth-child(18)").remove()
+          $("#referral-person-master-dt tr td:nth-child(17)").remove()
+          $("#referral-person-master-dt thead tr th:nth-child(17)").remove()
+          
+        }, 200);
+        
+      }
+
     }
 $scope.master_data = {}
 $scope.AddMaster = function(master_name, skips, master_data, api_route, server_method, callback ){
@@ -378,8 +427,10 @@ AddMaster(master_name, skips, master_data, api_route, server_method, callback, $
     })
 
 })
-app.controller("GuardianMaster", function($scope){
-  $(document).ready(function(){
+app.controller("GuardianMaster", function($scope, $rootScope){
+
+
+  
        // alert("test guardian")
     $(document).ready(function(){
 
@@ -389,12 +440,30 @@ app.controller("GuardianMaster", function($scope){
         ajax: {
           url: url,
           type: "post",
-          data: {master_name: "guardian_master"}
+          data: {master_name: "guardian_master", master_dialog: "edit-guardian-master"}
         }
       }
       // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
       if (!$.fn.DataTable.isDataTable('#guardian-master-dt')) {
         $("#guardian-master-dt").DataTable(options)
+      }
+     
+      $rootScope.ActivateMode2 = function(){
+       alert("dd")
+        
+        if($rootScope.show_bar)
+        {
+         
+          setTimeout(function() {
+            
+            $("#guardian-master-dt tr td:nth-child(17)").remove()
+            $("#guardian-master-dt thead tr th:nth-child(17)").remove()
+            $("#guardian-master-dt tr td:nth-child(16)").remove()
+            $("#guardian-master-dt thead tr th:nth-child(16)").remove()
+          }, 200);
+          
+        }
+  
       }
 
 
@@ -405,10 +474,10 @@ $scope.AddMaster = function(master_name, skips, master_data, api_route, server_m
 AddMaster(master_name, skips, master_data, api_route, server_method, callback, $scope)
 }
 
-})
+
 
 })
-app.controller("AcceptTest", function($scope, ngDialog){
+app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
 
   
   var url = getAPI("master", "AcceptTest")
@@ -582,27 +651,31 @@ app.controller("AcceptTest", function($scope, ngDialog){
     }
 
     $scope.Search = function(type, data){
-      //alert(data)
+      $rootScope.show_bar = false
       switch(type){
 
         case "patient_code":
+        $rootScope.show_bar = true
+        
+        
+       // alert("ee")
         ngDialog.open({ template: 'views/patient-master.html', className: 'ngdialog-theme-default custom-width', controller: "PatientMaster", closeByNavigation: true});
 
         break;
 
         case "ref_code_center":
-
+        $rootScope.show_bar = true
         ngDialog.open({ template: 'views/center-master.html', className: 'ngdialog-theme-default custom-width', controller: "ReferralCenterMaster", closeByNavigation: true});
 
         break;
         case "ref_code_person":
-
+        $rootScope.show_bar = true
       
         ngDialog.open({ template: 'views/ref-master.html', className: 'ngdialog-theme-default custom-width', controller: "ReferralPersonMaster", closeByNavigation: true});
 
         break;
         case "ref_code_guardian":
-
+        $rootScope.show_bar = true
         ngDialog.open({ template: 'views/guardian-master.html', className: 'ngdialog-theme-default custom-width', controller: "GuardianMaster", closeByNavigation: true});
 
         break;

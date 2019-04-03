@@ -1,0 +1,58 @@
+<input type="hidden" name="id" />
+<p><h3>UPDATE STAFF INFORMATION</h3></p>
+<table class = "table table-responsive">
+  <tr>
+    
+    <td><label><b>login username|code</b></label><input disabled name = "code" class = "form-control" type = "text" /></td>
+    <td><label><b>login password</b></label><input name = "password"  class = "form-control" type = "text" /></td>
+    <td><label><b>title</b></label><select name = "title" class = "form-control">
+      <option>Mr</option>
+      <option>Miss</option>
+      <option>Mrs</option>
+      <option>Others</option>
+    </select></td>
+    <td><label><b>first name</b></label><input name = "first_name"  class = "form-control" type = "text" /></td>
+    <td><label><b>last name</b></label><input name = "last_name"  class = "form-control" type = "text" /></td>
+    <td><label><b>sex</b></label>
+      <select name = "sex"  class = "form-control">
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </td>
+
+  </tr>
+  <tr>
+    
+      <td><label><b>date of birth</b></label><input name = "dob"  class = "form-control" type = "date" /></td>
+      <td><label><b>age</b></label><input name = "age"  class = "form-control" type = "text" /></td>
+      <!-- <td><label><b>department</b></label><select  class = "form-control"><option>
+        clinical lab
+      </option>
+    </select>
+      </td> -->
+
+      <td><label><b>phone no.</b></label><input name = "phone"  class = "form-control" type = "text" /></td>
+      <td><label><b>email</b></label><input name = "email"  class = "form-control" type = "text" /></td>
+      <td><label><b>marital status</b></label><input name = "marital_status"  class = "form-control" type = "text" /></td>
+      <td><label><b>religion</b></label><input name = "religion"  class = "form-control" type = "text" /></td>
+
+    </tr>
+    <tr>
+    
+        <td><label><b>nationality</b></label><input name = "nationality"  class = "form-control" type = "text" /></td>
+        <!-- <td><label><b>state of orign</b></label><select  class = "form-control">
+            <option>Delta</option>
+            <option>Rivers</option>
+          </select></td> -->
+          <td><label><b>office location</b></label><input name = "office_location"  class = "form-control" type = "text" /></td>
+         
+       
+
+      </tr>
+    
+
+</table>
+
+
+<button master_name="staff_master" master_dt_id="staff-master-dt" params="id, password, title, first_name, last_name, sex, dob, age, phone, email, marital_status, religion, nationality, office_location"
+    func="EditMainMaster" class="my-btn click">SAVE CHANGES</button>

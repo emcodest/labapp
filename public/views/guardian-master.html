@@ -1,4 +1,4 @@
-<div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
+<div ng-app="myApp" ng-controller = "GuardianMaster" class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
     
     <div ng-if = "! show_bar">
           <div ng-include="'ng-includes/header.html'"></div>
@@ -6,7 +6,7 @@
           <div ng-include="'ng-includes/close.html'"></div>
         </div>
         
-              <p><h3>GUARDIAN INFORMATION</h3></p>
+              <p><h3>GUARDIAN INFORMATION {{wmm}}</h3></p>
               <table class = "table table-responsive">
                 <tr>
                   
@@ -56,14 +56,8 @@
                 <br>
               <div class = "row">
                   <div class = "col-md-12 col-sm-12">
-                      <style>
-                          #referral-person-master-dt td{
-                            
-                            max-width: 50px;
-                            overflow-x: hidden;
-                          }
-                        </style>
-                      <table id = "guardian-master-dt" class = "table" width = "100%" style = "font-size: 0.8em; width: 100%">
+                      
+                      <table id = "guardian-master-dt" class = "table" ng-init = "ActivateMode2()">
                        <thead>
                          <tr>
                            <th>Code</th>
@@ -81,6 +75,8 @@
                            <th>Nationality</th>
                            <th>State of Origin</th>
                            <th>Discount %</th>
+                           <th>...</th>
+                           <th>...</th>
                            <th>...</th>
                         
                         </tr>

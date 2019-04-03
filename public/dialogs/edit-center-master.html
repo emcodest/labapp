@@ -1,0 +1,35 @@
+<input type="hidden" name="id" />
+<p><h3>UPDATE REF CODE CENTER</h3></p>
+<input  type = "hidden" name = "id" />
+<table class = "table table-responsive">
+    <tr>
+      
+      <td><label><b>code</b></label><input name = "code" class = "form-control" type = "text" /></td>
+      <td><label><b>center name</b></label><input name = "name" class = "form-control" type = "text" /></td>
+      <td><label><b>contact person</b></label><input name = "contact_person" class = "form-control" type = "text" /></td>
+      <td><label><b>primary specialty</b></label><input name = "primary_specialty"  class = "form-control" type = "text" /></td>
+      <td><label><b>other specialties</b></label><input name = "other_specialty"  class = "form-control" type = "text" /></td>
+  
+    </tr>
+    <tr>
+      
+        <td><label><b>mobile no.</b></label><input name = "mobile_no"  class = "form-control" type = "text" /></td>
+        <td><label><b>office no.</b></label><input name = "office_no"  class = "form-control" type = "text" /></td>
+        <td><label><b>email</b></label><input name = "email"  class = "form-control" type = "text" /></td>
+        <td><label><b>director name</b></label><input name = "director_name"  class = "form-control" type = "text" /></td>
+        <td><label><b>address</b></label><input name = "address"  class = "form-control" type = "text" /></td>
+  
+      </tr>
+      <tr>
+      
+          <td><label><b>region</b></label><input name = "region"  class = "form-control" type = "text" /></td>
+          <td><label><b>LGA</b></label><input class = "form-control" type = "text" name = "lga"  /></td>
+          <td><label><b>discount %</b></label><input name = "discount"  class = "form-control" type = "text" /></td>
+          <td><label><b>cut %</b></label><input name = "cut"  class = "form-control" type = "text" /></td>
+  
+        </tr>
+  
+  </table>
+
+<button master_name="center_master" master_dt_id="center-master-dt" params="id, code, name, contact_person, primary_specialty,other_specialty,mobile_no,office_no,email,director_name,address,region,lga,discount,cut "
+    func="EditMainMaster" class="my-btn click">SAVE CHANGES</button>

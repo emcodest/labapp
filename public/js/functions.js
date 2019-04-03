@@ -205,6 +205,14 @@ function calculateAge(birthday) {
   var ageDate = new Date(ageDifMs); // miliseconds from epoch
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
+function NewAge(str){
+   // birthday is a date
+   var birthday = new Date(str)
+   var ageDifMs = Date.now() - birthday.getTime();
+   var ageDate = new Date(ageDifMs); // miliseconds from epoch
+   var days = ageDate.getSeconds() / 86400
+   return "Year: "+Math.abs(ageDate.getUTCFullYear() - 1970)+" Month: "+ageDate.getMonth()+" Day: "+Math.ceil(days);
+}
 function check_object_index2(ar, ky)
 {
   for(var i in ar)
@@ -1190,6 +1198,49 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
     })    
     
   }
+  function EditMainMaster(params, _this){
+    var master_name = _this.attr("master_name")
+    var master_dt_id = _this.attr("master_dt_id")
+    var pstr = input_data(params)
+    var url = getAPI("master", "EditMaster")    
+    var type = "json"
+    var data = pstr
+    data.master_name = master_name
+    data.skips = "id"
+       
+    server(url, data, type, function(res){
+
+        if(res.success){
+                
+          $("#"+master_dt_id).DataTable().ajax.reload()
+        
+        }
+    })    
+    
+  }
+  function EditPatient(params){
+  
+    var pstr = input_data(params)
+    var url = getAPI("master", "EditMaster")    
+    var type = "json"
+    var data = pstr
+    data.master_name = "patient_master"
+    data.skips = "id"
+    //console.log(pstr)
+    
+   
+    
+    server(url, data, type, function(res){
+
+        if(res.success){
+                
+          $("#patientdt").DataTable().ajax.reload()
+        
+        }
+    })    
+    
+  }
+
   function EditTest(params){
   
     var pstr = input_data(params)
@@ -1555,6 +1606,18 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
           })
           
           break
+          case "edit_master":
+          var url = getAPI("master", "ListMasterByID")
+          var type = "json"
+           var data = {id: func[0], master_name: func[2]}    
+           var master_dialog = func[3].trim()  
+             
+          server(url, data, type, function (res) {
+         
+            dialog("dialogs/"+master_dialog+".html", res)
+          })
+          
+          break
        
 
 
@@ -1562,6 +1625,40 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
 
     }
   
+  }
+  function AddToAcceptTest(params){
+
+    var _id = params.split(",")
+    var idd = _id[0]
+    var master = _id[1]
+    var url = getAPI("master", "ListMasterByID")
+    var data = {id: idd, master_name: master}
+    var type = "json"
+    server(url, data, type, function(res){
+
+      // process
+      var mobject =  Object.keys(res)
+      var mval =  Object.values(res)
+      var dyn_data = ""
+      for(var i in mobject){
+
+        
+       
+           dyn_data += "<div class = 'col-md-2'><b>"+mobject[i].replace("_", " ").toUpperCase()+"</b></div><div class = 'col-md-2'>"+mval[i]+"</div>"
+        
+
+      }
+      $("#accept-test-info-record").find("#"+master.trim()).html("<p><b>"+master.replace("_", " ").toUpperCase()+"</b></p><div class = 'row'>"+dyn_data+"</div>")
+      $(".ngdialog-close").trigger("click")
+      myalert("Record Added")
+      
+    })    
+    //var info = "<div class = 'well ref-guardian-code-info><b>Name of master</b><table class = 'table' width='100%'>tr><th>Code</th><td>ADE</td><th>First Name</th><td>ADE</td><th>Last Name</th> <td>M</td><th>kk</th><td>M</td><th>Badd</th><td>jdjdj</td></tr><tr><td><button ng-click = \"RemoveInfo('ref-guardian-code-info', 'ref_code_guardian')\" class = 'btn btn-danger my-btn'>X</button></td></tr></table></div>"
+   
+    
+    //alert(idd)
+    //alert(master)
+
   }
   // PROCESS TEST - ACCEPT, PREVIEW, PERFORM, APPROVE, PRINT, EMAIL TEST, SMS TEST 
   function AcceptTest(params){
@@ -1613,6 +1710,11 @@ function selectdt(opt, dt, dtid, cb, test_id_dt){
     }
     fn.apply(null, [params, $(this)])
 
+  })
+  $(document).on("change", "[name=dob], #dob", function(){
+    var val = $(this).val()
+    val = NewAge(val)
+    $("[name=age], #age").val(val)
   })
 
 

@@ -1,0 +1,36 @@
+<script>
+    setTimeout(function() {
+
+       // $("#update-patient-info").trigger("click").remove()
+        var idd = $("[name=id]").val()
+
+       
+      
+
+    }, 500);
+</script>
+
+<input  type = "hidden" name = "id" />
+<p><h3>UPDATE MEDICINE MASTER</h3></p>
+<div class="row">
+    <div class = "col-md-6 col-sm-12">
+
+      <div class="form-group">
+        <label><b>Code</b></label><br>
+        <input disabled name="code" type="text" placeholder="code" name="" class = "form-control" style="width: 50%">
+
+      </div>
+
+      <div class="form-group">
+        <label><b>Name</b></label><br>
+        <input type="text" placeholder="name" name="name" class = "form-control" style="width: 50%">
+
+      </div>
+      <div class="form-group">
+        <label><b>Group</b></label><br>
+        <input type="text" placeholder="group" name="group" class = "form-control" style="width: 50%">
+
+      </div>
+
+
+<button master_name = "medicine_master" master_dt_id = "medicine-master-dt" params = "id, name, group" func = "EditMainMaster" class = "my-btn click">SAVE CHANGES</button>

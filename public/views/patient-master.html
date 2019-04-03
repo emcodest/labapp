@@ -1,7 +1,8 @@
+
 <div ng-app="myApp" ng-controller = "PatientMaster">
 <div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
     
-       <div ng-if = "! show_bar">
+       <div id = "show_bar" ng-if = "! show_bar">
           <div ng-include="'ng-includes/header.html'"></div>
           
           <div ng-include="'ng-includes/close.html'"></div>
@@ -97,7 +98,7 @@
                 <br>
               <div class = "row">
                   <div class = "col-md-12 col-sm-12">
-                      <table id = "patientdt" class = "table" style = "border: 1px solid #ddd; width: 100%">
+                      <table id = "patientdt" class = "table" ng-init = "ActivateMode2()">
                         <thead>
                         <tr>
                           <th>Code</th>
