@@ -1,65 +1,14 @@
-  <div class = "well" style="background: #fff">
+<div class="lab-panel" style="border-radius: 12px; border: 1px solid #ddd">
+
   <div ng-include="'ng-includes/header.html'"></div>
 
-   <div ng-include="'ng-includes/close.html'"></div>   
-    <hr>
-   <h3 class = "text-center">Preview Record</h3>
-   <hr>
-   <button class = "app-btn bg-blue" ng-click = "accept_test()">Accept Test Record</button>
-   <br><br>
-   <div class = "well" ng-if = "patient_data_ui">
-        <p><b>Patient data</b></p>
-        <div class = "row">
-          <div class = "col-md-3" ng-repeat="patient in patient_data_ui.data track by $index">
-              <p><b>{{patient.name}}: </b> <span  ng-if  = "! patient.birth_age">{{patient.val}} </span> <input ng-model = "mdate" ng-init = "mdate = formatDate(patient.val)"  ng-if  = "patient.birth_age"
-                ng-mousemove = "mdate = formatDate(patient.val)" ng-blur = "mdate = formatDate(patient.val)" ng-readonly="true" style = "border: none; background: #f9f9f9">  <b ng-if  = "patient.birth_age">{{patient.birth_age}} yrs</b></p>
-          </div>
-        </div>
-       
-      </div>
-      <div class = "well" ng-if = "ref_data_ui">
-            <p><b>Referral: </b>
-              </p>
-            <div class = "row">
-              <div class = "col-md-3" ng-repeat="ref in ref_data_ui.data track by $index">
-        <p><b>{{ref.name}}: </b> {{ref.val}}</p>
-              </div>
-            </div>
-           
-          </div>
-          <div class = "well" ng-if = "ref_data_ui.attached_ref">
-                <p><b>Referral: </b></p>  
-              <div class = "row">
-                <div class = "col-md-3" ng-repeat="ref in ref_data_ui.attached_ref.data track by $index">
-          <p><b>{{ref.name}}: </b> {{ref.val}}</p>
-                </div>
-              </div>
-             
-            </div>
+  <div ng-include="'ng-includes/close.html'"></div>
 
-            <div class = "row">
-                <div class = "col-md-9">
-                        <table class = "table">
-                                <tr><th>...</th><th>Test ID</th><th>Test Name</th><th>Rate</th><th>Disc %</th><th>Disc Amount</th><th>Tax %</th><th>Tax Amount</th><th>Total</th></tr>
-                                <tr ng-repeat="test in table_test_list track by $index"><td></td><td>{{test.code.toUpperCase()}}</td><td>{{test.name}}</td><td>{{test.rate}}</td><td>{{test.discount}}</td><td>{{test.discount_amount}}</td><td>{{test.tax_per}}</td><td>{{test.tax_amount}}</td><td>{{test.rate - test.discount_amount + test.tax_amount}}</td></tr>
-                               </table>
-                </div>
-                <div class = "col-md-3">
-                        <div class = "well">
-                          <p><b>Total Tests: </b> {{table_test_list.length}} </p>
-                          <p><b>Test Amount: </b> {{total_test_amountxx}} </p>
-                          <p><b>Concession: </b> {{total_discount_amountxx}} </p>
-                          
-                          <p><b>Tax Amount: </b> {{total_tax_amountxx}} </p>
-                          <p><b>Net Amount: </b> {{total_test_amountxx}}  </p>
-                          <p><b>Balance: </b>{{(total_test_amountxx.replace(',', '') - total_test_paid).toFixed(2)}}</p>
-                          <p><b>Paid:</b> {{make_pay}}</p>
-                          
-       
-                        </div>
-                      </div> 
+  
 
-            </div>
-            <button class = "app-btn bg-blue" ng-click = "accept_test()">Accept Test Record</button>
 
-</div> 
+</div>
+
+
+
+</div>

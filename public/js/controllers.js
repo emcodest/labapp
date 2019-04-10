@@ -41,7 +41,7 @@ app.controller("PatientMaster", function($scope, $route, $compile, $rootScope){
         })               
         
         //! - - - - - - - - - -- - - - - - -
-  
+       
     
     
     
@@ -384,6 +384,11 @@ app.controller("ReferralCenterMaster", function($scope, $rootScope){
 
     })
 
+    $scope.ShowNav = function(a){
+      //alert(a)
+      $scope[a] = true
+    }
+
 })
 
 app.controller("ReferralPersonMaster", function($scope, $rootScope){
@@ -425,6 +430,10 @@ AddMaster(master_name, skips, master_data, api_route, server_method, callback, $
 }
 
     })
+    $scope.ShowNav = function(a){
+      //alert(a)
+      $scope[a] = true
+    }
 
 })
 app.controller("GuardianMaster", function($scope, $rootScope){
@@ -449,7 +458,7 @@ app.controller("GuardianMaster", function($scope, $rootScope){
       }
      
       $rootScope.ActivateMode2 = function(){
-       alert("dd")
+      
         
         if($rootScope.show_bar)
         {
@@ -468,6 +477,10 @@ app.controller("GuardianMaster", function($scope, $rootScope){
 
 
     })
+    $scope.ShowNav = function(a){
+      //alert(a)
+      $scope[a] = true
+    }
    
 $scope.master_data = {}
 $scope.AddMaster = function(master_name, skips, master_data, api_route, server_method, callback ){
@@ -477,7 +490,7 @@ AddMaster(master_name, skips, master_data, api_route, server_method, callback, $
 
 
 })
-app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
+app.controller("AcceptTest", function($scope, ngDialog, $rootScope, $location){
 
   
   var url = getAPI("master", "AcceptTest")
@@ -506,31 +519,34 @@ app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
   }
 
     // ---------------- MODEL ACCEPT TEST
-    $scope.master_data = {
-      lab_no: "748785858",
-      patient_info: "id-of-patient",
-      clinical_info: "text of clinical info",
-      ref_code_center: "code of ref center",
-      ref_code_person: "code of ref person",
-      ref_code_guardian: "code of guardian",
-      test_info: [
-        {type: "test", code: "EXAMPLE-KFC", test_id: "id", test_name: "example-test-name", rate: "20", discount: "0", discount_amount: "0", tax_per: "0", tax_amount: "0", total: "0" }, {type: "profile", code: "EXAMPLE-KFC", test_id: "id", test_name: "example-test-name", rate: "1", discount: "0", discount_amount: "0", tax_per: "0", tax_amount: "0", total: "0" }
-      ],
-      total_test: "0",
-      test_amount: "0",
-      concession: "0",
-      home_collection: "No",
-      tax_amount: "0",
-      net_amount: "0",
-      balance: "0",
-      paid: "No",
-      pay_channel: [],
-      //pay_channel: [{name: "cash", amount: "0" }],
-      paid_type: "part",
-      receipt_no: this.lab_no
-
-
+    $scope.MasterData = function(){
+      return {
+        lab_no: "",
+        patient_info: "",
+        clinical_info: "",
+        ref_code_center: "",
+        ref_code_person: "",
+        ref_code_guardian: "",
+        test_info: [
+          // {type: "test", code: "EXAMPLE-KFC", test_id: "id", test_name: "example-test-name", rate: "20", discount: "0", discount_amount: "0", tax_per: "0", tax_amount: "0", total: "0" }, {type: "profile", code: "EXAMPLE-KFC", test_id: "id", test_name: "example-test-name", rate: "1", discount: "0", discount_amount: "0", tax_per: "0", tax_amount: "0", total: "0" }
+        ],
+        total_test: "0",
+        test_amount: "0",
+        concession: "0",
+        home_collection: "No",
+        tax_amount: "0",
+        net_amount: "0",
+        balance: "0",
+        paid: "No",
+        pay_channel: [],
+        //pay_channel: [{name: "cash", amount: "0" }],
+        paid_type: "part",
+        receipt_no: ""
+  
+  
+      }
     }
+    $scope.master_data = $scope.MasterData()
 
     $scope.Calculate = function(data){
      var _horizontal_total = 0
@@ -602,7 +618,7 @@ app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
       if(data.amount_paid > 0){
         data.paid = "Part"
       }
-      if(data.balance <= 0){
+      if(data.balance <= 0 && data.amount_paid > 0){
         data.paid = "Full"
       }
     }
@@ -651,32 +667,127 @@ app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
     }
 
     $scope.Search = function(type, data){
+      
+     
+      var s_data = ! data ? "" : data
       $rootScope.show_bar = false
+
       switch(type){
 
         case "patient_code":
+
         $rootScope.show_bar = true
+        // check if the search is 1
         
+        var data = {
+          code: s_data, master_name: "patient_master"
+        }
+        var url = getAPI("master", "ListMasterByCode") 
         
-       // alert("ee")
-        ngDialog.open({ template: 'views/patient-master.html', className: 'ngdialog-theme-default custom-width', controller: "PatientMaster", closeByNavigation: true});
+        var type = "json"
+        server(url, data, type, function (res) {
+         
+          if(res.length === 1){
+
+            $scope.master_data.patient_code = res[0].code
+            var params = res[0].id+","+"patient_master"
+            AddToAcceptTest(params)
+            
+
+          }else{
+            ngDialog.open({ template: 'views/patient-master.html', className: 'ngdialog-theme-default custom-width',  closeByNavigation: true});
+          }
+
+        })
+   
 
         break;
 
         case "ref_code_center":
+
         $rootScope.show_bar = true
-        ngDialog.open({ template: 'views/center-master.html', className: 'ngdialog-theme-default custom-width', controller: "ReferralCenterMaster", closeByNavigation: true});
+
+         // check if the search is 1
+        
+         var data = {
+          code: s_data, master_name: "center_master"
+        }
+        var url = getAPI("master", "ListMasterByCode") 
+        
+        var type = "json"
+        server(url, data, type, function (res) {
+         
+          if(res.length === 1){
+
+            $scope.master_data.ref_code_center = res[0].code
+            var params = res[0].id+","+"center_master"
+            AddToAcceptTest(params)
+            
+
+          }else{
+            ngDialog.open({ template: 'views/center-master.html', className: 'ngdialog-theme-default custom-width', closeByNavigation: true});
+          }
+
+        })
+        
+        
 
         break;
         case "ref_code_person":
+
         $rootScope.show_bar = true
+         // check if the search is 1
+        
+         var data = {
+          code: s_data, master_name: "person_master"
+        }
+        var url = getAPI("master", "ListMasterByCode") 
+        
+        var type = "json"
+        server(url, data, type, function (res) {
+         
+          if(res.length === 1){
+
+            $scope.master_data.ref_code_person = res[0].code
+            var params = res[0].id+","+"person_master"
+            AddToAcceptTest(params)
+            
+
+          }else{
+            ngDialog.open({ template: 'views/ref-master.html', className: 'ngdialog-theme-default custom-width',  closeByNavigation: true});
+          }
+
+        })
       
-        ngDialog.open({ template: 'views/ref-master.html', className: 'ngdialog-theme-default custom-width', controller: "ReferralPersonMaster", closeByNavigation: true});
+        
 
         break;
         case "ref_code_guardian":
         $rootScope.show_bar = true
-        ngDialog.open({ template: 'views/guardian-master.html', className: 'ngdialog-theme-default custom-width', controller: "GuardianMaster", closeByNavigation: true});
+        // check if the search is 1
+        
+        var data = {
+          code: s_data, master_name: "guardian_master"
+        }
+        var url = getAPI("master", "ListMasterByCode") 
+        
+        var type = "json"
+        server(url, data, type, function (res) {
+         
+          if(res.length === 1){
+
+            $scope.master_data.ref_code_guardian = res[0].code
+            var params = res[0].id+","+"guardian_master"
+            AddToAcceptTest(params)
+            
+
+          }else{
+            ngDialog.open({ template: 'views/guardian-master.html', className: 'ngdialog-theme-default custom-width', closeByNavigation: true});
+          }
+
+        })
+      
+       
 
         break;
 
@@ -687,7 +798,7 @@ app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
         break;
         case "profile":
         //alert("profile")
-        ngDialog.open({ template: 'dialogs/profile-list.html', className: 'ngdialog-theme-default custom-width', controller: "ProfileMaster", closeByNavigation: true});
+        ngDialog.open({ template: 'dialogs/profile-list.html', className: 'ngdialog-theme-default custom-width',  closeByNavigation: true});
 
         break;
 
@@ -737,5 +848,330 @@ app.controller("AcceptTest", function($scope, ngDialog, $rootScope){
       
       $("."+type).html("")
     }
+   
+    $rootScope.$on('AddToAcceptTest', function(event, args) {
+
+        $scope.master_data[args[1]] = args[2]
+        if(args[1] == 'patient_code'){
+          $scope.master_data.patient_info = args[2]
+        }
+        $scope.$apply()
+         
+          
+    });
+    $scope.CheckTestCode = function(arr, code){
+      for(var i in arr){
+        if(arr[i].code.toLowerCase() == code.toLowerCase()){
+          return true
+        }
+      }
+      return false
+    }
+    $scope.SearchTest = function(data){
+      
+      if(data){
+
+        var s_data = data // test code or profile code
+        var data = {
+          code: s_data
+        }
+        if($scope.CheckTestCode($scope.master_data.test_info, s_data)){
+          alertError("Code already exist")
+          return
+        }
+        var url = getAPI("master", "ListTestByCode") 
+        
+        var type = "json"
+        server(url, data, type, function (res) {
+        
+          if(res.length === 1){
+           var c_test = res[0]
+           
+           $scope.master_data.test_info.push({type: c_test.test_type, code: c_test.code, test_id: c_test.id, test_name: c_test.name, rate: c_test.rate, discount: "0", discount_amount: "0", tax_per: "0", tax_amount: "0", total: "0" })
+           $scope.test_code = ""
+            
+
+          }else{
+            myalert("Test code or profile does not exist")
+          }
+
+        })
+
+      }else{
+        myalert("Enter test code or profile")
+      }
+      
+
+    }
+    
+    $rootScope.$on('EmitTestToSearch', function(event, args) {
+      var code = args.trim()
+     
+      $scope.SearchTest(code)
+         
+          
+    });
+    $rootScope.$on('EmitSearchPatient', function(event, args) {
+     // var code = args.trim()
+     
+      $("#modal-id").modal("hide")
+      setTimeout(function() {
+        $(".ngdialog-close").trigger("click")
+        $scope.Search('patient_code', $scope.master_data.patient_code)
+
+      }, 200); 
+      
+         
+          
+    });
+    $rootScope.$on('EmitSearchMaster', function(event, args) {
+      var master = args.trim()
+     
+      $("#modal-id").modal("hide")
+      setTimeout(function() {
+        $(".ngdialog-close").trigger("click")
+        
+        if(master == "center_master")
+        $scope.Search('ref_code_center', $scope.master_data.ref_code_center)
+
+        if(master == "person_master")
+        $scope.Search('ref_code_person', $scope.master_data.ref_code_person)
+
+        if(master == "guardian_master")
+        $scope.Search('ref_code_guardian', $scope.master_data.ref_code_guardian)
+
+      }, 200);   
+          
+    });
+    $rootScope.$on('EmitPreviewHtml', function(event, args) {
+      
+                //  PREVIEW HTML
+        $scope[args[1]] = args[0]
+    });
+
+    $scope.clear_form = function(){
+      $scope.master_data = $scope.MasterData()
+      $("#patient_master, #center_master, #person_master, #guardian_master").html("")
+      $scope.LabNo()
+     
+      
+    }
+    // PREVIEW ACCEPT TEST
+   
+    $scope.PreviewAcceptTest = function(){
+      
+     // $location.path("/accept_test_preview/Preview Test")
+     $scope.PreviewTest = true
+    }
+    $scope.CancelPreviewAcceptTest = function(){
+      
+      if($scope.master_data.patient_info){
+        $scope.Search('patient_code', $scope.master_data.patient_code)
+       
+      }
+      if($scope.master_data.ref_code_center){
+        $scope.Search('ref_code_center', $scope.master_data.ref_code_center)
+        
+      }
+      if($scope.master_data.ref_code_person){
+        $scope.Search('ref_code_person', $scope.master_data.ref_code_person)
+      
+      }
+      if($scope.master_data.ref_code_guardian){
+        $scope.Search('ref_code_guardian', $scope.master_data.ref_code_guardian)
+        
+      }
+      
+      $scope.PreviewTest = false
+     }
+
+   
+
+
+
+})
+
+app.controller("AcceptTestList", function($scope, $route, $compile, $rootScope, $location){
+    
+
+  //! - - - - - - - - - -- - - - - - -LIST PATIENT RECORD
+  $(document).ready(function(){
+
+    var url = getAPI("master", "ListAcceptedTests")
+    //alert(url)
+    var options = {
+        ajax: {
+            url: url,
+            type: "post"
+        }
+    }
+    // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
+    if ( ! $.fn.DataTable.isDataTable( '#list-accepted-tests' ) ) {
+        $("#list-accepted-tests").DataTable(options)
+      }
+
+  })               
+  
+  //! - - - - - - - - - -- - - - - - -
+  $rootScope.$on('EmitEditAcceptedTest', function(event, args) {
+    var id = args
+   // alert(id)
+    $location.path("/accept_test/Accept Test")
+        
+  });
+ 
+
+
+
+
+
+})
+app.controller("AcceptTestUnPartial", function($scope, $route, $compile, $rootScope, $location){
+    
+  if($route.current.params.department)
+  $scope.department_name = $route.current.params.department
+
+
+
+  $(document).ready(function(){
+
+    //: if department ID is sent
+    if($route.current.params.id){
+      //alert($route.current.params.id)
+      $scope.SortDepartments($route.current.params.id)
+    }
+
+// Select all elements with data-toggle="popover" in the 
+//$('a').webuiPopover({title:'Title',content:'Content',placement:'bottom', trigger: "hover"});
+// $('a').webuiPopover('show');
+    $scope.ListAcceptedTestsUnpartial = function(){
+    $("#list-accepted-tests-unpartial").DataTable().destroy()
+    var url = getAPI("master", "ListAcceptedTestsUnpartial")
+    // alert(url)
+    var options = {
+      ajax: {
+        url: url,
+        type: "post"
+      },
+      fnDrawCallback: function (oSettings) {
+
+
+        $('.pop').webuiPopover({
+          trigger: "hover",
+          closeable: true,
+          backdrop: false,
+          dismissible: false
+        })
+      }
+    }
+
+    if (!$.fn.DataTable.isDataTable('#list-accepted-tests-unpartial')) {
+      $("#list-accepted-tests-unpartial").DataTable(options)
+    }
+
+    }
+    $scope.ListAcceptedTestsUnpartial()
+    
+
+  })               
+ 
+  $scope.ListDepartments = function(){
+    
+    var url = getAPI("department", "ListDepartmentSelect")
+        var data = {}
+        var type = "json"
+        
+        server(url, data, type, function(res) {
+         
+            for(var i in res){
+              $(".list_dept").append("<option value = '"+res[i].id+"'>"+res[i].name+"</option>")
+            }
+        })
+
+        $(".list_dept").change(function(){
+          var dept_id = $(this).val()
+          if(dept_id)
+          $scope.SortDepartments(dept_id)
+          else
+          $scope.ListAcceptedTestsUnpartial()
+        })
+    
+
+      }
+      $scope.ListDepartments()
+      $scope.SortDepartments = function(id){
+        var url = getAPI("master", "SortDepartment")
+        var data = {dept_id: id}
+        $("#list-accepted-tests-unpartial").DataTable().destroy()
+        var options = {
+        ajax: {
+            url: url,
+            type: "post",
+            data: data
+        },
+        fnDrawCallback: function (oSettings) {
+		  
+			
+          $('.pop').webuiPopover({trigger: "hover",  closeable:true,
+             backdrop:false, dismissible:false})
+       }
+    }
+   
+    if ( ! $.fn.DataTable.isDataTable( '#list-accepted-tests-unpartial' ) ) {
+        $("#list-accepted-tests-unpartial").DataTable(options)
+      }
+        
+        // var type = "json"
+        // server(url, data, type, function(res) {
+
+        //   alert(res)
+            
+        // })   
+
+  }
+
+
+  
+  //! - - - - - - - - - -- - - - - - -
+  $rootScope.$on('EmitEditAcceptedTest', function(event, args) {
+    var id = args
+   // alert(id)
+    $location.path("/accept_test/Accept Test")
+        
+  });
+ 
+
+
+
+
+
+})
+app.controller("AcceptTestFull", function($scope, $route, $compile, $rootScope, $location){
+    
+  $(document).ready(function(){
+
+    var url = getAPI("master", "ListAcceptedTestsFull")
+    // alert(url)
+    var options = {
+        ajax: {
+            url: url,
+            type: "post"
+        }
+    }
+   
+    if ( ! $.fn.DataTable.isDataTable( '#list-accepted-tests-full' ) ) {
+        $("#list-accepted-tests-full").DataTable(options)
+      }
+
+  })
+})
+
+app.controller("PerformTest", function($scope, $route, $compile, $rootScope, $location){
+    
+  $(document).ready(function(){
+
+    $scope.ChooseDepartment  = [{name: "Clinical", id: 1}]
+    
+  })
 
 })

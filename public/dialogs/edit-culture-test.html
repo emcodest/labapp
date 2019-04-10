@@ -84,7 +84,10 @@
                                                 <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option>
                                                     <option  value = "specimen">Specimen</option>
                                                     <option  value = "medicine">Medicine</option>
-                                                </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" />
+                                                <label><b>Preset: </b> <textarea  v-model = "culture_test.presets" class = "form-control" placeholder = "separate with \n"></textarea> </label>
+                                            
+                                            </td>
                                                 <td><br><button @click = "AddCultureTest('micro')" class = "btn-sm">Add Field</button></td>
                                             </tr>
                 
@@ -100,6 +103,7 @@
         
                                         <td><b>{{obj.ftype}}</b></td>
                                         <td><b>{{obj.field_name}}</b></td>
+                                        <td><b>{{obj.presets}}</b></td>
                                         <td><button @click = "RemoveCulture('micro', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
                                     </tr>
         
@@ -124,7 +128,10 @@
                     
                                                     <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option><option selected value = "specimen">Specimen</option>
                                                         <option  value = "medicine">Medicine</option>
-                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" />
+                                                    <label><b>Preset: </b> <textarea  v-model = "culture_test.presets" class = "form-control" placeholder = "separate with \n"></textarea> </label>
+                                                
+                                                </td>
                                                     <td><br><button @click = "AddCultureTest('culture')" class = "btn-sm">Add Field</button></td>
                                                 </tr>
                     
@@ -140,6 +147,7 @@
             
                                             <td><b>{{obj.ftype}}</b></td>
                                             <td><b>{{obj.field_name}}</b></td>
+                                            <td><b>{{obj.presets}}</b></td>
                                             <td><button @click = "RemoveCulture('culture', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
                                         </tr>
             
@@ -163,7 +171,10 @@
                     
                                                     <td><select v-model = "culture_test.ftype"><option value = "date">Date</option>
                                                         <option selected value = "text">Text</option><option selected value = "specimen">Specimen</option><option  value = "medicine">Medicine</option>
-                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    </select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" />
+                                                    <label><b>Preset: </b> <textarea  v-model = "culture_test.presets" class = "form-control" placeholder = "separate with \n"></textarea> </label>
+                                                
+                                                </td>
                                                     <td><br><button @click = "AddCultureTest('antibacterial')" class = "btn-sm">Add Field</button></td>
                                                 </tr>
                     
@@ -179,6 +190,7 @@
             
                                             <td><b>{{obj.ftype}}</b></td>
                                             <td><b>{{obj.field_name}}</b></td>
+                                            <td><b>{{obj.presets}}</b></td>
                                             <td><button @click = "RemoveCulture('antibacterial', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
                                         </tr>
             
@@ -201,7 +213,9 @@
                                             <table class = "table">
                                                 <tr>
                     
-                                                    <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option><option selected value = "specimen">Specimen</option><option  value = "medicine">Medicine</option></select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                    <td><select v-model = "culture_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option><option selected value = "specimen">Specimen</option><option  value = "medicine">Medicine</option></select><input v-model = "culture_test.field_name" class = "form-control" type = "text" placeholder = "field name" />
+                                                        <label><b>Preset: </b> <textarea  v-model = "culture_test.presets" class = "form-control" placeholder = "separate with \n"></textarea> </label>
+                                                    </td>
                                                     <td><br><button @click = "AddCultureTest('antifungal')" class = "btn-sm">Add Field</button></td>
                                                 </tr>
                     
@@ -217,6 +231,7 @@
             
                                             <td><b>{{obj.ftype}}</b></td>
                                             <td><b>{{obj.field_name}}</b></td>
+                                            <td><b>{{obj.presets}}</b></td>
                                             <td><button @click = "RemoveCulture('antifungal', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
                                         </tr>
             
@@ -233,7 +248,9 @@
 
             </div>
             
-            <button type="button" @click = "UpdateCultureTest(culture_test, culture_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+            <div class = "well">
+                    <button style = "margin: 0 auto; width: 200px" @click = "UpdateCultureTest(culture_test, culture_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+            </div>
             
         </div>
         

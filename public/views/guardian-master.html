@@ -5,51 +5,55 @@
           
           <div ng-include="'ng-includes/close.html'"></div>
         </div>
-        
-              <p><h3>GUARDIAN INFORMATION {{wmm}}</h3></p>
-              <table class = "table table-responsive">
-                <tr>
-                  
-                  <td><label><b>code</b></label><input ng-model = "master_data.code" class = "form-control" type = "text" /></td>
-                  <td><label><b>title</b></label><select ng-model = "master_data.title" class = "form-control">
-                    <option>Mr</option>
-                    <option>Miss</option>
-                    <option>Mrs</option>
-                    <option>Others</option>
-                  </select></td>
-                  <td><label><b>first name</b></label><input ng-model = "master_data.first_name" class = "form-control" type = "text" /></td>
-                  <td><label><b>last name</b></label><input ng-model = "master_data.last_name" class = "form-control" type = "text" /></td>
-                  <td><label><b>sex</b></label>
-                    <select ng-model = "master_data.sex" class = "form-control">
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </td>
-        
-                </tr>
-                <tr>
-                  
-                    <td><label><b>date of birth</b></label><input ng-model = "master_data.dob" class = "form-control" type = "text" /></td>
-                    <td><label><b>age</b></label><input ng-model = "master_data.age" class = "form-control" type = "text" /></td>
-                    <td><label><b>phone no.</b></label><input ng-model = "master_data.phone_no" class = "form-control" type = "text" /></td>
-                    <td><label><b>email</b></label><input ng-model = "master_data.email" class = "form-control" type = "text" /></td>
-                    <td><label><b>marital status</b></label><input ng-model = "master_data.marital_status" class = "form-control" type = "text" /></td>
-                    <td><label><b>religion</b></label><input ng-model = "master_data.religion" class = "form-control" type = "text" /></td>
-          
+               <p><h3>GUARDIAN INFORMATION</h3></p>
+               <button ng-if = "! show_sub_nav" ng-click = "ShowNav('show_sub_nav')" class = "my-btn"><i class = "fa fa-plus"></i> Add New</button>
+              
+              <div class = "sub-nav" ng-if = "show_sub_nav">
+               
+                <table class = "table table-responsive">
+                  <tr>
+                    
+                    <td><label><b>code</b></label><input ng-model = "master_data.code" class = "form-control" type = "text" /></td>
+                    <td><label><b>title</b></label><select ng-model = "master_data.title" class = "form-control">
+                      <option>Mr</option>
+                      <option>Miss</option>
+                      <option>Mrs</option>
+                      <option>Others</option>
+                    </select></td>
+                    <td><label><b>first name</b></label><input ng-model = "master_data.first_name" class = "form-control" type = "text" /></td>
+                    <td><label><b>last name</b></label><input ng-model = "master_data.last_name" class = "form-control" type = "text" /></td>
+                    <td><label><b>sex</b></label>
+                      <select ng-model = "master_data.sex" class = "form-control">
+                        <option>Male</option>
+                        <option>Female</option>
+                      </select>
+                    </td>
+                
                   </tr>
                   <tr>
-                  
-                      <td><label><b>nationality</b></label><input ng-model = "master_data.nationality" class = "form-control" type = "text" /></td>
-                      <td><label><b>state of orign</b></label><input ng-model = "master_data.state" type = "text" class = "form-control" /></td>
-                        <td><label><b>discount %</b></label><input ng-model = "master_data.discount" class = "form-control" type = "text" /></td>
-                     
-            
+                    
+                      <td><label><b>date of birth</b></label><input ng-model = "master_data.dob" class = "form-control" type = "text" /></td>
+                      <td><label><b>age</b></label><input ng-model = "master_data.age" class = "form-control" type = "text" /></td>
+                      <td><label><b>phone no.</b></label><input ng-model = "master_data.phone_no" class = "form-control" type = "text" /></td>
+                      <td><label><b>email</b></label><input ng-model = "master_data.email" class = "form-control" type = "text" /></td>
+                      <td><label><b>marital status</b></label><input ng-model = "master_data.marital_status" class = "form-control" type = "text" /></td>
+                      <td><label><b>religion</b></label><input ng-model = "master_data.religion" class = "form-control" type = "text" /></td>
+                
                     </tr>
-                  
-        
-              </table>
-        
-              <button ng-click = "AddMaster('guardian_master', 'master_name, skips', master_data, 'master', 'AddGuardianMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+                    <tr>
+                    
+                        <td><label><b>nationality</b></label><input ng-model = "master_data.nationality" class = "form-control" type = "text" /></td>
+                        <td><label><b>state of orign</b></label><input ng-model = "master_data.state" type = "text" class = "form-control" /></td>
+                          <td><label><b>discount %</b></label><input ng-model = "master_data.discount" class = "form-control" type = "text" /></td>
+                       
+                
+                      </tr>
+                    
+                
+                </table>
+                
+                <button ng-click = "AddMaster('guardian_master', 'master_name, skips', master_data, 'master', 'AddGuardianMaster', 'RefreshMaster')" class = "btn btn-sm my-btn bg-blue text-white">Submit</button>
+              </div>
               
               <br>
                 <h3>List</h3>

@@ -52,10 +52,17 @@
                                             <table class = "table">
                                                 <tr>
                     
-                                                    <td><select v-model = "predefined_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option>
+                                                    <td>
+                                                       <select v-model = "predefined_test.ftype"><option value = "date">Date</option><option selected value = "text">Text</option>
                                                         <option  value = "specimen">Specimen</option>
                                                         <option  value = "medicine">Medicine</option>
-                                                    </select><input v-model = "predefined_test.field_name" class = "form-control" type = "text" placeholder = "field name" /></td>
+                                                        </select> 
+                                                        <input v-model = "predefined_test.field_name" class = "form-control" type = "text" placeholder = "field name" />
+                                                        
+                                                        <label><b>Preset: </b> <textarea  v-model = "predefined_test.presets" class = "form-control" placeholder = "separate with \n"></textarea> </label>
+                                                    
+                                                
+                                                    </td>
                                                     <td><br><button @click = "AddCultureTest('predefined_test')" class = "btn-sm">Add Field</button></td>
                                                 </tr>
                     
@@ -71,6 +78,7 @@
             
                                             <td><b>{{obj.ftype}}</b></td>
                                             <td><b>{{obj.field_name}}</b></td>
+                                            <td><b>{{obj.presets}}</b></td>
                                             <td><button @click = "RemoveCulture('predefined_test', i)" class = "btn-sm btn-danger"><i class = "fa fa-times"></i></button></td>
                                         </tr>
             
@@ -84,7 +92,9 @@
             
              
                 
-                <button type="button" @click = "SavePredefinedTest(predefined_test, predefined_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+               <div class = "well">
+                    <button style = "margin: 0 auto; width: 200px" type="button" @click = "SavePredefinedTest(predefined_test, predefined_test_list)" class="btn btn-large btn-block btn-primary" style = "width: 200px">SAVE TEST</button>
+               </div>
                 
             </div>
             
@@ -93,3 +103,5 @@
         <!-- END VERTICAL NAV -->
           
         </div> 
+        
+        

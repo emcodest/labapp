@@ -180,10 +180,7 @@
                                         <li role="presentation">
                                                 <a href="#test-note3" aria-controls="tab" role="tab" data-toggle="tab">Test Note 3</a>
                                         </li>
-                                        <li role="presentation">
-                                            <a href="#reference" aria-controls="tab" role="tab" data-toggle="tab">Reference Range</a>
-                                    </li>
-
+                                      
                                     </ul>
                                 
                                     <!-- Tab panes -->
@@ -206,122 +203,7 @@
                                                     class="form-control" placeholder="note 3"></textarea>
 
                                          </div>
-                                         <div role="tabpanel" class="tab-pane" id="reference">
-                                                <button v-on:click = "NewRefRanges" class = "my-btn"><i class = "fa fa-plus"></i> New Reference</button>
-                                            <table  v-for = "(obj, i) in test_references"  class = "table">
-                                               
-                                                    <tr>
-                                                            <td>
-                                                                <b>Sex: </b><select v-model="test_references[i].sex = ''">
-                                                                    <option value = "">--select--</option>
-                                                                    <option value="M">Male</option>
-                                                                    <option value="F">Female</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <b>Date Type: </b><select
-                                                                    v-model="test_references[i].date_type">
-                                                                    <option value="M">Years</option>
-                                                                    <option value="M">Months</option>
-                                                                </select>
-                                                            </td>
-                                        
-                                                            <td>
-                                                                <b>From: </b><input v-model="test_references[i].from"
-                                                                    type="number" />
-                                                            </td>
-                                                            <td>
-                                                                <b>To: </b><input v-model="test_references[i].to"
-                                                                    type="number" />
-                                                            </td>
-                                        
-                                        
-                                                    </tr>
-                                        
-                                                    <tr>
-                                                            <td>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Lower bound 1</b></label>
-                                                                        <input v-model="test_references[i].lb_1"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="lower bound 1" /><br> </div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Upper band 1</b></label>
-                                                                        <input v-model="test_references[i].up_1"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="upper band 1" /><br> </div>
-                                                                </div>
-                                        
-                                        
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Unit _1</b></label>
-                                                                        <input type="text" placeholder="enter unit"
-                                                                            v-model="test_references[i].unit_1"
-                                                                            class="form-control"> <br> </div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Result Output Formula _1</b></label>
-                                                                        <input v-model="test_references[i].out_1"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="formula 1" /><br> </div>
-                                                                </div>
-                                        
-                                        
-                                                            </td>
-                                        
-                                                            <td>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Lower bound 2</b></label>
-                                                                        <input v-model="test_references[i].lb_2"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="lower bound 1" /><br> </div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Upper band 2</b></label>
-                                                                        <input v-model="test_references[i].up_2"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="upper band 1" /><br> </div>
-                                                                </div>
-                                        
-                                        
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Unit _2</b></label>
-                                                                        <input class="form-control" type="text"
-                                                                            placeholder="enter unit"
-                                                                            v-model="test_references[i].unit_2">
-                                        
-                                        
-                                                                        <br> </div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div>
-                                                                        <label><b>Result Output Formula _2</b></label>
-                                                                        <input v-model="test_references[i].out_2"
-                                                                            class="form-control" type="text"
-                                                                            placeholder="formula 2" /><br> </div>
-                                                                </div>
-                                        
-                                        
-                                                            </td>
-                                                            <td style='vertical-align: middle;'><button
-                                                                    @click="RemoveReference(i)"
-                                                                    class="btn btn-sm btn-danger"><i
-                                                                        class="fa fa-times"></i> Remove Row</button>
-                                                            </td>
-                                                    </tr>
-                                                    
-
-                                            </table>
-
-                                         </div>
+                                         
 
                                     </div>
                                 </div>

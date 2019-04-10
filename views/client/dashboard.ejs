@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/font.css">
   <link rel="stylesheet" href="css/datatable.css">
   <link rel="stylesheet" href="js/select2/select2.css">
+  <link rel="stylesheet" href="css/webpopoverui.css">
   <style>
       #referral-person-master-dt td, #patientdt td, #referral-center-master-dt td, #guardian-master-dt td, thead{
         
@@ -37,7 +38,16 @@
        
       }
    
-      
+      .webui-popover-content{
+	
+	    max-height: 300px;
+	    overflow-x: ellipsis;
+	    color: #333 !important;
+	
+      }
+      .table tr:hover{
+        background: #ddd;
+      }
      
 
     </style>
@@ -83,6 +93,7 @@
 <script src="js/datatable.js"></script>
 <script src="js/select2/select2.js"></script>
 <script src="./ckeditor/ckeditor.js"></script>
+<script src="js/webpopoverui.js"></script>
 
 
 

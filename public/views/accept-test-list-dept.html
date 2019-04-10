@@ -5,18 +5,25 @@
     <div ng-include="'ng-includes/close.html'"></div>
 
   <p>
-    <h3>LIST OF ACCEPTED TESTS</h3>
+    <h3>Unperformed | Partially Performed TESTS</h3>
   </p>
   
+   <div class = "form-group">
+     <b>Departments: {{department_name}}</b>
+     
+   </div>
+  
+  
 
-  <table id = "list-accepted-tests" style="background: #eee" class="table">
+
+  <table id = "list-accepted-tests-unpartial" style="background: #eee" class="table">
     <thead><tr>
       <th>Date</th>
       <th>Lab. No</th>
-      <!-- <th>Test Name</th> -->
-      <th>Patient ID</th>      
       <th>Sex</th>
-      <th>Age</th>
+      <th>Age</th>   
+      <th>Referred By</th>   
+      <th>Test Codes</th>      
       <th>...</th>      
       <th>...</th>
     </tr>
