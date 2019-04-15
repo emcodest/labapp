@@ -8,9 +8,11 @@
             return
         }
         //: GET THE PROFILE ID
+        
         $.map(window.profile_dt.rows('.selected').data(), function (item) {
             
             var tab_id = item[4] // id of profile     
+            
             $(".profile-name").html(item[1])   
             $("[name=idd]").val(tab_id) // store the profile id
          

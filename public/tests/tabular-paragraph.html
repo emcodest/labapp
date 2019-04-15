@@ -1,96 +1,613 @@
-<div class = "view-test" style="padding: 10px">
-  <hr style = "border: 2px solid gray">
-<h3 class = "text-center">Enter Test Result <br></h3>
-<p><small class = "pull-left">Type: tabular, pargagraph</small>
-	<div class = "clearfix"></div>
-<div class = "form-group pull-right">
 
-	Completely Performed: <input type = "checkbox" style = "width: 20px; height: 10px">
-	<button class = "app-btn bg-blue">Save Result</button>
-	<button func = "PreviewTest" params = "preview"  class = "app-btn bg-coral click">Preview</button>
- </div>
- <div class = "clearfix"></div>
+<div class="view-test" style="padding: 10px" id = "testpane">
 	
-	<div class = "page-move">
-	  <button class = "app-btn bg-coral">Prev</button>
-		<button class = "app-btn bg-blue">Next</button>
-	  <p>1 of 2 categories</p>
-	</div>
-	 <div class="item active">
-		 	<h3>TEST CATEGORY</h3>
-			 <p><small>Full blood count</small></p>
-			 <table class="table table-hover">
-				 <thead>
-					 <tr>
-						 <th>Test Name</th>
-						 <th>Value</th>
-						 <th>Units</th>
-						 <th>Normal Range</th>
-						 <th>Prev Result</th>
-					 </tr>
-				 </thead>
-				 <tbody>
-				 <tr>
-						 <th>Red Blood Cell</th>
-						 <th><input type = "text" /></th>
-						 <th>Mdl</th>
-						 <th>3.8 - 5.8</th>
-						 <th>4.2</th>
-				</tr>
-				 <tr>
-						 <th></th>
-						 <th><input type = "text" /></th>
-						 <th>Mdl</th>
-						 <th>3.8 - 5.8</th>
-						 <th>4.2</th>
-				</tr>
+	
+	<script>
+		
+			var test_vue = new Vue({
+            el: '#testpane',
+            data: {
+				enter_test: [],
+				current: 0
+			},
+			methods: {
+				LoadTest: function(){
+
+					var _this = this
+					var get_t =  window.load_perform_test
+					this.enter_test = get_t
+					//this.enter_test = window.load_perform_test
+					//: DO LAZY CHECKING of accepted tests
+					var accepted_test_id = get_t[0].accepted_test_id
+
+					//var mdata = JSON.stringify(this.enter_test)
+					var url = getAPI("master", "LoadSavePerformedTest")
+					var data = {
+						accepted_test_id: get_t[0].accepted_test_id
+					}
+					var type = "json"
+					server(url, data, type, function (res) {
+
+						if(res.length < 1){
+							//: JUST FORGET IT
+							_this.enter_test = get_t
+						}else{
+							var mdata = res[0].data
+							//alert(mdata)
+							mdata = JSON.parse(mdata)
+							//console.log("@####", mdata)
+							_this.enter_test = mdata
+						}
+						
+					})
 				
+					//alert(999)
+					//alert("about to load vue test")
+					// var test_category = {
+					// 	show: false, category_name: "Biochemistry",
+					// 	tests: [{name: "Full Blood Count", value_1: "", value_2: "", unit_1: "kg", unit_2: "kilo", range_1_1: "1", range_2_1: "4", range_1_2: "1.3", range_2_2: "4.2", prev_result_1: "", prev_result_2: "" }]				
 					
-				 </tbody>
-			 </table>
-			 
-			 <table class="table table-hover">
-				 <thead style = "opacity: 0">
-					 <tr>
-						 <th>Test Name</th>
-						 <th>Value</th>
-						 <th>Units</th>
-						 <th>Normal Range</th>
-						 <th>Prev Result</th>
-					 </tr>
-				 </thead>
-				 <tbody>
-				 <tr>
-						 <th>Red Blood Cell</th>
-						 <th><input type = "text" /></th>
-						 <th>Mdl</th>
-						 <th>3.8 - 5.8</th>
-						 <th>4.2</th>
-				</tr>
-				 <tr>
-						 <th></th>
-						 <th><input type = "text" /></th>
-						 <th>Mdl</th>
-						 <th>3.8 - 5.8</th>
-						 <th>4.2</th>
-				</tr>
+					// }
+					// var test_category_2 = {
+					// 	show: false, category_name: "Lab",
+					// 	tests: [
+					// 		{name: "Full Blood Count", value_1: "", value_2: "", unit_1: "kg", unit_2: "Ml", range_1_1: "1", range_2_1: "4", range_1_2: "1.3", range_2_2: "4.2", prev_result_1: "1", prev_result_2: "" },
+					// 		{name: "KFC", value_1: "", value_2: "", unit_1: "kg", unit_2: "Ml", range_1_1: "1", range_2_1: "4", range_1_2: "1.3", range_2_2: "4.2", prev_result_1: "1.4", prev_result_2: "" }
+						
+					// 	]				
+					
+					// }
+					// this.enter_test.push(test_category)
+					// this.enter_test.push(test_category_2)
+
+
+					//this.enter_test.push({show: false, category_name: "Clinical Lab"})
+					//: activate the first one
+					var curr = this.current
+					this.enter_test[curr].show = true
+					this.current++
+
+				},
+				GetParaMode: function(model, test_code){
+					
+					for (var j in model) {
+
+						for (var i in model[j].tests) {
+
+							if (model[j].tests[i].test_code.toUpperCase() == test_code.toUpperCase()) {
+
+								return model[j].tests[i].para_value
+							}
+
+						}
+					}
+					return false
+
+				},
+				ApplyParaMode: function(model, index, test_code, editor_val){
+					
+
+					for(var j in model){
+
+						for(var i in model[j].tests){
+
+							if (model[j].tests[i].test_code.toUpperCase() == test_code.toUpperCase()) {
+
+								model[j].tests[i].para_value = editor_val
+							}
+
+						}
+					}
+
+					
+				},
+				NextView: function(){
+					//: set every to false
+					if(this.current < this.enter_test.length)
+					 this.current++
+					 else
+					 return
+
+					for(var i in this.enter_test){
+						
+						this.enter_test[i].show =  false
+					}
+					//alert(this.current)
+					this.enter_test[this.current - 1].show = true
+					
+
+				},
+				PrevView: function(){
+
+					if(this.current > 1 )
+					 this.current--
+					 else
+					 return
+
+					for(var i in this.enter_test){
+						
+						this.enter_test[i].show =  false
+					}
+					//alert(this.current)
+					this.enter_test[this.current - 1].show = true
+
+
+				},
+				SaveResult: function(){
+
+					
+					var accepted_test_id = this.enter_test[0].accepted_test_id
+					var mdata = JSON.stringify(this.enter_test)
+					var url = getAPI("master", "SavePerformedTest")
+					var data = {
+						accepted_test_id: this.enter_test[0].accepted_test_id,
+						data: mdata
+					}
+					var type = "json"
+					server(url, data, type, function (res) {
+
+						//alertSuccess("Saved to PDF")
+						//alertSuccess("Saved successfully")
+						
+					})
+					
+
+
+				},
+				SetAbnormalResult: function(test, from, to){
+					//console.log("##", test[from])
+					//console.log("##", test[to])
+					var from_x = parseFloat(test[from].trim())
+					var to_x = parseFloat(test[to].trim())
+					var val = parseFloat($(event.currentTarget).val().trim())
+					//console.log({val, from_x, to_x})
+					if(isNaN(val))
+					val = 0
+					if(val < from_x || val > to_x){
+						$(event.currentTarget).css({"color": "red", "border": "1px solid red"})
+						test.abnormal = true
+					}else{
+						$(event.currentTarget).css({"color": "green", "border": "1px solid green"})
+						test.abnormal = false
+					}
+					
+
+
+
+					
+				},
+				NextFocus: function(test, value, formula){
+					//console.log("###", test)
+					//alert(test[formula])
+					
+					 var calculated_str = this.FindMatches(test[formula], this.enter_test)
+					//alert(calculated_str)
+					var fans = ""
+					try{
+						fans = eval("parseFloat("+calculated_str+")")
+					}catch(e){
+
+					}
+					 
+					 if(fans)
+					 test[value] = fans
+
+					$(event.currentTarget).closest("#enter-test").find("input").each(function (e) {
+						if (this == event.currentTarget) {
+							var eq = (e + 1)
+
+							$(event.currentTarget).closest("#enter-test").find("input").eq(eq).focus()
+						}
+
+					})
+
+					//: TRIGGER ENTER FOR ALL INPUT AGAIN
+					// $(event.currentTarget).closest("#enter-test").find("input").each(function (e) {
+					// 		var val_input = $(this).val()
+					// 		if(! isNaN(val_input)){
+					// 			//trigger
+								
+					// 		}
+					// })
+
+
+				},
+				FindMatches: function(strx, live_tests){
+					//console.log("##live", live_tests)
+					var mystring = strx //"([p_2]*[q_1]) / ([z_2] * [t_1])"
+					try {
+
+
+						var matches = mystring.match(/\[(.*?)\]/g);
+						
+						//var matches = mystring.match(/\([^)^a-zA-Z]+\)/g)
+						if (matches) {
+
+							//console.log("#$$$", live_tests)
+							for (var i in matches) {
+								var vmatch = matches[i]
+
+								for (var ii in live_tests) {
+
+									
+									// iterate tru tests
+									for (var iii in live_tests[ii].tests) {
+										//: test codes
+										var mtest_codes = live_tests[ii].tests[iii].test_code
+
+										if ("[" + mtest_codes + "_1]".toUpperCase() == vmatch.toUpperCase()) {
+
+											mystring = mystring.replace(vmatch, live_tests[ii].tests[iii].value_1)
+
+										}
+										if ("[" + mtest_codes + "_2]".toUpperCase() == vmatch.toUpperCase()) {
+											mystring = mystring.replace(vmatch, live_tests[ii].tests[iii].value_2)
+										}
+										// console.log("##", mtest_codes)
+
+									}
+
+
+
+								}
+
+							}
+
+
+						}
+					} catch (e) {
+						console.log('Formula: ', e)
+					}
+
+
+	 //alert(mystring)
+	//var ee = eval(mystring)
+	 //return (ee)
+
+	 return mystring
+
+
+				},
+				UpdateCalc: function(){
+					
+					for(var oo in this.enter_test){
+						for(var o in this.enter_test[oo].tests){
+							for(var io = 1; io < 3; io++){
+
+							var calculated_str = this.FindMatches(this.enter_test[oo].tests[o]["formula_"+io], this.enter_test)
+						
+							var fans = ""
+							try {
+								fans = eval("parseFloat("+calculated_str+")")
+							} catch (e) {
+
+							}
+
+							if (fans)
+							this.enter_test[oo].tests[o]["value_"+io] = fans
+						}
+
+						}
+					}
+					
+				},
+				LoadParagraph: function(ty, test, index){
+					//: load and apply
+					//alert(index)
+					switch (ty) {
+						case "new":
+							var dta =  this.GetParaMode(this.enter_test, test.test_code)
+							$("#editor1-paragraph-pane").find("#SaveParaResult").attr("index", index)
+							$("#editor1-paragraph-pane").find("#SaveParaResult").attr("test_code", test.test_code)
+							CKEDITOR.instances["editor1-paragraph"].setData(dta)
+							$("#editor1-paragraph-pane").show(500)
+							//console.log(test)
+						break;
+
+						case "note-2": 
+						
+						$("#editor2-paragraph-pane").find("#TestNote2").attr("index", index)
+							$("#editor2-paragraph-pane").find("#TestNote2").attr("test_code", test.test_code)
+						CKEDITOR.instances["editor2-paragraph"].setData(test.summary_2)
+						$("#editor2-paragraph-pane").show(500)
+
+						break;
+
+						case "note-3": 
+						
+						$("#editor3-paragraph-pane").find("#TestNote3").attr("index", index)
+							$("#editor3-paragraph-pane").find("#TestNote3").attr("test_code", test.test_code)
+						CKEDITOR.instances["editor3-paragraph"].setData(test.summary_3)
+						$("#editor3-paragraph-pane").show(500)
+						break;
+
+
+						case "note-4":
+						
+						$("#editor4-paragraph-pane").find("#TestNote4").attr("index", index)
+							$("#editor4-paragraph-pane").find("#TestNote4").attr("test_code", test.test_code)
+						CKEDITOR.instances["editor4-paragraph"].setData(test.summary_4)
+						$("#editor4-paragraph-pane").show(500)
+						break;
+					}
+					
+					
+				},
+				UnLoadParagraph: function(ty){
+					//: load and apply
+					//alert(ty)
+					switch (ty) {
+						case "new":
+						
+							$("#editor1-paragraph-pane").s.hidew(1000)
+						break;
+
+						case "note-2": 
+						
+						$("#editor2-paragraph-pane").hide(1000)
+						break;
+
+						case "note-3": 
+						$("#editor3-paragraph-pane").hide(1000)
+						break;
+
+
+						case "note-4":
+						$("#editor4-paragraph-pane").hide(1000)
+						break;
+					}
+					
+					
+				},
+				SaveParaResult: function(){
+					
+					var index = $(event.currentTarget).attr("index")
+					var test_code = $(event.currentTarget).attr("test_code")
+					var note1 = CKEDITOR.instances["editor1-paragraph"].getData()
+					
+					this.ApplyParaMode(this.enter_test, index, test_code, note1)
+					
+					alertSuccess("Saved Successfully")
+				},
+				ApplyParagraph: function(editor){
+					
+					 // APPLY PARAGRAPH TO VALUE			
+				 // -----------  USE THIS DATA AND UPDATE MODEL
 				
+				var index = $(event.currentTarget).attr("index")
+				 var test_code = $(event.currentTarget).attr("test_code")
+
+				 //alert(index)
+				 //alert(test_code)
+
+				var id_of_para = editor+"-pane"
+				//var id_of_para = $(this).attr("para")
+				//alert(id_of_para)
+				switch(id_of_para){
+					case "editor2-paragraph-pane":
 					
-				 </tbody>
-			 </table>		
+					var note2 = CKEDITOR.instances["editor2-paragraph"].getData()
+					
+					//: apply to model
+					this.ApplyParaMode(this.enter_test, index, test_code, note2)
+					
+					break;
+
+					case "editor3-paragraph-pane":
+					var note3 = CKEDITOR.instances["editor3-paragraph"].getData()
+					//: apply to model
+					this.ApplyParaMode(this.enter_test, index, test_code, note3)
+					break;
+
+					case "editor4-paragraph-pane":
+					var note4 = CKEDITOR.instances["editor4-paragraph"].getData()
+					//: apply to model
+					this.ApplyParaMode(this.enter_test, index, test_code, note4)
+					break;
+				}
+				console.log(this.enter_test)
+				alertSuccess("Applied successfully")
+				$("#"+id_of_para).hide(500)
+			
 			
 
-	</div>
+				}
 
+			}
+				
 
+		})
+			setTimeout(function() {
 
-          
+				
 
+			CKEDITOR.replace('editor1-paragraph', { uiColor: '#9AB8F3', width: '700px', height: '50vh', allowedContent: true })
+			CKEDITOR.replace('editor2-paragraph', { uiColor: '#9AB8F3', width: '700px', height: '50vh', allowedContent: true })
+			CKEDITOR.replace('editor3-paragraph', { uiColor: '#9AB8F3', width: '700px', height: '50vh', allowedContent: true })
+			CKEDITOR.replace('editor4-paragraph', { uiColor: '#9AB8F3', width: '700px', height: '50vh', allowedContent: true }) 
+			
+			 $("#funny-click").trigger("click").remove()
+
+			 //alert(window.load_perform_test)
+
+			 // CLOSE PARAGRAPH BOX
+			 $(".unload-paragraph").click(function(){
+				var id_of_para = $(this).attr("para")
+				$("#"+id_of_para).hide(500)
+			 })
+			
+
+			}, 100)
+	
+	</script>
+	
+	<button style = "opacity: 0" id = "funny-click" @click = "LoadTest">load vue</button>
+	<hr style="border: 2px solid gray">
+	<h3 class="text-center">Enter Test Result <br></h3>
+	
+	<p><small class="pull-left">Type: tabular, paragraph</small>
+		<div class="clearfix"></div>
+		<div class="form-group pull-right">
+
+			Completely Performed: <input type="checkbox" style="width: 20px; height: 10px">
+			<button @click = "SaveResult" class="app-btn bg-blue">Save Result</button>
+			<button func="PreviewTest" params="preview" class="app-btn bg-coral click">Preview</button>
+		</div>
+		<div class="clearfix"></div>
 		
+		
+		<div class="page-move">
+			<button @click = "PrevView" class="app-btn bg-coral">Prev</button>
+			<button @click = "NextView" class="app-btn bg-blue">Next</button>
+			<p>{{current}} of {{enter_test.length}} categories</p>
+		</div>
+
+		<div class = "category" id = "enter-test">
+			<div v-if = "i.show" class="item" v-for = "i in enter_test">
+				<h3 style = "text-transform: uppercase">{{i.category_name}}</h3>
+				
+				<table class="table table-hover" v-for = "(t, i) in i.tests">
+					<thead v-if = "i == 0">
+						<tr>
+							<th>Test Name</th>
+							<th>Value</th>
+							<th>Units</th>
+							<th>Normal Range</th>
+							<th>Prev Result</th>
+						</tr>
+					</thead>
+					<tbody v-if = "t.report_type == 'Tabular'">
+						<tr>
+							<th>{{t.name}}</th>
+							<th><input v-on:focus="UpdateCalc()"  v-on:keyup.enter = "NextFocus(t, 'value_1', 'formula_1')" v-on:keyup="SetAbnormalResult(t, 'range_1_1', 'range_2_1')"  v-model = "t.value_1" type="text" /></th>
+							<th>{{t.unit_1}}</th>
+							<th>{{t.range_1_1}} - {{t.range_2_1}}</th>
+							<th>{{t.prev_result_1}}</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th><input v-on:focus="UpdateCalc()" v-on:keyup.enter = "NextFocus(t, 'value_2', 'formula_2')" v-on:keyup="SetAbnormalResult(t, 'range_1_2', 'range_2_2')"  v-model = "t.value_2" type="text" /></th>
+							<th>{{t.unit_2}}</th>
+							<th>{{t.range_1_2}} - {{t.range_2_2}}</th>
+							<th>{{t.prev_result_2}}</th>
+						</tr>
+			
+			
+					</tbody>
+					<tbody v-if = "t.report_type == 'Paragraph'">
+						<tr>
+							<th>{{t.name}}</th>
+							<th>
+								<button @click = "LoadParagraph('new', t, i)"  style = "width: 150px" class = "app-btn bg-green"><span><i class = "fa fa-plus"></i> Result</span></button><br>
+								<button @click = "LoadParagraph('note-2', t, i)"  style = "width: 150px" class = "app-btn bg-blue"><i class = "fa fa-edit">Note 1</i></button><br>
+								<button @click = "LoadParagraph('note-3', t, i)"  style = "width: 150px" class = "app-btn bg-blue"><i class = "fa fa-edit">Note 2</i></button><br>
+								<button @click = "LoadParagraph('note-4', t, i)"  style = "width: 150px" class = "app-btn bg-blue"><i class = "fa fa-edit">Note 3</i></button><br>
+								
+							</th>
+							<th>...</th>
+							<th>...</th>
+							<th>...</th>
+						</tr>
+						<tr><th colspan = "5">
+								<!-- <textarea type = "hidden" v-model = "t.para_value"></textarea> -->
+						
+							</th></tr>
+					</tbody>
+
+
+				</table>
+			
+				<!-- <table class="table table-hover">
+					<thead style="opacity: 0">
+						<tr>
+							<th>Test Name</th>
+							<th>Value</th>
+							<th>Units</th>
+							<th>Normal Range</th>
+							<th>Prev Result</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Red Blood Cell</th>
+							<th><input type="text" /></th>
+							<th>Mdl</th>
+							<th>3.8 - 5.8</th>
+							<th>4.2</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th><input type="text" /></th>
+							<th>Mdl</th>
+							<th>3.8 - 5.8</th>
+							<th>4.2</th>
+						</tr>
+			
+			
+					</tbody>
+				</table> -->
+			
+			
+			</div>
+			
+		</div>
+		<div class="page-move">
+			<button @click = "PrevView" class="app-btn bg-coral">Prev</button>
+			<button @click = "NextView" class="app-btn bg-blue">Next</button>
+			<p>{{current}} of {{enter_test.length}} categories</p>
+		</div>
+
+	
+	
+
+		<!-- text editor -->
+		<div class = 'text-editor'>
+
+				<div id = "editor1-paragraph-pane">
+						<h3 class = "text-white">Result</h3>
+						<textarea id = "editor1-paragraph"></textarea>
+						<div class = "">
+	
+								<button id = "SaveParaResult" @click = "SaveParaResult()" class = "btn btn-sm app-btn  bg-blue pull-left">Save Changes</button>
+								<button para = 'editor1-paragraph-pane' class = "btn btn-sm app-btn bg-red pull-right unload-paragraph"><i class = "fa fa-times"></i> close</button>
+								
+						</div>
+						
+	
+				</div>
+				<div id = "editor2-paragraph-pane">
+						<h3 class = "text-white">Note 1</h3>
+					<textarea id = "editor2-paragraph"></textarea>
+					<div class = "">
+	
+							<button @click = "ApplyParagraph('editor2-paragraph')" id = "TestNote2" para = 'editor2-paragraph-pane' class = "btn btn-sm app-btn  bg-blue pull-left">Apply</button>
+							<button para = 'editor2-paragraph-pane' class = "btn btn-sm app-btn bg-red pull-right unload-paragraph"><i class = "fa fa-times"></i> close</button>
+					</div>
+				</div>			
+				<div id = "editor3-paragraph-pane">
+						<h3 class = "text-white">Note 2</h3>
+					<textarea id = "editor3-paragraph"></textarea>
+					<div class = "">
+	
+							<button @click = "ApplyParagraph('editor3-paragraph')" id = "TestNote3" para = 'editor3-paragraph-pane' class = "btn btn-sm app-btn  bg-blue pull-left apply-paragraph">Apply</button>
+							<button para = 'editor3-paragraph-pane' class = "btn btn-sm app-btn bg-red pull-right unload-paragraph"><i class = "fa fa-times"></i> close</button>
+					</div>
+				</div>
+				<div id = "editor4-paragraph-pane">
+						<h3 class = "text-white">Note 3</h3>
+					<textarea id = "editor4-paragraph"></textarea>
+					<div class = "">
+	
+							<button @click = "ApplyParagraph('editor4-paragraph')" id = "TestNote4" para = 'editor4-paragraph-pane' class = "btn btn-sm app-btn  bg-blue pull-left">Apply</button>
+							<button para = 'editor4-paragraph-pane' class = "btn btn-sm app-btn bg-red pull-right unload-paragraph"><i class = "fa fa-times"></i> close</button>
+					</div>
+				</div>			
+	
+				
+	
+		</div>
+
 
 </div>
-<div class = "page-move">
-	  <button class = "app-btn bg-coral">Prev</button>
-		<button class = "app-btn bg-blue">Next</button>
-	  <p>1 of 2 categories</p>
-</div>
+
+	

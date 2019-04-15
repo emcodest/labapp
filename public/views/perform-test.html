@@ -13,18 +13,22 @@
                 <h3>CHOOSE DEPARTMENT</h3>
             </p>
             <hr>
-            <div class="row">
-               
+            <div ng-if = "! show_department"><p>loading departments...</p></div>
+            <div ng-if = "show_department">
+                <div class="row">
                 
-                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat = "i in ChooseDepartment">
-                    <button onclick="window.location.href = 'users#!/perform_test_list_dept/Perform Test By Department/Clinical/1'"
-                        class="btn btn-primary">{{i.name}}</button>
+                
+                    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="i in ChooseDepartment">
+                        <div class = "well">
+                            <button style = "overflow: hidden; white-space: normal; text-overflow: ellipsis; display: inline-block" ng-click="GoToUnPartialTest(i.id, i.name)" class="btn btn-primary">{{i.name}}<p><b>{{i.code}}</b></p>
+                                </button>
+                        </div>
+                    </div>          
+                
+                
+                
                 </div>
-
-
-           
-
-        </div>
+            </div>
 
 
     </div>

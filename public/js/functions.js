@@ -213,10 +213,22 @@ function NewAge(str) {
     // birthday is a date
     var birthday = new Date(str)
     var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    var days = ageDate.getSeconds() / 86400
-    return "Year: " + Math.abs(ageDate.getUTCFullYear() - 1970) + " Month: " + ageDate.getMonth() + " Day: " + Math.ceil(days);
+   // var ageDate = new Date(ageDifMs); // miliseconds from epoch
+
+    // var days = ageDate.getSeconds() / 86400
+    // return "Year: " + Math.abs(ageDate.getUTCFullYear() - 1970) + " Month: " + ageDate.getMonth() + " Day: " + Math.ceil(days);
+    var seconds =  ageDifMs / 1000
+    var numyears = Math.floor(seconds / 31536000)
+    var nummonths = Math.floor((seconds % 31536000) / 2628000)
+    var numdays = Math.floor(((seconds % 31536000) % 2628000) / 86400)
+    //var numhours = Math.floor((((seconds % 31536000) % 2628000) % 86400) / 3600)
+   // var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60)
+    return "Year: " + numyears + " Month: " +nummonths + " Day: " +numdays
+ 
+
 }
+
+
 
 function check_object_index2(ar, ky) {
     for (var i in ar) {
@@ -335,6 +347,7 @@ function dialog(view, data) {
                 patient: {}
             },
             methods: {
+                
                 InitRefRanges: function(){
 
                    
@@ -347,8 +360,10 @@ function dialog(view, data) {
                   
                     var _this = this
                     server(url, data, type, function (res) {
-                       // alert(res)
+                      
                         _this.test_references = res
+                       
+                        
                     })
 
                 },
@@ -1198,7 +1213,7 @@ function TestMaster(params, _this) {
 
                 break
             case "add-test-to-profile":
-
+               
                 dialog("dialogs/display-tests.html", {})
                 break;
             case "preview-profile":
@@ -1278,6 +1293,8 @@ function TestMaster(params, _this) {
                     }, type, function(res) {
                         var mdata = res // {code: code, name: name, id: idd}
                         mdata.idd = mdata.id
+                        //console.log("##", mdata)
+                        //alert(mdata.rate)
                         dialog("dialogs/edit-test.html", mdata)
 
                     })
@@ -1451,7 +1468,7 @@ function EditTest(params) {
     var url = getAPI("department", "EditTest")
     var type = "json"
     var data = pstr
-    console.log(pstr)
+    //console.log(pstr)
 
     data["summary"] = CKEDITOR.instances["editor1"].getData()
     data["summary_2"] = CKEDITOR.instances["editor2"].getData()
@@ -2024,19 +2041,19 @@ function EditAcceptedTest(params) {
 } 
 
 function PerformTest(params) {
-
-       // alert(params)
+        //alert(params)
         // load the test from the server
-       // var url = getAPI("master", "ListMasterByID")
-        //var data = {
-       // id: idd,
-       // master_name: master
-       // }
-        //var type = "json"
-        //server(url, data, type, function(res) {
-
+        var url = getAPI("master", "GetTestsToPerform")
+        var data = {
+            lab_no: params.trim()
+        }
+        var type = "json"
+        server(url, data, type, function (res) {
+            //console.log(res)
+            
+            window.load_perform_test = res
             dialog("dialogs/view-new-performed-test.html", {})
-        //})
+        })
 
         
 
@@ -2111,6 +2128,9 @@ function NormalizeArray(arr, key, key_check, len){
     return fobj
 }
 
+// function getEditorValue(){
+//     // return "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores ut est quae esse recusandae aspernatur expedita repellendus minima qui accusamus deserunt ratione similique, facilis quisquam iure dignissimos? Aut, consequatur unde?"
+// }
 //! - - - - - - - - - -- - - - - - -
 $(document).on("click", ".click", function() {
 

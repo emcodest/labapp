@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="css/datatable.css">
   <link rel="stylesheet" href="js/select2/select2.css">
   <link rel="stylesheet" href="css/webpopoverui.css">
+  <!-- HANDLER UPLOAD UI -->
+  <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
   <style>
       #referral-person-master-dt td, #patientdt td, #referral-center-master-dt td, #guardian-master-dt td, thead{
         
@@ -48,7 +50,60 @@
       .table tr:hover{
         background: #ddd;
       }
-     
+      .performed{
+        background: #51a051;
+      }
+      .partial{
+        background: #ec412b;
+      }
+
+      
+      #enter-test table thead tr th:nth-child(1), #enter-test table tbody tr th:nth-child(1){
+        
+        min-width: 20% !important;
+        max-width: 20% !important;
+        width: 20%;
+        text-overflow: ellipsis;
+      }
+      #enter-test table thead tr th:nth-child(2), #enter-test table tbody tr th:nth-child(2){
+        
+        min-width: 20% !important;
+        max-width: 20% !important;
+        width: 20%;
+        text-overflow: ellipsis;
+      }
+      #enter-test table thead tr th:nth-child(3), #enter-test table tbody tr th:nth-child(3){
+        
+        min-width: 20% !important;
+        max-width: 20% !important;
+        width: 20%;
+        text-overflow: ellipsis;
+      }
+      #enter-test table thead tr th:nth-child(4), #enter-test table tbody tr th:nth-child(4){
+        
+        min-width: 20% !important;
+        max-width: 20% !important;
+        width: 20%;
+        text-overflow: ellipsis;
+      }
+      #enter-test table thead tr th:nth-child(5), #enter-test table tbody tr th:nth-child(5){
+        
+        min-width: 20% !important;
+        max-width: 20% !important;
+        width: 20%;
+        text-overflow: ellipsis;
+      }
+
+     #editor1-paragraph-pane, #editor2-paragraph-pane, #editor3-paragraph-pane,#editor4-paragraph-pane{
+       display: none;
+       position: fixed;
+       top: 10%;
+       left: 10%;
+       background: #19242c;
+       padding: 12px;
+     }
+	
+	
 
     </style>
 <!--   <link rel="stylesheet" href="css/bootswatch.css">   -->
@@ -94,6 +149,9 @@
 <script src="js/select2/select2.js"></script>
 <script src="./ckeditor/ckeditor.js"></script>
 <script src="js/webpopoverui.js"></script>
+
+<!-- HANDLER UPLOAD ACTION -->
+<script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
 
 
 

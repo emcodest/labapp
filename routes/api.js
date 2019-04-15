@@ -112,21 +112,7 @@ router.post('/upload-file', upload.array('myfile', 12),  function(req, res) {
     
 
   })
-  // upload(req, res, function (err) {
-  //   console.log("my_path", req.files)
-  
-  //   if (err instanceof multer.MulterError) {
-  //     // A Multer error occurred when uploading.
-  //     console.log("Error occured", err)
-  //   } else if (err) {
-  //     // An unknown error occurred when uploading.
-  //     console.log("Unknown error")
-  //   }
-
-  //   // Everything went fine.
-    
-
-  // })
+ 
   res.send("Bingo")
   
 

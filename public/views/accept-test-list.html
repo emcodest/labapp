@@ -3,6 +3,19 @@
     <div ng-include="'ng-includes/header.html'"></div>
 
     <div ng-include="'ng-includes/close.html'"></div>
+    <style>
+        table td:nth-child(6){
+          width: 50%;
+        }
+        table td:nth-child(6) span{
+          
+          background: #b8b6a6;
+          color: #333;
+          font-size: 0.8em;
+        }
+      
+      </style>
+
 
   <p>
     <h3>LIST OF ACCEPTED TESTS</h3>
@@ -17,7 +30,10 @@
       <th>Patient ID</th>      
       <th>Sex</th>
       <th>Age</th>
+      <th>Tests</th>      
       <th>...</th>      
+      <th>...</th>
+      <th>...</th>
       <th>...</th>
     </tr>
   </thead>  

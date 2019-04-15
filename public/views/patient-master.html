@@ -2,14 +2,15 @@
 <div ng-app="myApp" ng-controller = "PatientMaster">
 <div class = "lab-panel" style = "border-radius: 12px; border: 1px solid #ddd">
     
-       <div id = "show_bar" ng-if = "! show_bar">
+       <div id = "show_bar" ng-if = "! show_bar_2">
           <div ng-include="'ng-includes/header.html'"></div>
           
           <div ng-include="'ng-includes/close.html'"></div>
        </div>
-          <button ng-if = "! getToggle()" ng ng-click = "toggle()" class = "my-btn"><i class = "fa fa-plus"></i> New Record</button>
+          <button ng-if = "! getToggle()" ng ng-click = "toggle()" class = "app-btn bg-green"><i class = "fa fa-plus"></i> New Record</button>
               <div ng-if = "getToggle()" class = "patient-info" style = "background: beige">
-                <p><h3>PATIENT INFORMATION</h3></p>
+                <p ng-init = "baddest()"><h3>PATIENT INFORMATION</h3></p>
+              
                 <table class = "table table-responsive">
                   <tr>
                     
@@ -30,13 +31,13 @@
                         <option value = "female">Female</option>
                       </select>
                     </td>
-                    <td><label><b>date of birth</b></label><input  ng-model = "patient.dob" class = "form-control" type = "date" /></td>
+                    <td><label><b>date of birth</b></label><input name = "dob"  ng-model = "patient.dob" class = "form-control" type = "date" /></td>
                 
                   </tr>
                   <tr>
                     
                      
-                      <td><label><b>age</b></label><input ng-model = "patient.age" class = "form-control" type = "text" /></td>
+                      <td><label><b>age</b></label><input name = "age" ng-model = "patient.age" class = "form-control" type = "text" /></td>
                       <td><label><b>phone no.</b></label><input ng-model = "patient.phone_number" class = "form-control" type = "text" /></td>
                       <td><label><b>email</b></label><input ng-model = "patient.email" class = "form-control" type = "text" /></td>
                       <td><label><b>marital status</b></label><select ng-model = "patient.marital_status" class = "form-control">
@@ -86,7 +87,7 @@
                 </table>
 
                 <button ng-click = "add_new_patient_info()" class = "my-btn">Add Record</button>
-                <button ng-click = "toggle()" class = "btn btn-danger btn-sm pull-right"><i class = "fa fa-times"></i> Hide Form</button>
+                <button ng-click = "toggle()" class = "app-btn bg-red pull-right"><i class = "fa fa-times"></i> Hide Form</button>
 
               </div>
         
@@ -98,7 +99,7 @@
                 <br>
               <div class = "row">
                   <div class = "col-md-12 col-sm-12">
-                      <table id = "patientdt" class = "table" ng-init = "ActivateMode2()">
+                      <table id = "patientdt" class = "table">
                         <thead>
                         <tr>
                           <th>Code</th>

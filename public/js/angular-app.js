@@ -83,7 +83,13 @@ app.config(function ($routeProvider) {
         .when("/accept_test_list/:title", {
             templateUrl: "views/accept-test-list.html",
             controller: "AcceptTestList"
-        }).when("/inventory/:title", {
+        })
+        .when("/settings/settings-master", {
+            templateUrl: "views/settings-master.html",
+            controller: "SettingMaster"
+        })
+        
+        .when("/inventory/:title", {
             templateUrl: "views/inventory-master.html"
         }).when("/inventory_setup/:title", {
             templateUrl: "views/inventory-setup.html"
