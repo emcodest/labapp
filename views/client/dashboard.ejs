@@ -24,6 +24,12 @@
   <link rel="stylesheet" href="css/datatable.css">
   <link rel="stylesheet" href="js/select2/select2.css">
   <link rel="stylesheet" href="css/webpopoverui.css">
+ 
+  
+  <!-- PRINTING -->
+ <script src="./node_modules/css-regions-polyfill/bin/css-regions-polyfill.min.js"></script>
+ <script src="./src/print-headers-and-footers.js"></script>
+  <link rel="stylesheet" href="./src/print-headers-and-footers.css">
   <!-- HANDLER UPLOAD UI -->
   <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
   <style>
@@ -102,7 +108,15 @@
        background: #19242c;
        padding: 12px;
      }
-	
+     .text-center{
+       text-align: center;
+     }
+     .uppercase{
+       text-transform: uppercase;
+     }
+     .abnormal{
+       color: red;
+     }
 	
 
     </style>
@@ -111,7 +125,7 @@
 </head>
 
 <body ng-app="myApp"  ng-controller = "my_server">
-
+  
   
 <div  ng-view></div>  
 
@@ -150,10 +164,12 @@
 <script src="./ckeditor/ckeditor.js"></script>
 <script src="js/webpopoverui.js"></script>
 
+
+
 <!-- HANDLER UPLOAD ACTION -->
 <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
 
-
+ 
 
 <div class="modal fade" id="modal-id" style = "width: 100%; background: #fff">
   <div class="modal-dialog">

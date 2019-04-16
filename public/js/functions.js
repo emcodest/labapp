@@ -2059,10 +2059,91 @@ function PerformTest(params) {
 
 }
 
-function PreviewTest(params) {
-     $("#modal-id").modal("hide")
-     dialog("dialogs/view-new-performed-test-preview.html", {})
+// function PreviewTest(params) {
+//      $("#modal-id").modal("hide")
+//      dialog("dialogs/view-new-performed-test-preview.html", {})
 
+// }
+function InitPrintResult(){
+
+        //console.log(window.localStorage.getItem("PreviewTest"))
+            //alert("hey")
+			PrintHAF.init({
+				domID: 'result',
+				size: 'letter',
+				marginTop: 48,
+				marginBottom: 48,
+				marginLeft: 48,
+				marginRight: 48,
+				createHeaderTemplate: function(pageNumber) {
+					var header = document.createElement('div');
+					//header.innerHTML = 'HEADER ' + pageNumber;
+					header.innerHTML = "<img class = 'pull-right' src = 'img/logo.png' height = '48px' /><div class = 'clearfix'></div>";
+
+					
+					//: create dynamic header
+
+					//element.classList.add("mystyle");
+					//! - - - - - - - - - -- - - - - - -START				
+					//if(pageNumber > 1)
+					///{
+						
+						//var elChild = document.createElement('div');
+						//var pageNumberx = pageNumber - 1
+
+						//var nodes = document.querySelectorAll(".haf-content")
+						//var nodes = document.querySelectorAll(".cat")
+						//var first = nodes[0];
+						//var last = nodes[nodes.length- 1]
+						//var test_cat = last.innerHTML
+						//console.log(test_cat)
+						//var test_cat = document.querySelector("#test-category-"+pageNumberx+":last-child h1").innerHTML
+						//elChild.innerHTML = "<h1>"+test_cat+"</h1>" // "+pageNumber
+					
+						//header.appendChild(elChild)
+						
+					//}
+					
+					//! - - - - - - - - - -- - - - - - -END
+					//console.log(header.innerHTML)
+					return header;
+				},
+				createFooterTemplate: function(pageNumber) {
+					var footer = document.createElement('div');
+					//footer.innerHTML = 'FOOTER ' + pageNumber;
+					footer.innerHTML = "<img src = 'img/address.png' height = '48px' width = '100%' /><div class = 'page-number'>"+pageNumber+"</div><div class = 'clearfix'></div>"
+					
+					return footer;
+				},
+				before: function() {
+					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
+					
+					printSpinnerOverlay.classList.remove('haf-hidden');
+					printSpinnerOverlay.classList.add('haf-fade-in');
+				},
+				after: function() {
+					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
+					
+					printSpinnerOverlay.classList.add('haf-hidden');
+					printSpinnerOverlay.classList.remove('haf-fade-in');
+					
+
+					//document.getElementById("result").innerHTML = ""
+				}
+			});
+		 
+
+
+
+}
+
+InitPrintResult()
+
+function PrintResult(){
+//setTimeout(function() {
+    PrintHAF.print()
+//}, 200); 
+ 
 }
 
 
