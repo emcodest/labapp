@@ -1,0 +1,14 @@
+SPRINT 1
+    - LIST TEST IN PROFILE                          10 mins         X   6:10 - 6:20
+        - NOT COMPLETED, just check report type during test adding
+    
+    - RENDER PRE DEFINED TEST                       20 mins         X   6:25 - 6: 45
+
+
+SPRINT 2
+    - SAVE HTML FOR PDF                             20 mins         X   6:45 - 7:05
+    - INSTALL PUPPETEER                             10 mins         X   7:10 - 7:20
+    - USE PUPPETEER TO PRINT PDF                    30 mins         X   7:20 - 7:50
+SPRINT 3
+    - PRINT FROM PRINTER                            20 mins         X   7:50 - 8:10
+    - AVOID PAGE BREAK TABLE                        20 mins         X   8:10 - 8:15

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="../node_modules/css-regions-polyfill/bin/css-regions-polyfill.min.js"></script>
+		<script src="../src/print-headers-and-footers.js"></script>
+		<link rel="stylesheet" href="../src/print-headers-and-footers.css">
+		<script src="../ckeditor/ckeditor.js"></script>
+		<style>
+			.clearfix{
+				clear: both;
+				
+			}
+			.pull-right{
+				float: right;
+			}
+			.page-number{
+				float: right;
+				border-radius: 50%;
+				border: 1px solid #d5d5d5;
+				padding: 4px;
+				font-size: 0.7em;
+			}
+			#cke_editor1{
+				margin-right: auto;
+				margin-left: auto;
+				
+
+			}
+			@media print {
+    				p {
+						page-break-after: always;
+						
+						}
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="haf-print-spinner-overlay" class="haf-row haf-exact-center haf-hidden">
+			<div class="haf-spinner"></div>
+		</div>
+		
+	
+
+		 <textarea name="editor1" id="editor1" rows="10" cols="80">
+                Type or paste
+			</textarea><br>
+				<button onclick="setText(); PrintHAF.print()">Print</button>
+		<div id="print-container">
+
+
+			
+		</div>
+		
+		<style>
+			@media print {
+				#haf-print-spinner-overlay {
+					display: none;
+				}
+			}
+		
+			#haf-print-spinner-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: grey;
+			}
+			
+			.haf-row {
+				display: flex;
+				flex-direction: row;
+			}
+			
+			.haf-exact-center {
+				align-items: center;
+				justify-content: center;
+			}
+			
+			.haf-hidden {
+				display: none;
+			}
+			
+			/*http://codepen.io/brunjo/pen/WbrjKw#0: The MIT License (MIT) Copyright (c) <year> <copyright holders> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
+			.haf-spinner {
+				margin: 50px;
+				height: 50px;
+				width: 50px;
+				animation: rotate 0.8s infinite linear;
+				border: 8px solid #fff;
+				border-right-color: transparent;
+				border-radius: 50%;
+			}
+
+			@keyframes rotate {
+				0%    { transform: rotate(0deg); }
+				100%  { transform: rotate(360deg); }
+			}
+			
+			.haf-fade-in {
+				animation: fadeIn .25s;
+			}
+			
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+		</style>
+			
+		<script>
+			PrintHAF.init({
+				domID: 'print-container',
+				size: 'letter',
+				marginTop: 48,
+				marginBottom: 48,
+				marginLeft: 48,
+				marginRight: 48,
+				createHeaderTemplate: function(pageNumber) {
+					var header = document.createElement('div');
+					//header.innerHTML = 'HEADER ' + pageNumber;
+					header.innerHTML = "<img class = 'pull-right' src = 'img/logo.png' height = '48px' /><div class = 'clearfix'></div>";
+
+					
+					//: create dynamic header
+
+					//element.classList.add("mystyle");
+					//! - - - - - - - - - -- - - - - - -START				
+					//if(pageNumber > 1)
+					///{
+						
+						//var elChild = document.createElement('div');
+						//var pageNumberx = pageNumber - 1
+
+						//var nodes = document.querySelectorAll(".haf-content")
+						//var nodes = document.querySelectorAll(".cat")
+						//var first = nodes[0];
+						//var last = nodes[nodes.length- 1]
+						//var test_cat = last.innerHTML
+						//console.log(test_cat)
+						//var test_cat = document.querySelector("#test-category-"+pageNumberx+":last-child h1").innerHTML
+						//elChild.innerHTML = "<h1>"+test_cat+"</h1>" // "+pageNumber
+					
+						//header.appendChild(elChild)
+						
+					//}
+					
+					//! - - - - - - - - - -- - - - - - -END
+					//console.log(header.innerHTML)
+					return header;
+				},
+				createFooterTemplate: function(pageNumber) {
+					var footer = document.createElement('div');
+					//footer.innerHTML = 'FOOTER ' + pageNumber;
+					footer.innerHTML = "<img src = 'img/address.png' height = '48px' width = '100%' /><div class = 'page-number'>"+pageNumber+"</div><div class = 'clearfix'></div>"
+					
+					return footer;
+				},
+				before: function() {
+					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
+					
+					printSpinnerOverlay.classList.remove('haf-hidden');
+					printSpinnerOverlay.classList.add('haf-fade-in');
+				},
+				after: function() {
+					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
+					
+					printSpinnerOverlay.classList.add('haf-hidden');
+					printSpinnerOverlay.classList.remove('haf-fade-in');
+					
+
+					document.getElementById("print-container").innerHTML = ""
+				}
+			});
+		</script>
+		<script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+				CKEDITOR.replace( 'editor1', { uiColor: '#9AB8F3', height: '60vh', allowedContent: true} );
+				
+		</script>
+		<script>
+			function setText()
+			{
+				var data = CKEDITOR.instances.editor1.getData();
+				document.getElementById("print-container").innerHTML = data
+			}
+		</script>
+	</body>
+
+</html>

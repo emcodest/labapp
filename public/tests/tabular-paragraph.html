@@ -15,6 +15,7 @@
 					var _this = this
 					var get_t = window.load_perform_test
 					this.enter_test = get_t
+					//console.log(this.enter_test)
 					//this.enter_test = window.load_perform_test
 					//: DO LAZY CHECKING of accepted tests
 					var accepted_test_id = get_t[0].accepted_test_id
@@ -26,19 +27,30 @@
 					}
 					var type = "json"
 					server(url, data, type, function (res) {
-
+						
 						if (res.length < 1) {
 							//: JUST FORGET IT
 							_this.enter_test = get_t
+							
 						} else {
 							var mdata = res[0].data
 							//alert(mdata)
 							mdata = JSON.parse(mdata)
 							//console.log("@####", mdata)
 							_this.enter_test = mdata
+							
 						}
 
 					})
+						var curr =  this.current
+						this.enter_test[curr].show = true
+						this.current++
+						setTimeout(() => {
+							_this.NextView()
+							_this.PrevView()	
+						}, 100);
+						
+
 
 					//alert(999)
 					//alert("about to load vue test")
@@ -62,10 +74,8 @@
 
 					//this.enter_test.push({show: false, category_name: "Clinical Lab"})
 					//: activate the first one
-					var curr = this.current
-					this.enter_test[curr].show = true
-					this.current++
-
+					
+						
 				},
 				GetParaMode: function (model, test_code) {
 
@@ -470,7 +480,7 @@
 
 		<div class="category" id="enter-test">
 			<div v-if="i.show" class="item" v-for="i in enter_test">
-				<h3 style="text-transform: uppercase">{{i.category_name}}</h3>
+				<h3 style="text-transform: uppercase">{{i.category_name}} </h3>
 
 				<table class="table table-hover" v-for="(t, i) in i.tests">
 					<thead v-if="i == 0">
@@ -482,7 +492,8 @@
 							<th>Prev Result</th>
 						</tr>
 					</thead>
-					<tbody v-if="t.report_type == 'Tabular'">
+					<!-- TABULAR -->
+					<tbody v-if="t.report_type == 'Tabular' || ! t.report_type">
 						<tr>
 							<th>{{t.name}}</th>
 							<th><input v-on:focus="UpdateCalc()"
@@ -506,6 +517,10 @@
 
 
 					</tbody>
+
+
+					<!-- PARAGRAPH -->
+
 					<tbody v-if="t.report_type == 'Paragraph'">
 						<tr>
 							<th>{{t.name}}</th>
@@ -533,6 +548,62 @@
 						</tr>
 					</tbody>
 
+					<!-- PREDEFINED_TEST -->
+					<tbody v-if="t.report_type == 'predefined_test'">
+						<tr>
+							<td>{{t.name}}</td>
+							<!-- <th><input v-model="t.value_1" type="text" /></th> -->
+							
+							<td>
+								<div v-for = "(aa, io) in NormalizeArray_2(JSON.parse(t.custom), 'predefined_test_list', ['field_name', 'ftype', 'presets'], 3, 'default')"><b>{{aa.field_name}}</b><br>
+
+									<div class = "form-group" >
+										<select v-model="t[aa.field_name]" v-if = "aa.presets" class = "form-control">
+											<option value = "">--select--</option>
+												<option v-for = "oo in aa.presets.split('\\n')">{{oo}}</option>
+										
+										</select>
+									</div>
+									<div class = "form-group">
+										<input v-if = "! aa.presets" v-model="t[aa.field_name]" type="text" class = "form-control" />
+									</div>
+								</div>
+							
+
+							</td>
+
+							<th>...</th>
+							<th>...</th>
+							<th>...</th>
+							
+							
+						</tr>
+						
+
+
+					</tbody>
+					<tbody v-if="t.report_type == 'culture'">
+							<tr>
+								<td>{{t.name}}</td>
+								<!-- <th><input v-model="t.value_1" type="text" /></th> -->
+								
+								<td>
+									
+									disabled
+								
+	
+								</td>
+	
+								<th>...</th>
+								<th>...</th>
+								<th>...</th>
+								
+								
+							</tr>
+							
+	
+	
+						</tbody>
 
 				</table>
 

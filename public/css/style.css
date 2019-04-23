@@ -1,67 +1,4 @@
-/* @media print{
-  body{
-      counter-reset: pageNumber;
-  }
-  .pager{
-      min-height: 800px;
-  }
-  .page-breaker{
-      page-break-after: always;
-      
-      text-align: center;
-       margin-top: 36px !important;
-       font-size: 0.8em !important;
-  }
-  .page-breaker:before{
-      counter-increment: pageNumber;
-     content: "Page:" counter(pageNumber); 
-     font-size: 0.8em !important;
-  }
- 
- 
-} */
 
-@page{
-  size: a4;
-  margin: 0;
-
-}
-@media print{
-
-  html, body{
-    width: 210mm;
-    height: 297mm;
-
-     
-  }
-  table{
-    page-break-inside: avoid !important;
- 
-  }
-  .page-break{
-
-  page-break-before:always; 
-  
- }
- .abnormal-main-result{
-  color: red !important;
-}
-.ref-only-center{
-  margin-left: 20px;
-}
-
- 
- .track-page{ 
- 	/*position: relative;
- 	display: block;*/
- 	/* border: 1px solid red !important; */
- 	/*margin-top: 50px;*/
- 	
-
- }
-
- 
-}
  .nnheader{
   
   font-size: 0.6em !important;
@@ -86,7 +23,7 @@
  }
 
 body{
-  background:beige;
+  background:#fff;
      
 }
 .MsoNormalTable{
@@ -857,3 +794,124 @@ input{
    background: #416378; 
   
 }
+/* ................... */
+
+#referral-person-master-dt td, #patientdt td, #referral-center-master-dt td, #guardian-master-dt td, thead{
+  
+  max-width: 50px !important; 
+  overflow-x: hidden !important;
+
+  font-size: 0.8em !important;
+  
+}
+#referral-person-master-dt, #patientdt, #referral-center-master-dt, #guardian-master-dt{
+ width: 100% !important;
+ 
+}
+
+.webui-popover-content{
+
+max-height: 300px;
+overflow-x: ellipsis;
+color: #333 !important;
+
+}
+.table tr:hover{
+  background: #ddd;
+}
+.performed{
+  background: #51a051;
+}
+.partial{
+  background: #ec412b;
+}
+
+
+#enter-test table thead tr th:nth-child(1), #enter-test table tbody tr th:nth-child(1){
+  
+  min-width: 20% !important;
+  max-width: 20% !important;
+  width: 20%;
+  text-overflow: ellipsis;
+}
+#enter-test table thead tr th:nth-child(2), #enter-test table tbody tr th:nth-child(2){
+  
+  min-width: 20% !important;
+  max-width: 20% !important;
+  width: 20%;
+  text-overflow: ellipsis;
+}
+#enter-test table thead tr th:nth-child(3), #enter-test table tbody tr th:nth-child(3){
+  
+  min-width: 20% !important;
+  max-width: 20% !important;
+  width: 20%;
+  text-overflow: ellipsis;
+}
+#enter-test table thead tr th:nth-child(4), #enter-test table tbody tr th:nth-child(4){
+  
+  min-width: 20% !important;
+  max-width: 20% !important;
+  width: 20%;
+  text-overflow: ellipsis;
+}
+#enter-test table thead tr th:nth-child(5), #enter-test table tbody tr th:nth-child(5){
+  
+  min-width: 20% !important;
+  max-width: 20% !important;
+  width: 20%;
+  text-overflow: ellipsis;
+}
+
+#editor1-paragraph-pane, #editor2-paragraph-pane, #editor3-paragraph-pane,#editor4-paragraph-pane{
+ display: none;
+ position: fixed;
+ top: 10%;
+ left: 10%;
+ background: #19242c;
+ padding: 12px;
+}
+.text-center{
+ text-align: center;
+}
+.uppercase{
+ text-transform: uppercase;
+}
+.abnormal{
+ color: red !important;
+}
+
+
+/* ----------------- */
+.modal-body{
+  overflow-y: scroll;
+  height: 90vh;
+}
+.patient-info th{
+width: 30%;
+}
+.patient-info td{
+width: 70%;
+}
+.tabular{
+width: 100%;
+}
+.tabular th, .tabular td, .tabular tr{
+border: none;
+padding: 1px;
+}
+.tabular thead{
+border: 1px solid #333;
+
+
+}
+.cat-name{
+text-transform: uppercase;
+text-align: center;
+margin-bottom: 18px;
+font-weight: bold;
+font-size: 16px;
+}
+
+
+

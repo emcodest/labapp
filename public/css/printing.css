@@ -1,0 +1,83 @@
+@page {
+    size: a4;
+    margin: 10;
+
+}
+
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+        height: 297mm;
+
+
+    }
+
+    body {
+        /* counter-reset: pageNumber; */
+    }
+
+    
+
+    .page-breaker {
+        page-break-after: always;
+
+        text-align: center;
+        margin-top: 36px !important;
+        font-size: 0.8em !important;
+    }
+
+    .page-breaker:after {
+        /* counter-increment: pageNumber;
+        content: counter(pageNumber); */
+        font-size: 0.8em !important;
+        bottom: 0px;
+        width: 100%;
+        text-align: center !important;
+        
+    }
+
+    table {
+        /* page-break-inside: avoid !important; */
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @media print{
+
+
+    table{
+        border-collapse:collapse;
+    }
+    
+    tr td{
+        page-break-inside: avoid;
+        white-space: nowrap;
+    }
+
+
+
+
+
+} */

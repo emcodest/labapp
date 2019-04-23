@@ -1403,6 +1403,12 @@ function AddNewTest(add_new_test_fd) {
 
             $("#testdt_test").DataTable().ajax.reload()
 
+            $("input").each(function(i, d){
+                $(this).val("")
+            })
+           // alert("hey")
+            _modal.add_new_test_fd = {}
+
         }
     })
 
@@ -2028,7 +2034,7 @@ function CloseMaster(a) {
         default:
             break;
     }
-
+  
     //angular.element(document.body).scope().$apply();
     $("#accept-test-info-record").find("#" + a.trim()).html("").css("border", "none")
 }
@@ -2064,86 +2070,97 @@ function PerformTest(params) {
 //      dialog("dialogs/view-new-performed-test-preview.html", {})
 
 // }
-function InitPrintResult(){
-
-        //console.log(window.localStorage.getItem("PreviewTest"))
-            //alert("hey")
-			PrintHAF.init({
-				domID: 'result',
-				size: 'letter',
-				marginTop: 48,
-				marginBottom: 48,
-				marginLeft: 48,
-				marginRight: 48,
-				createHeaderTemplate: function(pageNumber) {
-					var header = document.createElement('div');
-					//header.innerHTML = 'HEADER ' + pageNumber;
-					header.innerHTML = "<img class = 'pull-right' src = 'img/logo.png' height = '48px' /><div class = 'clearfix'></div>";
-
-					
-					//: create dynamic header
-
-					//element.classList.add("mystyle");
-					//! - - - - - - - - - -- - - - - - -START				
-					//if(pageNumber > 1)
-					///{
-						
-						//var elChild = document.createElement('div');
-						//var pageNumberx = pageNumber - 1
-
-						//var nodes = document.querySelectorAll(".haf-content")
-						//var nodes = document.querySelectorAll(".cat")
-						//var first = nodes[0];
-						//var last = nodes[nodes.length- 1]
-						//var test_cat = last.innerHTML
-						//console.log(test_cat)
-						//var test_cat = document.querySelector("#test-category-"+pageNumberx+":last-child h1").innerHTML
-						//elChild.innerHTML = "<h1>"+test_cat+"</h1>" // "+pageNumber
-					
-						//header.appendChild(elChild)
-						
-					//}
-					
-					//! - - - - - - - - - -- - - - - - -END
-					//console.log(header.innerHTML)
-					return header;
-				},
-				createFooterTemplate: function(pageNumber) {
-					var footer = document.createElement('div');
-					//footer.innerHTML = 'FOOTER ' + pageNumber;
-					footer.innerHTML = "<img src = 'img/address.png' height = '48px' width = '100%' /><div class = 'page-number'>"+pageNumber+"</div><div class = 'clearfix'></div>"
-					
-					return footer;
-				},
-				before: function() {
-					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
-					
-					printSpinnerOverlay.classList.remove('haf-hidden');
-					printSpinnerOverlay.classList.add('haf-fade-in');
-				},
-				after: function() {
-					var printSpinnerOverlay = document.getElementById('haf-print-spinner-overlay');
-					
-					printSpinnerOverlay.classList.add('haf-hidden');
-					printSpinnerOverlay.classList.remove('haf-fade-in');
-					
-
-					//document.getElementById("result").innerHTML = ""
-				}
-			});
-		 
 
 
 
+
+function PrintResult(p_type, obj){
+    //! - - - - - - - - - -- - - - - - -FIRST IMPLEMENTATION
+    var ref_url = window.location.href
+    window.localStorage.ref_url = ref_url
+
+    var mp_header = $("#result").find("#header").html()
+
+    $("#result").find("#header").css("display", "none")
+    mp_header = '<div style = "margin-top: 20px"><img src = "../img/logo.png" width = "30%" class = "pull-right" /></div><div class="clearfix"></div>'+mp_header
+    $(".patient-header").html(mp_header)
+    var __this = obj
+    var m_text = __this.text()
+    obj.text("Printing...")
+    window.localStorage.printResult = $("#result").html()
+    
+    //: WRITE THE FILE TO THE SERVER FIRST
+    var url = getAPI("master", "ResultWriter")
+    var file_name = "print-result"
+    var content = window.localStorage.printResult
+    var data = {
+        
+        file_name:  file_name,
+        content: content
+    }
+    var type = "json"
+
+    server(url, data, type, function(res) {
+            __this.text(m_text)
+            if(p_type != "pdf"){
+                var win_url = "./printing/"+file_name+".html"
+                window.open(win_url, "_blank")      
+            }else{
+                var win_url = "./printing/"+file_name+".pdf"
+                window.open(win_url, "_blank")
+            }
+            
+        
+    })
+    
+    
+
+    //var win_url = "./report-printing/report/labapp.html"
+    //window.open(win_url, "_blank")
+
+    //! - - - - - - - - - -- - - - - - - END FIRST IMPLEMENTATION
+
+    //! - - - - - - - - - -- - - - - - - SECOND IMPLMENTATION
+
+//     var staticHeight = 0;
+// var pageHeight = 100
+// $('.item').each(function() {
+
+//     staticHeight += $(this).filter(':visible').outerHeight(true);
+
+
+//     console.log(staticHeight)
+
+//     if (staticHeight > pageHeight) {
+//         $(this).after( '<div class="page-break">Page Break</div>');
+//         staticHeight = 0;
+//     }
+
+// });
+//PrintElem("result")
+ 
 }
 
-InitPrintResult()
+function PrintElem(elem){
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+    
 
-function PrintResult(){
-//setTimeout(function() {
-    PrintHAF.print()
-//}, 200); 
- 
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('<link href = "css/bootstrap.css" >');
+    mywindow.document.write('<link href = "css/style.css">');
+
+    mywindow.document.write('</head><body>');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write('</body></html>');
+    
+    //mywindow.document.close(); // necessary for IE >= 10
+    //mywindow.focus(); // necessary for IE >= 10*/
+
+   // mywindow.print();
+   // mywindow.close();
+
+    return true;
 }
 
 
@@ -2202,6 +2219,39 @@ function NormalizeArray(arr, key, key_check, len){
 
             
         }
+        fobj.push(mobj)
+      
+    }
+    
+    return fobj
+}
+function NormalizeArray_2(arr, key, key_check, len, m_check){
+    //: change to [{}, {}]  format
+    var mkey = []
+    var fobj = []
+    var ars = Object.keys(arr)
+    
+    for(var i in ars){
+        var get_ar = ars[i].split(key)
+        if(get_ar.length > 1){
+            mkey.push(get_ar[1])
+        }
+    }
+    
+    var obj_len = mkey.length / len
+   
+    
+    for(var i = 0; i < obj_len; i++){
+
+        var mobj = {}
+       
+
+        for(var j in key_check){
+
+            mobj[key_check[j]] = arr[key+"[0]["+m_check+"]["+i+"]["+key_check[j]+"]"]
+           // console.log("["+i+"]["+m_check+"]["+i+"]["+key_check[j]+"]")
+        }
+       
         fobj.push(mobj)
       
     }
