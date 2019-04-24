@@ -200,7 +200,36 @@ function get_today() {
 
     return yyyy + mm + dd;
 }
+function customMonth(no){
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+    no = parseInt(no) - 1
+    return months[no]
+}
+function formatAge(age){
+    // ["Year:", "32", "Month:", "1", "Day:", "23"]
+    var age_f = ""
+    var sage = age.split(" ")
+    if(sage[1]  > 0){
+        age_f += sage[1]+"Yrs "
+    }
+    if(sage[3]  > 0){
+        age_f += sage[3]+"Mn "
+    }
+    if(sage[5]  > 0){
+        age_f += sage[5]+"d"
+    }
+    //console.log(sage)
+    return age_f // 0 Yrs 1Mn 5d
 
+}
+function formatSex(sex){
+    if(sex.toLowerCase() == "male"){
+        return "M"
+    }else{
+
+        return "F"
+    }
+}
 function calculateAge(birthday) {
     // birthday is a date
     birthday = new Date(birthday)

@@ -25,23 +25,6 @@
 				var url = getAPI("master", "GetPatientInfo")
 				server(url, data, type, function (res) {
 					
-					__this.patient.date = res.date
-
-					//: reprocess date
-					var rdate = __this.patient.date.split("/")
-
-					var fdate = ""
-
-					for(var io in rdate){
-						if(io == 1){
-						fdate += "/"+customMonth(rdate[1])+"/"
-						}else
-						fdate += rdate[io]
-					}
-					__this.patient.date = fdate
-					
-					
-
 					__this.patient.no = res.no
 					__this.patient.name = res.name
 					__this.patient.sex = formatSex(res.sex)
@@ -73,31 +56,6 @@
 
 </script>
 <style>
-	#result{
-		margin: 0 auto;
-		width: 60%;
-	}
-	.wrap{
-		border: 3px solid #181616c2;
-		padding: 12px;
-		position: relative;
-	}
-	.cover-wrap{
-		position: absolute;
-		bottom: -5px;
-		height: 5px;
-		width: 99.8%;
-		background: #181616c2;
-		left: 8px;
-	}
-	.cover-wrap-right{
-		position: absolute;
-		right: -6px;
-		top: 0px;
-		height: 73px;
-		width: 5px;
-		background: #181616c2;
-	}
 	/* .modal-body{
         overflow-y: scroll;
         height: 90vh;
@@ -151,29 +109,48 @@
 								<td>
 							</tr>
 							<tr>
-									<th>Referred By: </th>
-									<td>{{patient.referred_by}}	<td>
+								<th>Sex: </th>
+								<td>{{patient.sex}}
+								<td>
 							</tr>
-							
-							
+							<tr>
+								<th>Age: </th>
+								<td>{{patient.age}}
+								<td>
+							</tr>
+							<tr>
+								<th>Referred By: </th>
+								<td>{{patient.referred_by}}
+								<td>
+							</tr>
 						</thead>
 
 					</table>
+
+
+
+
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
 					<table class="patient-info">
 						<thead>
-								<tr>
-										<th>Date: </th>
-										<td>{{patient.date}}	<td>
-								</tr>
-								<tr>
-										<th>Age/Sex: </th>
-										<td>{{patient.age}} / {{patient.sex}}<td>
-								</tr>
+							<tr>
+								<th>Address</th>
+								<td>{{patient.address}}
+								<td>
+							</tr>
+							<tr>
+								<th>Phone: </th>
+								<td>{{patient.phone}}
+								<td>
+							</tr>
+							<tr>
+								<th>Email: </th>
+								<td>{{patient.email}}
+								<td>
+							</tr>
 
-									
 						</thead>
 
 					</table>
@@ -181,10 +158,6 @@
 				</div>
 			</div>
 
-
-
-			<div class = "cover-wrap-right"></div>
-			<div class = "cover-wrap"></div>
 		</div>
 
 

@@ -1,25 +1,13 @@
 @page {
-    size: a4;
-    margin: 10;
+    /* size: a4;
+    margin: 10; */
+    margin: 1cm 1cm 1cm;
 
 }
 
 @media print {
 
-    html,
-    body {
-        width: 210mm;
-        height: 297mm;
-
-
-    }
-
-    body {
-        /* counter-reset: pageNumber; */
-    }
-
-    
-
+  
     .page-breaker {
         page-break-after: always;
 
@@ -39,45 +27,31 @@
     }
 
     table {
-        /* page-break-inside: avoid !important; */
+         page-break-inside: avoid !important; 
 
     }
 
-
-
-
-
-
+   
+	.wrap{
+		border: 3px solid #181616c2;
+		padding: 12px;
+		position: relative;
+	}
+	.cover-wrap{
+		position: absolute;
+		bottom: -5px;
+		height: 5px;
+		width: 99.8%;
+		background: #181616c2;
+		left: 8px;
+	}
+	.cover-wrap-right{
+		position: absolute;
+		right: -6px;
+		top: 0px;
+		height: 73px;
+		width: 5px;
+		background: #181616c2;
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @media print{
-
-
-    table{
-        border-collapse:collapse;
-    }
-    
-    tr td{
-        page-break-inside: avoid;
-        white-space: nowrap;
-    }
-
-
-
-
-
-} */
