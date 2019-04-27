@@ -920,7 +920,9 @@ function add_new_patient_info(scope, dt_id) {
         //scope.patient.first_name = ""
     scope.add_new_patient_info = function() {
         var url = getAPI("patient", "AddPatientRecord")
+        scope.patient.age = $("[name=age], #age").val()
         var data = scope.patient
+        //console.log(data)
         var type = "json"
         server(url, data, type, function(res) {
             if (res.success) {
@@ -2070,12 +2072,96 @@ function CloseMaster(a) {
  
    
 // PROCESS TEST - ACCEPT, PREVIEW, PERFORM, APPROVE, PRINT, EMAIL TEST, SMS TEST 
+function SendMessage(params){
+    var get_info = params.split(",")
+    var idd = get_info[0]
+    var typex = get_info[1]
+    switch(typex){
+        case "accept_test":
+        alert("Send Message for  accept test")
+        break
+
+        case "approve_test":
+
+        //alert(idd)
+
+        alert("Send Message for  approve test")
+
+        break
+    }
+}
+function PrintReceipt(params){
+    var get_info = params.split(",")
+    var idd = get_info[0]
+    var typex = get_info[1]
+    switch(typex){
+        case "accept_test":
+            alert("Print receipt for  accept test")
+        break
+
+    }
+
+}
+function ApproveResult(params, _mthis){
+    var accepted_test_id = params
+
+    var url = getAPI("master", "ApproveResult")
+    var data = {
+        accepted_test_id: accepted_test_id
+    }
+    var type = "json"
+    server(url, data, type, function(res) {
+
+        if(res.success){
+            _mthis.remove()
+            setTimeout(function() {
+                window.location.reload()   
+            }, 2000);
+           
+        }
+
+    })
+
+
+   // alert(accepted_test_id)
+   // alert("about to approve result")
+
+}
+function UnApproveResult(params, _mthis){
+    var accepted_test_id = params
+    var accepted_test_id = params
+    var url = getAPI("master", "UnApproveResult")
+    var data = {
+        accepted_test_id: accepted_test_id
+    }
+    var type = "json"
+    server(url, data, type, function(res) {
+        if(res.success){
+            _mthis.remove()
+            setTimeout(function() {
+                window.location.reload()   
+            }, 2000);
+           
+        }
+
+    })
+
+}
 function EditAcceptedTest(params) {
     var id = params
+    //alert(id)
     angular.element(document.body).scope().EmitEditAcceptedTest(id)
 } 
+function ColorTests(datatable_id){
 
-function PerformTest(params) {
+    $("#"+datatable_id).find("tr").find("button[is_approved=yes]").parent().parent().css({"background": "green", "color": "#fff"})
+}
+function PerformTest(params, _this) {
+
+        /// CHECK IF THIS TEST HASE APPROVED STATUS
+        window.is_test_approved = $(_this).attr("is_approved")
+        window.current_lab_no = params.trim()
+        //alert(window.is_test_approved)
         //alert(params)
         // load the test from the server
         var url = getAPI("master", "GetTestsToPerform")
@@ -2085,7 +2171,8 @@ function PerformTest(params) {
         var type = "json"
         server(url, data, type, function (res) {
             //console.log(res)
-            
+            window.is_test_fully_performed = res[0].status_full
+            //alert(window.is_test_fully_performed)
             window.load_perform_test = res
             dialog("dialogs/view-new-performed-test.html", {})
         })
@@ -2107,10 +2194,12 @@ function PrintResult(p_type, obj){
     //! - - - - - - - - - -- - - - - - -FIRST IMPLEMENTATION
     var ref_url = window.location.href
     window.localStorage.ref_url = ref_url
-
+    
+    
     var mp_header = $("#result").find("#header").html()
 
     $("#result").find("#header").css("display", "none")
+
     mp_header = '<div style = "margin-top: 20px"><img src = "../img/logo.png" width = "30%" class = "pull-right" /></div><div class="clearfix"></div>'+mp_header
     $(".patient-header").html(mp_header)
     var __this = obj
@@ -2308,5 +2397,9 @@ $(document).on("click", ".click", function() {
 $(document).on("change", "[name=dob], #dob", function() {
     var val = $(this).val()
     val = NewAge(val)
-    $("[name=age], #age").val(val)
+    
+        $("[name=age], #age").val(val)
+    
+    
+  
 })

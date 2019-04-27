@@ -54,7 +54,10 @@ app.config(function ($routeProvider) {
             templateUrl: "views/accept-test.html",
             controller: "AcceptTest"
         })
-
+        .when("/accept_edit_test/:title/:id", {
+            templateUrl: "views/accept-edit-test.html",
+            controller: "AcceptTest"
+        })
         .when("/accept_test_list_unpartial/:title", {
             templateUrl: "views/accept-test-list-unpartial.html",
             controller: "AcceptTestUnPartial"

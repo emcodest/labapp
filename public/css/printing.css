@@ -41,17 +41,17 @@
 		position: absolute;
 		bottom: -5px;
 		height: 5px;
-		width: 99.8%;
-		background: #181616c2;
+		width: 99.6%;
+		background: #181616c2 !important;
 		left: 8px;
 	}
 	.cover-wrap-right{
 		position: absolute;
 		right: -6px;
-		top: 0px;
-		height: 73px;
+		top: 3px;
+		height: 82px;
 		width: 5px;
-		background: #181616c2;
+		background: #181616c2 !important; 
 	}
 
 }

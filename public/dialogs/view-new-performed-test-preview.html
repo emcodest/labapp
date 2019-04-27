@@ -16,6 +16,20 @@
         $("#load-test").load(format, function(text) {
                   
             //: after being loaded
+            var acc_id = $("[name=accepted_test_id]").val()
+            
+            $("#appr_test").attr("params", acc_id)
+            $("#unappr_test").attr("params", acc_id)
+
+            //: switch approve unapprove
+            if(window.is_test_approved == "yes"){
+                $("#unappr_test").show()  
+                $("#appr_test").hide()  
+            }else{
+                $("#appr_test").show()
+                $("#unappr_test").hide()
+            }
+           
             
 
         })
@@ -24,8 +38,9 @@
     }, 100);
 
 </script>
-
+<input type = "hidden" id = "accepted_test_id" name = "accepted_test_id" />
 <div class = "view-test" style="padding: 10px">
+
   <hr style = "border: 2px solid gray">
 <h3 class = "text-center">Preview Result <br> </h3>
 <div class = "form-group pull-right">
@@ -39,7 +54,8 @@
  </div>
 
  <div class="form-group pull-left">
-        <button class = "app-btn bg-green">Approve Result</button>
+        <button id = 'appr_test' params = '' func = 'ApproveResult' class = "app-btn bg-green click">Approve Result</button>
+        <button id = 'unappr_test' params = '' func = 'UnApproveResult' class = "app-btn bg-red click">UnApprove Result</button>
  </div>
 
  <div class = "clearfix"></div>

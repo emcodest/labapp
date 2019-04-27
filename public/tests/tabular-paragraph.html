@@ -425,7 +425,7 @@
 					// console.log(enter_test)
 					window.localStorage.setItem("PreviewTest", JSON.stringify(enter_test))
 					$("#modal-id").modal("hide")
-					dialog("dialogs/view-new-performed-test-preview.html", {})
+					dialog("dialogs/view-new-performed-test-preview.html", {accepted_test_id: enter_test[0].accepted_test_id})
 					
 				}
 
@@ -434,6 +434,40 @@
 
 		})
 		setTimeout(function () {
+
+			// INDICATE THAT THIS TEST IS FULLY PERFORMED
+			if(window.is_test_fully_performed == "yes"){
+				$("#fully_perform_test").prop("checked", true)
+			}else{
+				$("#fully_perform_test").prop("checked", false)
+			}
+			
+			$("#fully_perform_test").click(function(){
+				var is_checked = $(this).is(":checked")
+				if(is_checked){
+					//: USE THE CURRENT LAB NO. TO GET THE ACCEPTED_TEST_ID FOR PERFORM_TESTS MASTER
+					//alert(window.current_lab_no)
+					var url = getAPI("master", "IndicateFullyPerformed")
+					var data = {
+						lab_no: window.current_lab_no
+					}
+					var type = "json"
+					server(url, data, type, function (res) {
+						
+					})
+
+				}else{
+					var url = getAPI("master", "RevertFullyPerformed")
+					var data = {
+						lab_no: window.current_lab_no
+					}
+					var type = "json"
+					server(url, data, type, function (res) {
+						
+					})
+				}
+				
+			})
 
 
 
@@ -465,7 +499,7 @@
 		<div class="clearfix"></div>
 		<div class="form-group pull-right">
 
-			Completely Performed: <input type="checkbox" style="width: 20px; height: 10px">
+			Fully Performed: <input id = "fully_perform_test" type="checkbox" style="width: 30px; height: 17px;">
 			<button @click="SaveResult" class="app-btn bg-blue">Save Result</button>
 			<button @click="PreviewTest(enter_test)" class="app-btn bg-coral">Preview</button>
 		</div>

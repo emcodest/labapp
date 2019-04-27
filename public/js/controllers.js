@@ -536,7 +536,7 @@ app.controller("GuardianMaster", function ($scope, $rootScope) {
 })
 app.controller("AcceptTest", function ($scope, ngDialog, $rootScope, $location) {
 
-
+  alert(window.booking_id)
   var url = getAPI("master", "AcceptTest")
 
   var options = {
@@ -1121,11 +1121,16 @@ app.controller("AcceptTestList", function ($scope, $route, $compile, $rootScope,
 
   })
 
+  
+
+  // END EDIT TEST
+
   //! - - - - - - - - - -- - - - - - -
   $rootScope.$on('EmitEditAcceptedTest', function (event, args) {
     var id = args
-    // alert(id)
-    $location.path("/accept_test/Accept Test")
+     //alert(id)
+     $scope.EditBooking = true
+     $location.path("/accept_test/Accept Test")
 
   });
 
@@ -1137,11 +1142,29 @@ app.controller("AcceptTestList", function ($scope, $route, $compile, $rootScope,
 })
 app.controller("AcceptTestUnPartial", function ($scope, $route, $compile, $rootScope, $location) {
 
+  var master_switch = ""
+  var mlocate = $location.path()
+  var msplit_locate = mlocate.split("\/")
+  if(msplit_locate[1].trim() == "approve_tests"){
+    master_switch = "ListAcceptedTestsFull_2"
+  }else{
+    master_switch = "ListAcceptedTestsUnpartial"
+  }
+  //alert(master_switch)
+  //! - - - - - - - - - -- - - - - - -COLORIZE APPROVE TESTS
+ 
+    setInterval(function() {
+
+      ColorTests("list-accepted-tests-unpartial")
+      //alert(99)
+    }, 1000);
+ 
+
   if ($route.current.params.department)
     $scope.department_name = $route.current.params.department
   $scope.ListAcceptedTestsUnpartial = function () {
     $("#list-accepted-tests-unpartial").DataTable().destroy()
-    var url = getAPI("master", "ListAcceptedTestsUnpartial")
+    var url = getAPI("master", master_switch)
     // alert(url)
     var options = {
       ajax: {
@@ -1254,7 +1277,7 @@ app.controller("AcceptTestUnPartial", function ($scope, $route, $compile, $rootS
   //! - - - - - - - - - -- - - - - - -
   $rootScope.$on('EmitEditAcceptedTest', function (event, args) {
     var id = args
-    // alert(id)
+     alert(id)
     $location.path("/accept_test/Accept Test")
 
   });
