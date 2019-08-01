@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="870219884353-i3ap9eqb2j3nhdt4m8bdqdn75c36ad9c.apps.googleusercontent.com">
+    <title>Manage Google Contacts</title>
+     <!-- Latest compiled and minified CSS & JS -->
+     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+     <script src="//code.jquery.com/jquery.js"></script>
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     
+</head>
+<body>
+    
+    <div class="container">
+        <h3>Manage Your Google Contacts</h3>
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                
+                
+              
+                
+                
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>SIGN IN</h1>
+                        <p>Google Account Required!</p>
+                        <p>
+                            <!-- <a class="btn btn-primary btn-lg">Authorize</a> -->
+                            <div class="g-signin2 btn btn-primary btn-lg" data-onsuccess="onSignIn"></div>
+                        </p>
+                    </div>
+                </div>
+                
+
+                
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    
+   
+    
+    
+<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+<script>
+    function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            window.location.href = 'index.html'
+        }
+        
+            
+
+
+// </script>
+<!-- <script src = "../js/jquery.js"> </script>
+<script>
+    $(document).ready(function(){
+        alert(88)
+    })
+
+</script> -->
+
+</body>
+</html>

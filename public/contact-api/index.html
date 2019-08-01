@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta name="google-signin-client_id" content="870219884353-i3ap9eqb2j3nhdt4m8bdqdn75c36ad9c.apps.googleusercontent.com"> -->
+    <title>Manage Google Contacts</title>
+     <!-- Latest compiled and minified CSS & JS -->
+     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+     <script src="//code.jquery.com/jquery.js"></script>
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+     <script src="https://apis.google.com/js/api.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <h3>Manage Your Google Contacts</h3>
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <h3>Menu</h3>
+                
+               
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        <h4 class="list-group-item-heading">List</h4>
+                        <p class="list-group-item-text"><button class = "btn btn-md btn-info" onclick = "ListContact()">contacts</button></p>
+                    </a>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Add</h4>
+                        <!-- <p class="list-group-item-text">Content goes here</p> -->
+                    </a>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Update</h4>
+                        <!-- <p class="list-group-item-text">Content goes here</p> -->
+                    </a>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Delete</h4>
+                        <!-- <p class="list-group-item-text">Content goes here</p> -->
+                    </a>
+                </div>
+                <div class="list-group">
+                    <span href="#" class="list-group-item">
+                        <!-- <h4 class="list-group-item-heading">Exit</h4> -->
+                        <a class = "btn btn-danger"  href="#" onclick="signOut();">Sign out</a>
+                    </span>
+                </div>
+                
+                
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>Profile</h1>
+                        <p>Your profile information below</p>
+                        
+                    </div>
+                </div>
+                
+
+                
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    
+   
+    
+    
+<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+<script>
+    
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+               
+                window.location.href = 'signin.html'
+            });
+        }
+            
+
+function start() {
+  // 2. Initialize the JavaScript client library.
+  gapi.client.init({
+    'apiKey': 'AIzaSyAI3DbqcFa7wlSQkEweqiaLBlI2HXNMCZE',
+    // Your API key will be automatically added to the Discovery Document URLs.
+    'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
+    // clientId and scope are optional if auth is not required.
+    'clientId': '870219884353-i3ap9eqb2j3nhdt4m8bdqdn75c36ad9c.apps.googleusercontent.com',
+    'scope': 'profile,https://www.googleapis.com/auth/contacts',
+  }).then(function() {
+    // 3. Initialize and make the API request.
+    return gapi.client.people.people.get({
+      'resourceName': 'people/me',
+      'requestMask.includeField': 'person.names'
+    });
+  }).then(function(response) {
+      alert(response)
+    console.log(response.result);
+  }, function(reason) {
+      console.log('==========', reason.details)
+    console.log('Error: ' + reason.result.error.message);
+  });
+};
+// 1. Load the JavaScript client library.
+gapi.load('client', start);
+
+    function ListContact(){
+        gapi.client.people.people.get({
+            'resourceName': 'people/me',
+            'personFields': 'names'
+        }).then(function (res) {
+            console.log('==========', res)
+        }, function (error) {
+            console.log('=====error=====', error)
+
+        });
+    }
+
+// </script>
+<!-- <script src = "../js/jquery.js"> </script>
+<script>
+    $(document).ready(function(){
+        alert(88)
+    })
+
+</script> -->
+
+</body>
+</html>

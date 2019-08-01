@@ -4,9 +4,10 @@
 
   <div ng-include="'ng-includes/close.html'"></div>
 <!-- ######################################################################################### -->
+<a class = "btn btn-sm btn-danger pull-right"   ng-click="accept_test_list_ui()">List Accepted Test</a>
   <!-- PREVIEW TEST -->
   <div ng-if = "! PreviewTest">
-    <div class="well bg-blue">
+    <!-- <div class="well bg-blue">
      
       <p class="pull-left">
         <button class="app-btn bg-coral" ng-click="PreviewAcceptTest()">Preview
@@ -24,11 +25,11 @@
         
         </p>
       <p>&nbsp</p>
-    </div>
+    </div> -->
     
     
     
-    <div class="panel-body text-left" style="background: rgb(236, 234, 234)">
+    <div class="panel-body text-left" style="background: beige">
       <!--  <p><h2>Patient Information: </h2> -->
       <div class="row">
         <div class="col-md-4">
@@ -226,8 +227,13 @@
             ng-init="master_data.receipt_number = master_data.lab_no" ng-model="master_data.receipt_number"
             type="text" placeholder="Receipt No." /></span>
       </div>
-    
-      <button class="app-btn bg-coral" ng-click="PreviewAcceptTest()">Preview Record</button>
+     
+      <button ng-if = "! master_data.booking_id" class="app-btn bg-coral" ng-click="PreviewAcceptTest()">Preview Record</button>
+
+      <!-- <button  class="app-btn bg-green" ng-click="PreviewAcceptTest()">SAVE CHANGES</button> -->
+      <button ng-if = "master_data.booking_id"
+      ng-click="AddMaster('accepted_tests', 'master_name, skips', master_data, 'master', 'AcceptTest', 'RefreshMaster')"
+      class="app-btn bg-green text-white">Save Changes</button> 
       <!-- 
       <button
         ng-click="AddMaster('accepted_tests', 'master_name, skips', master_data, 'master', 'AcceptTest', 'RefreshMaster')"
@@ -255,31 +261,88 @@
       
             <button
               ng-click="AddMaster('accepted_tests', 'master_name, skips', master_data, 'master', 'AcceptTest', 'RefreshMaster')"
-              class="app-btn bg-blue text-white">Accept Test</button> </p>
-          <p class="pull-right"> </p>
+              class="app-btn bg-blue text-white">Accept Test</button> 
+            
+            </p>
+            <p class="pull-right">
+              <button
+              ng-click="PrintA4()"
+              class="app-btn bg-green text-green">Print A4</button>
+      
+            <button
+              ng-click="PrintPOS()"
+              class="app-btn bg-green text-white">PRINT POS</button> 
+            
+            </p>
           <p>&nbsp</p>
         </div>
+        <div class="item">
+					<div class="patient-header">
+						<div style="margin-top: 20px"><img src="../img/logo.png" width="30%"
+								class="pull-right"></div>
+						<div class="clearfix"></div>
+						<div class="wrap">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<table class="patient-info">
+										<thead>
+											<tr>
+												<th>Receipt No: </th>
+												<td>{{master_data.receipt_number}}
+												</td>
+												<td></td>
+											</tr>
+											<tr>
+												<th>Name: </th>
+												<td>Emanovwe Emmanuel
+												</td>
+												<td></td>
+											</tr>
+									
+										</thead>
+									</table>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<table class="patient-info">
+										<thead>
+											<tr>
+												<th>Date: </th>
+												<td>19/Apr/2019 </td>
+												<td></td>
+											</tr>
+											<tr>
+												<th>Age/Sex: </th>
+												<td>32Yrs 1Mn 23d / M</td>
+												<td></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+							<div class="cover-wrap-right"></div>
+							<div class="cover-wrap"></div>
+						</div> 
       
       
       
-        <div class="panel-body text-left" style="background: rgb(236, 234, 234)">
+        <div class="panel-body text-left" style="background: #fff">
           <!--  <p><h2>Patient Information: </h2> -->
           <div class="row">
             <div class="col-md-4">
               <div class="row">
                 <div class="col-md-4">
       
-                  <label>Patient Information: </label>
+                  <!-- <label>Patient Information: </label> -->
                 </div>
                 <div class="col-md-8">
-                  <div class="row">
+                  <!-- <div class="row">
                     <div class="col-md-2"> </div>
                     <div class="col-md-10"><input ng-enter="Search('patient_code', master_data.patient_code)"
                         ng-model="master_data.patient_code" style="display: inline-block" type="text"
                         class="form-control patient_master" placeholder="patient code" /></div>
       
       
-                  </div>
+                  </div> -->
       
       
       
@@ -289,15 +352,15 @@
       
             </div>
             <div class="col-md-8">
-              <input type="checkbox" ng-model="master_data.is_clinical_box" ng-selected="is_clinical_info"> Clinical
+              <!-- <input type="checkbox" ng-model="master_data.is_clinical_box" ng-selected="is_clinical_info"> Clinical
               Information
               <textarea id="is_clinical_box_data" ng-if="master_data.is_clinical_box" class="form-control"
-                ng-model="master_data.clinical_info" placeholder="enter clinical details"></textarea>
+                ng-model="master_data.clinical_info" placeholder="enter clinical details"></textarea> -->
             </div>
       
           </div>
           </p>
-          <table class="table table-responsive">
+          <!-- <table class="table table-responsive">
             <tr>
               <td><label><b>Lab No.</b></label><input readonly ng-init="LabNo()" ng-model="master_data.lab_no"
                   type="text" class="form-control" /></td>
@@ -343,13 +406,13 @@
       
       
             </tr>
-          </table>
+          </table> -->
       
           <p>
       
       
       
-            <b><i>Test Information </i></b>
+            <!-- <b><i>Test Information </i></b> -->
          
           </p>
       
@@ -363,7 +426,7 @@
       
               <table class="table">
                 <tr>
-                  <th>...</th>
+                 
                   <th>Test ID</th>
                   <th>Test Name</th>
                   <th>Rate</th>
@@ -374,19 +437,14 @@
                   <th>Total</th>
                 </tr>
                 <tr ng-repeat="test in master_data.test_info track by $index">
-                  <td><input type="checkbox" ng-model="test.selected_checkbox" /></td>
+                 
                   <td>{{test.code.toUpperCase()}}</td>
                   <td>{{test.test_name}}</td>
-                  <td><input ng-model="test.rate" placeholder="Rate" type="text" class="form-control"
-                      ng-change="alert('update after change')" readonly></td>
-                  <td><input ng-change="convert_disc(test.rate, test)" ng-model="test.discount"
-                      placeholder="Discount" type="text" class="form-control"></td>
-                  <td><input ng-change="convert_disc_amt(test.rate, test)" ng-model="test.discount_amount"
-                      placeholder="Disc. amt" type="text" class="form-control"></td>
-                  <td><input ng-model="test.tax_per" placeholder="Tax %" type="text" class="form-control" readonly>
-                  </td>
-                  <td><input ng-model="test.tax_amount" placeholder="Tax Amount" type="text" class="form-control"
-                      readonly></td>
+                  <td>{{test.rate}}</td>
+                  <td>{{test.discount}}</td>
+                  <td>{{test.discount_amount}}</td>
+                  <td>{{test.tax_per}}</td>
+                  <td>{{test.tax_amount}}</td>
                   <td>{{test.total}}</td>
                 </tr>
       
@@ -414,7 +472,7 @@
             </div>
           </div>
       
-          <div class="well row" style="background: #333">
+          <!-- <div class="well row" style="background: #333">
             <span class="toolbar col-md-2 col-sm-4  col-xs-6">
               <b>Home Collection</b>
               <select ng-model="master_data.home_collection" ng-options="item for item in ['Yes', 'No']">
@@ -454,7 +512,7 @@
                 ng-init="master_data.receipt_number = master_data.lab_no" ng-model="master_data.receipt_number"
                 type="text" placeholder="Receipt No." /></span>
           </div>
-      
+       -->
       
           
           <button
@@ -466,6 +524,7 @@
             class="app-btn bg-blue text-white">Accept Test</button>
       
         </div>
+        
   </div>
 
 

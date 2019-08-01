@@ -16,9 +16,13 @@ module.exports = function (sequelize, Sequelize) {
         },
         test_raw: {
 
-            type: Sequelize.STRING
+            type: Sequelize.TEXT("long")
         },
-        patient_id: {
+        master_raw: {
+
+            type: Sequelize.TEXT("long")
+        },
+        patient_id: { 
             type: Sequelize.STRING
         },
         ref_center_id: {

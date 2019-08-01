@@ -10,7 +10,16 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "views/start.html"
-        }).when("/masters", {
+        })
+        .when("/accept_test/:title", {
+            templateUrl: "views/accept-test.html",
+            controller: "AcceptTest"
+        })
+        .when("/accept_test_list/:title", {
+            templateUrl: "views/accept-test-list.html",
+            controller: "AcceptTestList"
+        })
+        .when("/masters", {
 
             templateUrl: "views/masters.html"
         })
@@ -48,12 +57,7 @@ app.config(function ($routeProvider) {
 
             templateUrl: "views/ref-master.html",
             controller: "ReferralPersonMaster"
-        })
-
-        .when("/accept_test/:title", {
-            templateUrl: "views/accept-test.html",
-            controller: "AcceptTest"
-        })
+        })        
         .when("/accept_edit_test/:title/:id", {
             templateUrl: "views/accept-edit-test.html",
             controller: "AcceptTest"
@@ -81,12 +85,8 @@ app.config(function ($routeProvider) {
         .when("/perform_test_list_dept/:title/:department/:id", {
             templateUrl: "views/accept-test-list-dept.html",
             controller: "AcceptTestUnPartial"
-        })
+        })        
         
-        .when("/accept_test_list/:title", {
-            templateUrl: "views/accept-test-list.html",
-            controller: "AcceptTestList"
-        })
         .when("/settings/settings-master", {
             templateUrl: "views/settings-master.html",
             controller: "SettingMaster"

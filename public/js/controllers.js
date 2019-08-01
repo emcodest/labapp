@@ -411,6 +411,7 @@ if ($scope.$parent.show_bar_2) {
     
     $scope.master_data = {}
     $scope.AddMaster = function (master_name, skips, master_data, api_route, server_method, callback) {
+      
       AddMaster(master_name, skips, master_data, api_route, server_method, callback, $scope)
     }
 
@@ -535,8 +536,27 @@ app.controller("GuardianMaster", function ($scope, $rootScope) {
 
 })
 app.controller("AcceptTest", function ($scope, ngDialog, $rootScope, $location) {
+ 
+  //: if is set, set to editing
+  if(window.booking_id){
+    // GET SET FOR EDITING BOOKING
+    var url = getAPI("master", "ListBookingByID")
 
-  alert(window.booking_id)
+    var type = "json"
+    var xdata = {accepted_test_id: window.booking_id}
+    server(url, xdata, type, function (res) {
+
+      $scope.master_data = JSON.parse(res)
+
+      $scope.master_data.booking_id = window.booking_id
+      window.booking_id = false
+
+    })
+
+
+    //alert(window.booking_id)
+  }
+  
   var url = getAPI("master", "AcceptTest")
 
   var options = {
@@ -559,7 +579,12 @@ app.controller("AcceptTest", function ($scope, ngDialog, $rootScope, $location) 
       // master_data = JSON.stringify(master_data).toString()
       // console.log(master_data)
       //alert("hdhdhdhdh")
+      
+      var master_raw_x = JSON.stringify(master_data).toString()
+      master_data.master_raw = master_raw_x
+      
       AddMaster(master_name, skips, master_data, api_route, server_method, callback, $scope)
+
     }, 500);
 
 
@@ -924,6 +949,9 @@ app.controller("AcceptTest", function ($scope, ngDialog, $rootScope, $location) 
     return yyyy + mm + dd;
   }
   $scope.LabNo = function () {
+    //: IF NOT EDITING
+    if(! window.booking_id){
+
     var url = getAPI("master", "ListTodaySerial")
     var type = "json"
     var today = $scope.get_today()
@@ -935,8 +963,11 @@ app.controller("AcceptTest", function ($scope, ngDialog, $rootScope, $location) 
       var code = $scope.GetLocationCode()
 
       var labno = code + today + res.sno
-      $scope.master_data.lab_no = labno
+    
+     $scope.master_data.lab_no = labno
     })
+
+  }
 
 
 
@@ -1105,14 +1136,17 @@ app.controller("AcceptTestList", function ($scope, $route, $compile, $rootScope,
 
   //! - - - - - - - - - -- - - - - - -LIST PATIENT RECORD
   $(document).ready(function () {
-
+    
+    $('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd'})
+    
     var url = getAPI("master", "ListAcceptedTests")
     //alert(url)
     var options = {
       ajax: {
         url: url,
         type: "post"
-      }
+      },
+      "order": [[ 0, "desc" ]]
     }
     // {data: [ [code, name, sex, no, ...], [] ]} = {ajax: url}
     if (!$.fn.DataTable.isDataTable('#list-accepted-tests')) {
@@ -1277,7 +1311,7 @@ app.controller("AcceptTestUnPartial", function ($scope, $route, $compile, $rootS
   //! - - - - - - - - - -- - - - - - -
   $rootScope.$on('EmitEditAcceptedTest', function (event, args) {
     var id = args
-     alert(id)
+    // alert(id)
     $location.path("/accept_test/Accept Test")
 
   });

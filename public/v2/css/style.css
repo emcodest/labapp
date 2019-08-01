@@ -1,0 +1,17 @@
+._v2-header{
+  
+   margin-top: -50px;
+   
+}
+
+._v2-header ._v2-title{
+  
+   font-size: 0.2em !important;
+}
+.lab-panel{
+   background: beige;
+}
+  
+.datepicker{
+   padding: 14px;
+}

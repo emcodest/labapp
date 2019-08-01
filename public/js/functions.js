@@ -284,6 +284,7 @@ function check_object_index3(ar, ky) {
 }
 
 function server(url, data, type, cb) {
+    
     $.ajax({
         type: "POST",
         url: url,
@@ -1852,9 +1853,9 @@ function DeleteMaster(params) {
 function AddMaster(master_name, skips, master_data, api_route, server_method, cb, $scope) {
 
     //alert(api_route)
-    //alert(master_name)
+    //alert(server_method)
     //alert(cb)
-    master_data.master_name = master_name // table_name
+    //master_data.master_name = master_name // table_name
     master_data.skips = skips // skip data
     var url = getAPI(api_route, server_method)
         //alert(url)
@@ -2149,7 +2150,7 @@ function UnApproveResult(params, _mthis){
 }
 function EditAcceptedTest(params) {
     var id = params
-    //alert(id)
+    window.booking_id = id
     angular.element(document.body).scope().EmitEditAcceptedTest(id)
 } 
 function ColorTests(datatable_id){
