@@ -1,2 +1,2 @@
 # labapp
-A lab management app
+A lab result printing app
